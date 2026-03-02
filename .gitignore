@@ -1,0 +1,34 @@
+# dependencies
+node_modules/
+
+# env files (NEVER commit secrets)
+.env
+.env.local
+.env.production
+.env.*.local
+
+# build
+.next/
+out/
+dist/
+
+# debug
+npm-debug.log*
+
+# local
+.DS_Store
+*.local
+
+# supabase
+supabase/.temp/
+
+# cache
+.cache/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+*.egg

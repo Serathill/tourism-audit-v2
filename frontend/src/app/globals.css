@@ -1,0 +1,224 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/* ═══════════════════════════════════════════════════════════
+   Tourism Audit V2 — Brand Design System
+   Light mode only (no dark mode in MVP — agency rule)
+   Brand: Teal primary + Amber CTA + Slate neutrals
+   Fonts: Plus Jakarta Sans (display) + Inter (body)
+   ═══════════════════════════════════════════════════════════ */
+
+@theme inline {
+  /* shadcn semantic color mappings */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Fonts — Plus Jakarta Sans (display) + Inter (body) */
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-plus-jakarta-sans);
+
+  /* ── Brand color tokens (usable as Tailwind utilities) ── */
+  /* e.g., bg-brand-teal, text-brand-amber-dark, etc.       */
+  --color-brand-teal: #0D9488;
+  --color-brand-teal-light: #14B8A6;
+  --color-brand-teal-lighter: #99F6E4;
+  --color-brand-teal-lightest: #F0FDFA;
+  --color-brand-teal-dark: #0F766E;
+  --color-brand-teal-darkest: #134E4A;
+
+  --color-brand-amber: #F59E0B;
+  --color-brand-amber-light: #FBBF24;
+  --color-brand-amber-lighter: #FEF3C7;
+  --color-brand-amber-dark: #D97706;
+
+  --color-brand-warm: #FFFBF5;
+
+  /* Radius */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+}
+
+:root {
+  --radius: 0.625rem;
+
+  /* ── shadcn semantic tokens (light mode only) ── */
+  --background: #FFFFFF;
+  --foreground: #0F172A;         /* slate-900 */
+  --card: #FFFFFF;
+  --card-foreground: #0F172A;
+  --popover: #FFFFFF;
+  --popover-foreground: #0F172A;
+
+  /* Primary = Teal (trust, links, focus rings) */
+  --primary: #0D9488;            /* teal-600 */
+  --primary-foreground: #FFFFFF;
+
+  /* Secondary = Light slate (tags, subtle actions) */
+  --secondary: #F1F5F9;         /* slate-100 */
+  --secondary-foreground: #0F172A;
+
+  /* Muted = Subdued backgrounds and text */
+  --muted: #F8FAFC;             /* slate-50 */
+  --muted-foreground: #64748B;  /* slate-500 */
+
+  /* Accent = Amber (CTA buttons, highlights) */
+  --accent: #F59E0B;            /* amber-500 */
+  --accent-foreground: #0F172A;
+
+  /* Destructive = Error red */
+  --destructive: #DC2626;       /* red-600 */
+
+  /* Borders & inputs */
+  --border: #E2E8F0;            /* slate-200 */
+  --input: #E2E8F0;
+  --ring: #0D9488;              /* teal-600 — focus rings match primary */
+
+  /* ── Extended brand tokens ── */
+  --bg-warm: #FFFBF5;
+  --bg-secondary: #F8FAFC;
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #94A3B8;
+  --border-hover: #CBD5E1;
+
+  /* Semantic */
+  --success: #059669;
+  --warning: #F59E0B;
+  --error: #DC2626;
+  --info: #0284C7;
+
+  /* Gradients */
+  --gradient-hero: linear-gradient(180deg, #FFFBF5 0%, #F0FDFA 100%);
+  --gradient-cta: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%);
+  --gradient-section: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   Base Styles
+   ═══════════════════════════════════════════════════════════ */
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  /* Headings use display font (Plus Jakarta Sans) */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display), var(--font-sans), system-ui, sans-serif;
+  }
+
+  /* Smooth scrolling with reduced-motion respect */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Link transitions */
+  a {
+    transition: color 150ms ease;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   Mobile Optimization (iOS Safari, touch targets, zoom)
+   ═══════════════════════════════════════════════════════════ */
+
+@layer base {
+  /* Prevent iOS zoom on input focus — 16px minimum */
+  input, select, textarea {
+    font-size: 16px;
+  }
+
+  /* iOS Safari fixes */
+  input, textarea, select, button {
+    -webkit-appearance: none;
+    border-radius: 0;
+  }
+
+  /* Restore border-radius after resetting iOS defaults */
+  input, textarea, select {
+    border-radius: var(--radius-md);
+  }
+  button {
+    border-radius: var(--radius-lg);
+  }
+}
+
+/* WCAG 2.5.5 — Minimum 44x44px touch targets on mobile */
+@media (pointer: coarse) {
+  button,
+  [role="button"],
+  a,
+  input,
+  select,
+  textarea {
+    min-height: 44px;
+  }
+}
+
+/* Small screens (< 360px) — safety net */
+@media (max-width: 359px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   Brand Utilities
+   ═══════════════════════════════════════════════════════════ */
+
+.bg-gradient-cta {
+  background: var(--gradient-cta);
+}
+
+.bg-gradient-hero {
+  background: var(--gradient-hero);
+}
+
+.bg-gradient-section {
+  background: var(--gradient-section);
+}
+
+.bg-warm {
+  background-color: var(--bg-warm);
+}

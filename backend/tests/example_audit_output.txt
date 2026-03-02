@@ -1,0 +1,384 @@
+# Tourism Digital Audit — Pensiunea Belvedere, Brașov
+
+**Audit Date:** 2026-02-13
+**Research Depth:** Maximum (8 parallel agent tracks, 87 web searches)
+**Total Score:** 54/110 (49%)
+
+---
+
+## Section 1: Online Presence & Visibility Assessment
+
+### Phase 1: Property Discovery & Digital Footprint
+
+Pensiunea Belvedere is a 3-star guesthouse (pensiune) located in the hills above Brașov, offering 12 rooms with mountain views. The property has been operating for approximately 8 years based on earliest online mentions (2018).
+
+**Digital Footprint Summary:**
+
+| Platform | Status | URL | Key Metric |
+|----------|--------|-----|------------|
+| Website | Active | belvedere-brasov.ro | PageSpeed 38/100 mobile |
+| Booking.com | Active | booking.com/hotel/ro/pensiunea-belvedere | 8.7/10, 312 reviews |
+| Google Business | Active | maps/Pensiunea+Belvedere+Brasov | 4.3/5, 89 reviews |
+| Facebook | Inactive | facebook.com/PensiuneaBelvedere | 1,247 followers, last post 4 months ago |
+| TripAdvisor | Active | tripadvisor.com/Hotel-Pensiunea_Belvedere | 4.0/5, 67 reviews |
+| Instagram | Not found | — | — |
+| Airbnb | Not found | — | — |
+| TikTok | Not found | — | — |
+| Pensiuni.info | Active | pensiuni.info/pensiunea-belvedere-brasov | Listed, 23 reviews |
+| Travelminit.ro | Active | travelminit.ro/cazare/pensiunea-belvedere | 9.1/10, 45 reviews |
+
+**Digital Presence Score: 7/10**
+The property has presence on major platforms but is missing from Instagram, Airbnb, and TikTok — three channels that drive 35%+ of bookings for properties in the Brașov area.
+
+### Phase 2: Website Technical Audit
+
+**Domain:** belvedere-brasov.ro
+**Hosting:** Shared hosting on RoWeb (Romanian provider)
+**CMS:** WordPress 6.4.2
+
+| Element | Status | Details |
+|---------|--------|---------|
+| SSL/HTTPS | ✅ Active | Valid Let's Encrypt certificate, expires 2026-05-15 |
+| PageSpeed Mobile | ❌ 38/100 | LCP: 4.2s, CLS: 0.15, FID: 280ms |
+| PageSpeed Desktop | ⚠️ 62/100 | LCP: 2.1s, acceptable but below 70 target |
+| Mobile Responsive | ⚠️ Partial | Header overlaps on iPhone SE, gallery not swipeable |
+| CTA "Rezervă Acum" | ❌ Missing | No direct booking button — only phone number |
+| Direct Booking Engine | ❌ Missing | No online reservation system |
+| URL Structure | ⚠️ Mixed | /camera-dubla-1/ OK, but /page_id=47 for some pages |
+| Navigation | ⚠️ Basic | 5 menu items, no language switcher |
+| Images | ⚠️ Unoptimized | 2.3MB average per image, no WebP, no lazy loading |
+| Contact Form | ✅ Working | Simple form, submits to email |
+
+**Key Issues Found:**
+- Largest Contentful Paint (LCP) of 4.2s on mobile — Google recommends under 2.5s
+- No booking engine means 100% of direct bookings must go through phone/email
+- Hero image is 3.8MB JPEG — should be under 200KB as WebP
+- WordPress plugins outdated: Contact Form 7 (v5.7.1, current is 6.0), Yoast SEO (v21.3, current is 23.4)
+
+**Website Technical Score: 4/10**
+
+### Phase 3: SEO Technical Audit
+
+| Element | Status | Details |
+|---------|--------|---------|
+| Title Tag | ⚠️ Generic | "Pensiunea Belvedere - Cazare Brașov" (missing keywords: "munte", "vedere panoramică") |
+| Meta Description | ❌ Missing | No meta description set — Google auto-generates from page content |
+| H1 Tag | ✅ Present | "Pensiunea Belvedere" — single H1, correct |
+| H2-H6 Hierarchy | ⚠️ Broken | H3 used before H2 on homepage, missing H2 on gallery page |
+| Alt Text | ❌ Poor | 3 of 47 images have alt text (6%) — rest are "IMG_20230415_142356.jpg" |
+| Schema.org | ❌ Missing | No structured data of any type |
+| Sitemap.xml | ❌ Missing | Returns 404 |
+| Robots.txt | ✅ Present | Basic, allows all crawling |
+| Canonical Tags | ❌ Missing | Duplicate content risk between www and non-www |
+| Multilingual | ❌ Missing | Romanian only, no English version |
+| Internal Linking | ⚠️ Weak | Average 2 internal links per page, no breadcrumbs |
+
+**SEO Technical Score: 3/10**
+
+### Phase 4: Google Visibility & Local SEO
+
+**Search Position Testing (performed 2026-02-13):**
+
+| Search Query | Position | Notes |
+|-------------|----------|-------|
+| "pensiune brasov" | Not in top 50 | Dominated by Booking.com, Travelminit aggregators |
+| "cazare brasov munte" | Not in top 30 | First organic result is a blog aggregator |
+| "pensiunea belvedere brasov" | #1 | Brand name search works correctly |
+| "cazare cu vedere panoramica brasov" | Not in top 50 | High-intent keyword, completely absent |
+| "pensiuni langa brasov" | Not in top 30 | Lost to competitors with better SEO |
+
+**Google Business Profile Analysis:**
+- Rating: 4.3/5 from 89 reviews
+- Photos: 34 photos (owner: 12, visitors: 22)
+- Categories: "Pensiune" (primary only — missing "Cazare de vacanță", "Pensiune turistică")
+- Posts: Last post 7 months ago
+- Q&A: 3 questions, 0 answers from owner
+- Hours: Set correctly
+- Description: Generic, 2 sentences only
+- Missing: Menu/services list, special attributes, COVID info removed
+
+**Local Pack Appearance:** Does NOT appear in Google Local Pack for "pensiune brasov" — competitors with better-optimized GMB profiles dominate.
+
+**Google Visibility Score: 5/10**
+
+### Phase 5: Booking Platform Presence
+
+**Booking.com:**
+- Rating: 8.7/10 from 312 reviews
+- Badge: "Very Good"
+- Photos: 28 photos (below average of 45 for area)
+- Room types listed: 4
+- Facilities listed: 12 (competitors average 20+)
+- Response time: "Within a day" — competitors show "Within a few hours"
+- Description: 150 words (competitors average 300+)
+- Genius program: Not enrolled
+- Promotions: None active
+- Review response rate: 15% (extremely low)
+
+**TripAdvisor:**
+- Rating: 4.0/5 from 67 reviews
+- Ranking: #47 of 89 accommodations in Brașov
+- Certificate of Excellence: No
+- Photos: 19 (below average)
+- Management response rate: 8%
+- Last management response: 11 months ago
+
+**Pensiuni.info:**
+- Rating: 8.9/10 from 23 reviews
+- Profile complete but photos outdated (2021 watermarks visible)
+
+**Travelminit.ro:**
+- Rating: 9.1/10 from 45 reviews
+- Best-performing platform by rating
+- Photos: 15, recent and good quality
+
+**Booking Platforms Score: 8/10** (strong presence, but optimization gaps)
+
+## Section 2: Content, Reputation & Community
+
+### Phase 6: Social Media & Content Audit
+
+**Facebook:**
+- Page: facebook.com/PensiuneaBelvedere
+- Followers: 1,247
+- Last post: October 2025 (4 months ago)
+- Post frequency (when active): ~2 posts/month
+- Average engagement: 12 likes, 1 comment per post
+- Engagement rate: 1.0% (below 2.5% industry benchmark)
+- Content type: Only static photos, no videos, no Stories, no Reels
+- No paid promotion detected
+- Page not verified
+- Messenger: Enabled, response time "Usually within a day"
+
+**Instagram:**
+- ❌ No Instagram profile found
+- Competitors in Brașov average 2,500+ followers on Instagram
+- 67% of travelers aged 25-44 use Instagram for accommodation research
+
+**TikTok:**
+- ❌ No TikTok presence
+- Tourism TikTok content in Romania gets 3-5x more reach than Instagram Reels
+
+**YouTube:**
+- ❌ No YouTube channel
+- No video content found anywhere online
+
+**Social Media Score: 2/10**
+
+### Phase 7: Online Reputation & Reviews
+
+**Aggregate Review Data:**
+
+| Platform | Rating | Reviews | Sentiment |
+|----------|--------|---------|-----------|
+| Booking.com | 8.7/10 | 312 | 78% positive |
+| Travelminit | 9.1/10 | 45 | 91% positive |
+| Google | 4.3/5 | 89 | 72% positive |
+| TripAdvisor | 4.0/5 | 67 | 65% positive |
+| Pensiuni.info | 8.9/10 | 23 | 87% positive |
+| **TOTAL** | — | **536** | **76% positive** |
+
+**What Guests Love (top 3 themes from 536 reviews):**
+1. **Priveliștea** (mentioned in 67% of reviews): "Vedere spectaculoasă spre Tâmpa", "Ne-am trezit cu muntele în față — magic"
+2. **Curățenia** (mentioned in 54%): "Camerele impecabile", "Se vede că proprietarii au grijă"
+3. **Micul dejun** (mentioned in 41%): "Mic dejun tradițional excelent", "Brânza și gemurile de casă sunt incredibile"
+
+**What Guests Want Improved (top 3 themes):**
+1. **WiFi slab** (mentioned in 23% of negative reviews): "Internet-ul merge doar în recepție", "Nu am putut lucra remote"
+2. **Parcarea** (mentioned in 18%): "Loc de parcare limitat, am parcat pe stradă"
+3. **Izolarea fonică** (mentioned in 12%): "Se aude prin pereți", "Vecini de cameră zgomotoși"
+
+**Review Response Analysis:**
+- Overall response rate: 12% (extremely low)
+- Booking.com: 15% response rate, generic "Mulțumim" template
+- TripAdvisor: 8% response rate, last response 11 months ago
+- Google: 5% response rate (4 responses out of 89 reviews)
+- Average response time: 14 days (industry best practice: under 24 hours)
+
+**Reputation Score: 7/10** (good ratings, terrible management)
+
+### Phase 8: Content Quality Assessment
+
+**Photography:**
+- Total photos across all platforms: ~85
+- Quality: Mix of professional (30%) and phone photos (70%)
+- Seasonal coverage: Summer only — no autumn/winter/spring photos
+- Drone/aerial: None
+- 360° virtual tour: None
+- Video: None
+
+**Written Content:**
+- Website descriptions: Generic, 150 words total
+- No blog section
+- No local area guide
+- No FAQ page
+- Booking.com description: 150 words (competitors: 300+)
+
+**Content Score: 6/10**
+
+### Phase 9: Community & Forum Sentiment
+
+**Reddit:**
+- r/Romania: 0 mentions
+- r/travel: 0 mentions
+- r/brasov: 0 mentions
+- No Reddit presence whatsoever
+
+**Romanian Travel Forums:**
+- forum.pegas.ro: 1 mention (2023, positive — "am stat ok, vedere frumoasă")
+- forumultau.ro: 0 mentions
+- skyscrapercity.com/Romania: 0 mentions
+
+**Travel Blogs:**
+- Not featured in any Romanian travel blog (checked top 20)
+- Not featured in any international travel blog
+- No press mentions found
+
+**Facebook Travel Groups:**
+- "Cazări de Vis în România" (45K members): 0 mentions
+- "Pensiuni și Cabane România" (78K members): 1 mention (2024, recommendation from a guest)
+- "Brașov & Poiana Brașov" (32K members): 0 mentions
+
+**Community Score: 1/10** (virtually invisible)
+
+### Phase 10: Competitive Landscape
+
+**Top 5 Competitors in Brașov Area (15km radius):**
+
+| Competitor | Google | Booking | Instagram | TripAdvisor | Total Reviews |
+|-----------|--------|---------|-----------|-------------|---------------|
+| Casa Wagner | 4.6/5 | 9.2/10 | 8,200 followers | #3 in Brașov | 1,847 |
+| Pensiunea Casa Crăița | 4.7/5 | 9.0/10 | 3,400 followers | #12 | 892 |
+| Vila Katharina | 4.5/5 | 8.9/10 | 2,100 followers | #18 | 634 |
+| Pensiunea Curtea Brăduț | 4.4/5 | 8.8/10 | 1,800 followers | #25 | 423 |
+| **Pensiunea Belvedere** | **4.3/5** | **8.7/10** | **0** | **#47** | **536** |
+
+**Where You're Stronger:**
+- Travelminit rating (9.1/10) is highest in competitor set
+- Guest reviews consistently praise the view — unique selling point not leveraged digitally
+- Breakfast quality is a differentiator mentioned by 41% of guests
+
+**Where You're Behind:**
+- Instagram: 0 vs average 3,875 followers among competitors
+- TripAdvisor ranking: #47 vs average #14 among top competitors
+- Total reviews: 536 vs average 949 (excluding Casa Wagner outlier: 649)
+- Review response rate: 12% vs competitor average of 65%
+- Website speed: 38/100 vs competitor average of 72/100
+
+**Competitive Position Score: 5/10**
+
+## Section 3: Opportunities & Action Plan
+
+### Phase 11: Business Registry & Tourism Compliance
+
+| Element | Status | Details |
+|---------|--------|---------|
+| Firmă înregistrată (CUI) | ✅ Found | CUI 28341567, S.C. BELVEDERE TURISM S.R.L. |
+| Clasificare turism | ✅ Active | 3 margarete (pensiune turistică) |
+| Autorizație de funcționare | ⚠️ Not confirmed | Could not verify current year validity online |
+| Membru ANTREC | ❌ Not found | Not listed in ANTREC directory |
+| Membru FPTR | ❌ Not found | Not listed in FPTR directory |
+| Consistență date (adresă) | ⚠️ Minor issues | Address format differs between Booking (Str. Dealului 15) and Google (Strada Dealului nr. 15, Brașov) |
+| Consistență date (telefon) | ✅ Consistent | Same phone across all platforms |
+
+**Compliance Score: 6/10**
+
+### Digital Score Summary
+
+| Category | Score | Assessment |
+|----------|-------|------------|
+| Prezență Digitală | 7/10 | Present on major platforms, missing Instagram/Airbnb/TikTok |
+| Website Tehnic | 4/10 | Slow, no booking engine, unoptimized images |
+| SEO Tehnic | 3/10 | Missing meta descriptions, schema, sitemap, alt text |
+| Vizibilitate Google | 5/10 | GMB exists but neglected, poor keyword rankings |
+| Platforme Booking | 8/10 | Strong ratings, but profiles incomplete |
+| Social Media | 2/10 | Facebook inactive, no Instagram/TikTok/YouTube |
+| Reputație & Recenzii | 7/10 | Good ratings but 12% response rate |
+| Conținut & Fotografii | 6/10 | Decent photos but no video, no seasonal coverage |
+| Poziție Competitivă | 5/10 | Behind competitors on digital, ahead on Travelminit |
+| Comunitate & Forumuri | 1/10 | Virtually invisible in online communities |
+| Conformitate Turism | 6/10 | Registered, classified, but not in tourism associations |
+| **TOTAL** | **54/110 (49%)** | **Below Average — Significant Improvement Needed** |
+
+### Top Gaps Identified
+
+1. **Zero social media strategy** — No Instagram (67% of target travelers use it), Facebook dead for 4 months, no video content anywhere while competitors average 3,875 Instagram followers
+2. **No direct booking capability** — 100% of direct inquiries require phone/email, losing 40-60% of potential direct bookers who expect instant online booking
+3. **Website performance critical** — PageSpeed 38/100 mobile, 4.2s LCP means 53% of mobile visitors leave before the page loads (Google data). Competitors average 72/100
+4. **SEO fundamentally broken** — No meta descriptions, no schema markup, no sitemap, 6% alt text coverage. Invisible to Google for commercial keywords
+5. **Review management abandoned** — 12% response rate vs 65% competitor average. 88% of reviews go unanswered, signaling disengagement to potential guests
+
+### Priority Action Plan
+
+**Immediate (This Week):**
+
+01. Create Instagram Business profile linked to Facebook, post first 15 photos showcasing the panoramic mountain view — your #1 differentiator mentioned in 67% of reviews. Target: 500 followers in first month.
+
+02. Respond to ALL unanswered Google reviews (85 reviews) and Booking.com reviews with personalized messages. Prioritize negative reviews first. Target: 100% response rate within 48 hours going forward.
+
+03. Update Google Business Profile: add 3 secondary categories ("Cazare de vacanță", "Pensiune turistică", "Loc de cazare"), write a 300-word description with keywords, answer the 3 unanswered Q&A questions.
+
+**Short-Term (This Month):**
+
+04. Compress all website images to WebP format and enable lazy loading. Current 2.3MB average should drop to under 100KB. Expected PageSpeed improvement: +25-30 points.
+
+05. Install a direct booking widget (e.g., Beds24, Cloudbeds, or direct Booking.com affiliate widget). Properties with direct booking convert 40-60% more inquiries than phone-only.
+
+06. Create and submit sitemap.xml, add meta descriptions to all pages, implement Schema.org LodgingBusiness markup. Expected result: indexation of all pages within 2-4 weeks.
+
+**Strategic (Next 3 Months):**
+
+07. Develop a content calendar: 4 Instagram posts/week, 2 Facebook posts/week, 1 Reel/week showing guest experiences, mountain views at different times of day, seasonal scenery, breakfast preparation. Use guest UGC with permission.
+
+08. Create Airbnb listing to capture the 28% of travelers who search exclusively on Airbnb. Target: Superhost status within 6 months.
+
+09. Launch a simple blog on the website: "Top 10 trasee din zona Brașov", "Ce poți vizita lângă Pensiunea Belvedere", "Ghid complet: weekend în Brașov". Each article targets 1-2 long-tail keywords.
+
+10. Apply for ANTREC membership and request listing in their directory — adds credibility and drives referral traffic from association searches.
+
+---
+
+## Sources & References
+
+### Direct Platform Sources (23)
+- belvedere-brasov.ro (website crawl, 2026-02-13)
+- booking.com/hotel/ro/pensiunea-belvedere (profile analysis)
+- google.com/maps/place/Pensiunea+Belvedere+Brasov (GMB analysis)
+- tripadvisor.com/Hotel-Pensiunea_Belvedere (profile + reviews)
+- facebook.com/PensiuneaBelvedere (page analysis)
+- pensiuni.info/pensiunea-belvedere-brasov
+- travelminit.ro/cazare/pensiunea-belvedere
+
+### SEO & Technical Tools (12)
+- pagespeed.web.dev (mobile + desktop tests)
+- search.google.com (keyword position checks, 8 queries)
+- web.dev/measure (Core Web Vitals)
+
+### Competitor Analysis (18)
+- Booking.com profiles: Casa Wagner, Casa Crăița, Vila Katharina, Curtea Brăduț
+- Instagram profiles: @casawagner, @casacraita, @vilakatharina, @curteabradut
+- TripAdvisor rankings and review counts
+
+### Community & Forum Searches (15)
+- reddit.com/r/Romania, /r/travel, /r/brasov
+- forum.pegas.ro
+- Facebook groups: "Cazări de Vis în România", "Pensiuni și Cabane România", "Brașov & Poiana Brașov"
+- Top 20 Romanian travel blogs checked
+
+### Business Registry (8)
+- onrc.ro (Romanian Trade Register)
+- listafirme.eu
+- antrec.ro/membri
+- fptr.ro/membri
+
+### Industry Benchmarks (11)
+- Phocuswright European Accommodation Report 2025
+- Google/Ipsos Travel Study 2025
+- TripAdvisor Insights hospitality benchmarks
+- Statista Romania tourism digital trends
+
+**Total sources consulted: 87**
+
+---
+
+*Research completed: 2026-02-13 | 8 parallel agent tracks | 87 web searches | Depth: MAXIMUM*
