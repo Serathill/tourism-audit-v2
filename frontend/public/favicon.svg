@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Background circle -->
+  <circle cx="16" cy="16" r="16" fill="#0D9488"/>
+  <!-- Magnifying glass (audit symbol) -->
+  <circle cx="14" cy="13" r="6" stroke="white" stroke-width="2.5" fill="none"/>
+  <line x1="18.5" y1="17.5" x2="24" y2="23" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Checkmark inside glass (digital audit = verified) -->
+  <polyline points="11,13 13.5,15.5 17,11" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>
