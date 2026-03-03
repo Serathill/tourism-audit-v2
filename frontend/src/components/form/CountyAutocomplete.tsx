@@ -91,7 +91,7 @@ export function CountyAutocomplete({
           </div>
 
           {/* Options list */}
-          <div role="listbox" className="max-h-60 overflow-y-auto p-1">
+          <div role="listbox" className="max-h-[min(15rem,50vh)] overflow-y-auto overscroll-contain p-1">
             {filteredRegions.length === 0 ? (
               <p className="px-3 py-4 text-center text-sm text-muted-foreground">
                 Niciun județ găsit

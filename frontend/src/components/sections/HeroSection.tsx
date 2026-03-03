@@ -54,7 +54,7 @@ export function HeroSection() {
 
           {/* Right column — form wizard */}
           <div id="audit-form" className="scroll-mt-20">
-            <div className="rounded-2xl border border-border bg-white p-6 shadow-md sm:p-8">
+            <div className="rounded-2xl border border-border bg-white p-6 shadow-sm sm:p-8 sm:shadow-md">
               <FormWizardClient meetingLink={meetingLink} />
             </div>
 

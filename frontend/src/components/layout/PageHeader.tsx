@@ -51,14 +51,14 @@ export function PageHeader() {
         <button
           type="button"
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="inline-flex items-center justify-center rounded-lg p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground md:hidden"
+          className="inline-flex items-center justify-center rounded-lg p-2.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground md:hidden"
           aria-label={mobileOpen ? "Închide meniul" : "Deschide meniul"}
           aria-expanded={mobileOpen}
         >
           {mobileOpen ? (
-            <X className="size-5" />
+            <X className="size-6" />
           ) : (
-            <Menu className="size-5" />
+            <Menu className="size-6" />
           )}
         </button>
       </nav>

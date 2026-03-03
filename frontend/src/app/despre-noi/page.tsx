@@ -19,6 +19,20 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/despre-noi",
   },
+  openGraph: {
+    title: "Despre noi | Audit Digital Turism",
+    type: "website",
+    url: "https://audit.devidevs.com/despre-noi",
+    images: [
+      {
+        url: "/preview-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Echipa Audit Digital Turism",
+      },
+    ],
+  },
+  twitter: { card: "summary_large_image", images: ["/preview-image.png"] },
 };
 
 export const revalidate = 604800; // 7 days

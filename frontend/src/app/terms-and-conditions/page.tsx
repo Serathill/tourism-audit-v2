@@ -9,6 +9,20 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/terms-and-conditions",
   },
+  openGraph: {
+    title: "Termeni și condiții | Audit Digital Turism",
+    type: "website",
+    url: "https://audit.devidevs.com/terms-and-conditions",
+    images: [
+      {
+        url: "/preview-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Audit Digital Turism",
+      },
+    ],
+  },
+  twitter: { card: "summary_large_image", images: ["/preview-image.png"] },
 };
 
 export const revalidate = 2592000; // 30 days

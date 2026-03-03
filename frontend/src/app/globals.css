@@ -35,7 +35,7 @@
   --font-display: var(--font-plus-jakarta-sans);
 
   /* ── Brand color tokens (usable as Tailwind utilities) ── */
-  /* e.g., bg-brand-teal, text-brand-amber-dark, etc.       */
+  /* e.g., bg-brand-teal, text-brand-amber-light, etc.      */
   --color-brand-teal: #0D9488;
   --color-brand-teal-light: #14B8A6;
   --color-brand-teal-lighter: #99F6E4;
@@ -46,7 +46,6 @@
   --color-brand-amber: #F59E0B;
   --color-brand-amber-light: #FBBF24;
   --color-brand-amber-lighter: #FEF3C7;
-  --color-brand-amber-dark: #D97706;
 
   --color-brand-warm: #FFFBF5;
 
@@ -109,6 +108,11 @@
   --error: #DC2626;
   --info: #0284C7;
 
+  /* Audit score colors */
+  --audit-score-good: #059669;
+  --audit-score-warning: #F59E0B;
+  --audit-score-bad: #DC2626;
+
   /* Gradients */
   --gradient-hero: linear-gradient(180deg, #FFFBF5 0%, #F0FDFA 100%);
   --gradient-cta: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%);
@@ -127,6 +131,8 @@
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
+    max-width: 1440px;
+    margin: 0 auto;
   }
 
   /* Headings use display font (Plus Jakarta Sans) */
@@ -221,4 +227,24 @@
 
 .bg-warm {
   background-color: var(--bg-warm);
+}
+
+.brand-gradient {
+  background-image: linear-gradient(135deg, #0D9488 0%, #14B8A6 100%);
+}
+
+.brand-text-gradient {
+  background-image: linear-gradient(135deg, #0D9488 0%, #14B8A6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Hide scrollbar utility — for horizontal scroll components */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
 }

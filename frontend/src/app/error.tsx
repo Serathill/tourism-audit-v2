@@ -13,7 +13,10 @@ export default function RootError({
   reset: () => void;
 }) {
   useEffect(() => {
-    Sentry.captureException(error);
+    Sentry.withScope((scope) => {
+      scope.setTag("errorBoundary", "route");
+      Sentry.captureException(error);
+    });
   }, [error]);
 
   return (

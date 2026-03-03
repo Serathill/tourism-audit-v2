@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "WATCHPACK_POLLING=true CHOKIDAR_USEPOLLING=1 next dev",
+    "dev:turbo": "next dev --turbopack",
+    "dev:turbo:poll": "WATCHPACK_POLLING=true CHOKIDAR_USEPOLLING=1 next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"

@@ -1,25 +1,45 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import { Suspense } from "react";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import { headers } from "next/headers";
 import Script from "next/script";
 import { Toaster } from "sonner";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { PageFooter } from "@/components/layout/PageFooter";
+import { CookieConsentBanner } from "@/components/CookieConsentBanner";
+import { GAListener } from "@/components/GAListener";
+import { ScrollDepthTracker } from "@/components/ScrollDepthTracker";
+import { ExitIntentPopup } from "@/components/ExitIntentPopup";
 import "./globals.css";
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin", "latin-ext"],
   display: "swap",
+  preload: true,
+  adjustFontFallback: true,
 });
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta-sans",
   subsets: ["latin", "latin-ext"],
   display: "swap",
+  preload: true,
+  adjustFontFallback: true,
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://audit.devidevs.com";
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://audit.devidevs.com";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: "cover",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#0D9488" },
+  ],
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -41,6 +61,12 @@ export const metadata: Metadata = {
   authors: [{ name: "DeviDevs Agency", url: "https://devidevs-agency.com" }],
   creator: "DeviDevs Agency",
   publisher: "DeviDevs Agency",
+
+  alternates: {
+    canonical: "/",
+    languages: { "ro-RO": "/" },
+  },
+
   openGraph: {
     type: "website",
     locale: "ro_RO",
@@ -56,15 +82,50 @@ export const metadata: Metadata = {
         height: 630,
         alt: "Audit Digital Turism — DeviDevs Agency",
       },
+      {
+        url: "/og",
+        width: 1200,
+        height: 630,
+        alt: "Audit Digital Turism",
+      },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
     title: "Audit Digital Gratuit pentru Turism",
     description:
       "Primeste un audit digital gratuit pentru pensiunea ta. Rezultate in 30-90 minute.",
     images: ["/preview-image.png"],
+    site: "@Devi__Devs",
+    creator: "@Devi__Devs",
   },
+
+  icons: {
+    icon: [
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      {
+        url: "/android-chrome-192x192.png",
+        sizes: "192x192",
+        type: "image/png",
+      },
+      { url: "/logo.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+    shortcut: "/logo.png",
+  },
+
+  manifest: "/site.webmanifest",
+
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "Audit Digital Turism",
+  },
+
   robots: {
     index: true,
     follow: true,
@@ -112,6 +173,28 @@ function JsonLd({ nonce }: { nonce: string }) {
     },
   };
 
+  const webApplicationSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: "Audit Digital Turism",
+    url: siteUrl,
+    applicationCategory: "BusinessApplication",
+    operatingSystem: "Web",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "RON",
+      description: "Audit digital gratuit pentru proprietati turistice",
+    },
+  };
+
+  const webSiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    url: siteUrl,
+    name: "Audit Digital Turism",
+  };
+
   return (
     <>
       <script
@@ -126,6 +209,20 @@ function JsonLd({ nonce }: { nonce: string }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(serviceSchema),
+        }}
+      />
+      <script
+        nonce={nonce}
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(webApplicationSchema),
+        }}
+      />
+      <script
+        nonce={nonce}
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(webSiteSchema),
         }}
       />
     </>
@@ -150,9 +247,34 @@ export default async function RootLayout({
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
         />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://www.google.com" />
+        <link
+          rel="preconnect"
+          href="https://www.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.google.com" />
         <JsonLd nonce={nonce} />
         {gaId && (
           <>
+            <script
+              nonce={nonce}
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('consent', 'default', {
+                    'analytics_storage': 'denied',
+                    'ad_storage': 'denied',
+                    'ad_user_data': 'denied',
+                    'ad_personalization': 'denied'
+                  });
+                `,
+              }}
+            />
             <Script
               nonce={nonce}
               src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
@@ -163,12 +285,6 @@ export default async function RootLayout({
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
-                gtag('consent', 'default', {
-                  'analytics_storage': 'denied',
-                  'ad_storage': 'denied',
-                  'ad_user_data': 'denied',
-                  'ad_personalization': 'denied'
-                });
                 gtag('config', '${gaId}');
               `}
             </Script>
@@ -194,6 +310,12 @@ export default async function RootLayout({
             className: "font-body",
           }}
         />
+        <Suspense fallback={null}>
+          <GAListener />
+        </Suspense>
+        <ScrollDepthTracker />
+        <CookieConsentBanner />
+        <ExitIntentPopup />
       </body>
     </html>
   );

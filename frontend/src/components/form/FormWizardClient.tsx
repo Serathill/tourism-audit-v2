@@ -16,6 +16,7 @@ import {
   type AuditFormInput,
 } from "@/schemas/audit-form";
 import { HONEYPOT_FIELD_NAME } from "@/lib/constants";
+import { getStoredUTMParams } from "@/lib/utm";
 
 type FormWizardClientProps = {
   meetingLink?: string;
@@ -74,11 +75,13 @@ export function FormWizardClient({ meetingLink }: FormWizardClientProps) {
     setIsSubmitting(true);
 
     try {
+      const utmParams = getStoredUTMParams();
       const response = await fetch("/api/audit/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...data,
+          ...utmParams,
           [HONEYPOT_FIELD_NAME]: honeypot,
         }),
       });

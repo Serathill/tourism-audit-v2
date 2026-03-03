@@ -10,6 +10,42 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/audit",
   },
+  openGraph: {
+    title: "Solicită audit digital gratuit | Audit Digital Turism",
+    type: "website",
+    url: "https://audit.devidevs.com/audit",
+    images: [
+      {
+        url: "/preview-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Audit Digital Turism",
+      },
+    ],
+  },
+  twitter: { card: "summary_large_image", images: ["/preview-image.png"] },
+};
+
+// ISR: revalidate every 7 days
+export const revalidate = 604800;
+
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Acasă",
+      item: "https://audit.devidevs.com/marketing-pentru-turism",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Audit digital gratuit",
+      item: "https://audit.devidevs.com/audit",
+    },
+  ],
 };
 
 export default function AuditPage() {
@@ -17,6 +53,10 @@ export default function AuditPage() {
 
   return (
     <div className="bg-gradient-hero">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <div className="mx-auto max-w-xl px-4 py-12 sm:px-6 md:py-16">
         <div className="mb-8 text-center">
           <h1 className="font-display text-[clamp(1.5rem,4vw,2.25rem)] font-bold tracking-tight text-foreground">

@@ -1,9 +1,20 @@
 import { NextResponse } from "next/server";
 import { headers } from "next/headers";
+import * as Sentry from "@sentry/nextjs";
 import { auditFormSchema } from "@/schemas/audit-form";
 import { checkRateLimit } from "@/lib/rate-limit";
 import { isHoneypotFilled } from "@/lib/honeypot";
+import { verifyRecaptcha } from "@/lib/recaptcha";
 import { createServiceClient } from "@/lib/supabase/service";
+
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
 
 export async function POST(request: Request) {
   try {
@@ -38,17 +49,19 @@ export async function POST(request: Request) {
     }
 
     // ── 4. reCAPTCHA verification (skip if not configured) ──
-    // TODO: Add reCAPTCHA token verification when frontend sends token
-    // const recaptchaToken = body.recaptcha_token;
-    // if (recaptchaToken) {
-    //   const { success: captchaOk } = await verifyRecaptcha(recaptchaToken);
-    //   if (!captchaOk) {
-    //     return NextResponse.json(
-    //       { message: "Verificarea de securitate a eșuat. Te rugăm încearcă din nou." },
-    //       { status: 403 }
-    //     );
-    //   }
-    // }
+    const recaptchaToken = body.recaptcha_token;
+    if (recaptchaToken) {
+      const { success: captchaOk } = await verifyRecaptcha(recaptchaToken);
+      if (!captchaOk) {
+        return NextResponse.json(
+          {
+            message:
+              "Verificarea de securitate a eșuat. Te rugăm încearcă din nou.",
+          },
+          { status: 403 }
+        );
+      }
+    }
 
     // ── 5. Zod schema validation ─────────────────────────
     const parsed = auditFormSchema.safeParse(body);
@@ -111,15 +124,17 @@ export async function POST(request: Request) {
     const { data: property, error: insertError } = await supabase
       .from("properties")
       .insert({
-        owner_name: data.owner_name,
+        owner_name: escapeHtml(data.owner_name),
         owner_email: data.owner_email,
-        property_name: data.property_name,
-        property_address: data.property_address,
+        property_name: escapeHtml(data.property_name),
+        property_address: escapeHtml(data.property_address),
         website_url: data.website_url || null,
         booking_platform_links: bookingLinks.length > 0 ? bookingLinks : null,
         social_media_links: socialLinks.length > 0 ? socialLinks : null,
         google_my_business_link: data.google_my_business_link || null,
-        business_description: data.business_description || null,
+        business_description: data.business_description
+          ? escapeHtml(data.business_description)
+          : null,
         status: 10, // pending
       })
       .select("id")
@@ -177,7 +192,7 @@ export async function POST(request: Request) {
     );
   } catch (error) {
     console.error("Audit submit error:", error);
-    // TODO: Sentry.captureException(error);
+    Sentry.captureException(error);
     return NextResponse.json(
       { message: "Eroare internă. Vă rugăm încercați din nou." },
       { status: 500 }

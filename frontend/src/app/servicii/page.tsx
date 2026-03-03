@@ -18,6 +18,20 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/servicii",
   },
+  openGraph: {
+    title: "Servicii | Audit Digital Turism",
+    type: "website",
+    url: "https://audit.devidevs.com/servicii",
+    images: [
+      {
+        url: "/preview-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Servicii Audit Digital Turism",
+      },
+    ],
+  },
+  twitter: { card: "summary_large_image", images: ["/preview-image.png"] },
 };
 
 export const revalidate = 604800; // 7 days
