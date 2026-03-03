@@ -21,7 +21,6 @@ _REQUIRED_ENV_VARS = [
     "SUPABASE_KEY",
     "RESEND_API_KEY",
     "BACKEND_API_KEY",
-    "MEETING_LINK",
 ]
 
 
