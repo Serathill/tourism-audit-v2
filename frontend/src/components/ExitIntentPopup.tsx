@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 const COOKIE_NAME = "exit_intent_dismissed";
 const SUPPRESS_DAYS = 7;
 const MIN_TIME_ON_PAGE_MS = 5000;
+const MOBILE_IDLE_MS = 45000; // 45s inactivity on mobile before showing
 
 function getCookie(name: string): string | null {
   if (typeof document === "undefined") return null;
@@ -23,6 +24,7 @@ function setCookie(name: string, value: string, days: number): void {
 export function ExitIntentPopup() {
   const [show, setShow] = useState(false);
   const [ready, setReady] = useState(false);
+  const [triggered, setTriggered] = useState(false);
 
   useEffect(() => {
     if (getCookie(COOKIE_NAME)) return;
@@ -32,43 +34,46 @@ export function ExitIntentPopup() {
 
   const dismiss = useCallback(() => {
     setShow(false);
+    setTriggered(true);
     setCookie(COOKIE_NAME, "1", SUPPRESS_DAYS);
   }, []);
 
   useEffect(() => {
-    if (!ready) return;
+    if (!ready || triggered) return;
 
-    // Desktop: mouse leaves from top
-    function onMouseLeave(e: MouseEvent) {
-      if (e.clientY <= 50) setShow(true);
+    const isTouch = window.matchMedia("(pointer: coarse)").matches;
+
+    function trigger() {
+      setShow(true);
+      setTriggered(true);
     }
 
-    // Mobile: scroll direction change after 25%
-    let lastScrollY = window.scrollY;
-    let scrollingDown = true;
-
-    function onScroll() {
-      const currentY = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollPercent = docHeight > 0 ? (currentY / docHeight) * 100 : 0;
-
-      if (currentY > lastScrollY) {
-        scrollingDown = true;
-      } else if (scrollingDown && currentY < lastScrollY && scrollPercent > 25) {
-        scrollingDown = false;
-        setShow(true);
+    if (!isTouch) {
+      // Desktop: mouse leaves from top — standard exit intent
+      function onMouseLeave(e: MouseEvent) {
+        if (e.clientY <= 50) trigger();
       }
-      lastScrollY = currentY;
+      document.addEventListener("mouseleave", onMouseLeave);
+      return () => document.removeEventListener("mouseleave", onMouseLeave);
     }
 
-    document.addEventListener("mouseleave", onMouseLeave);
-    window.addEventListener("scroll", onScroll, { passive: true });
+    // Mobile: idle timer — show after 45s of no interaction
+    let idleTimer = setTimeout(trigger, MOBILE_IDLE_MS);
+
+    function resetIdle() {
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(trigger, MOBILE_IDLE_MS);
+    }
+
+    window.addEventListener("scroll", resetIdle, { passive: true });
+    window.addEventListener("touchstart", resetIdle, { passive: true });
 
     return () => {
-      document.removeEventListener("mouseleave", onMouseLeave);
-      window.removeEventListener("scroll", onScroll);
+      clearTimeout(idleTimer);
+      window.removeEventListener("scroll", resetIdle);
+      window.removeEventListener("touchstart", resetIdle);
     };
-  }, [ready]);
+  }, [ready, triggered]);
 
   if (!show) return null;
 
