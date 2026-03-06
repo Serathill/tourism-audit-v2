@@ -29,7 +29,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://audit.devidevs.com";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://tourism-audit.devidevs.com";
 
 export const viewport: Viewport = {
   width: "device-width",

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Termeni și condiții | Audit Digital Turism",
     type: "website",
-    url: "https://audit.devidevs.com/terms-and-conditions",
+    url: "https://tourism-audit.devidevs.com/terms-and-conditions",
     images: [
       {
         url: "/preview-image.png",

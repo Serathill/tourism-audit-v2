@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Politica de confidențialitate | Audit Digital Turism",
     type: "website",
-    url: "https://audit.devidevs.com/privacy-policy",
+    url: "https://tourism-audit.devidevs.com/privacy-policy",
     images: [
       {
         url: "/preview-image.png",

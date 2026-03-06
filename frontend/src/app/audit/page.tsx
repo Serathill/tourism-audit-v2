@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Solicită audit digital gratuit | Audit Digital Turism",
     type: "website",
-    url: "https://audit.devidevs.com/audit",
+    url: "https://tourism-audit.devidevs.com/audit",
     images: [
       {
         url: "/preview-image.png",
@@ -37,13 +37,13 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "Acasă",
-      item: "https://audit.devidevs.com/marketing-pentru-turism",
+      item: "https://tourism-audit.devidevs.com/marketing-pentru-turism",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Audit digital gratuit",
-      item: "https://audit.devidevs.com/audit",
+      item: "https://tourism-audit.devidevs.com/audit",
     },
   ],
 };

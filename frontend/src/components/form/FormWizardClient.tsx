@@ -114,7 +114,7 @@ export function FormWizardClient({ meetingLink }: FormWizardClientProps) {
   if (isSuccess) {
     const propertyName = form.getValues("property_name");
     return (
-      <div className="flex flex-col items-center gap-5 py-4 text-center">
+      <div className="flex flex-col items-center gap-5 py-4 text-center" role="status" aria-live="polite">
         <div className="flex size-14 items-center justify-center rounded-full bg-[var(--success)]/10">
           <CheckCircle2 className="size-7 text-[var(--success)]" />
         </div>

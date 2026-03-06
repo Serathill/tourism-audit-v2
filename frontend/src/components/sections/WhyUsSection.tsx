@@ -1,4 +1,4 @@
-import { Bot, Zap, ShieldCheck, Users, ExternalLink } from "lucide-react";
+import { TrendingUp, Zap, ShieldCheck, Users, ExternalLink } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -8,30 +8,30 @@ import {
 } from "@/components/ui/card";
 import { BRAND } from "@/lib/constants";
 
-const DIFFERENTIATORS = [
+const BENEFITS = [
   {
-    icon: Bot,
-    title: "Singura analiză cu AI din turismul românesc",
+    icon: TrendingUp,
+    title: "Mai multe rezervări directe",
     description:
-      "Folosim Gemini Deep Research Pro pentru a genera audituri cuprinzătoare. Niciun competitor din piață nu oferă acest nivel de automatizare.",
+      "Reducem dependența de platformele care percep comisioane mari.",
   },
   {
     icon: Zap,
-    title: "Raport în 30-90 de minute",
+    title: "Marketing care funcționează",
     description:
-      "În timp ce competiția livrează audituri manuale în zile sau săptămâni, AI-ul nostru analizează prezența ta online și livrează raportul pe email.",
+      "Implementăm o strategie personalizată care atrage clienții ideali pentru tine.",
   },
   {
     icon: ShieldCheck,
-    title: "Fără acces la date interne",
+    title: "Timp și energie salvate",
     description:
-      "Analizăm exclusiv informații publice: Google, platforme de booking, social media, recenzii. Nu cerem niciodată parole sau acces la conturile tale.",
+      "Ne ocupăm noi de complexitatea marketingului digital. Tu te concentrezi pe oaspeți.",
   },
   {
     icon: Users,
-    title: "Echipă cu experiență Deloitte",
+    title: "Un partener, nu un furnizor",
     description:
-      "Alexandru Mihailă, CMO ex-Deloitte, coordonează strategia. Petru și Nicu aduc experiență în dezvoltare de business și tehnologie AI.",
+      "Oferim transparență totală și suport constant pentru a-ți atinge obiectivele.",
   },
 ] as const;
 
@@ -44,13 +44,19 @@ export function WhyUsSection() {
       <div className="mx-auto max-w-[1200px] px-4 py-16 sm:px-6 md:py-20">
         <h2
           id="whyus-heading"
-          className="mb-10 text-center font-display text-[clamp(1.5rem,3vw,2rem)] font-bold tracking-tight text-foreground"
+          className="mb-4 text-center font-display text-[clamp(1.5rem,3vw,2rem)] font-bold tracking-tight text-foreground"
         >
-          De ce să alegi marketing digital pentru turism cu noi
+          Parteneriatul cu noi înseamnă rezultate
         </h2>
 
+        <p className="mx-auto mb-10 max-w-2xl text-center text-muted-foreground">
+          Totul începe cu auditul și o discuție de follow-up, ambele 100%
+          gratuite. Primești o analiză valoroasă și recomandări concrete,
+          fără niciun cost sau obligație.
+        </p>
+
         <div className="grid gap-6 sm:grid-cols-2">
-          {DIFFERENTIATORS.map((item) => (
+          {BENEFITS.map((item) => (
             <Card
               key={item.title}
               className="border-border/50 bg-white transition-shadow hover:shadow-md"

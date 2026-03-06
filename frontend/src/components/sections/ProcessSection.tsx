@@ -14,7 +14,7 @@ const STEPS = [
     badge: "Pasul 1",
     title: "Audit gratuit",
     description:
-      "Completează formularul scurt și primești un raport detaliat cu recomandări personalizate — generat automat cu AI în 30-90 de minute.",
+      "În aproximativ 5 minute, primești un raport complet, fără niciun efort din partea ta și fără să ne dai acces la date interne. Folosim inteligența artificială și date publice pentru a identifica rapid nevoile și oportunitățile de creștere.",
     highlighted: true,
   },
   {
@@ -22,7 +22,7 @@ const STEPS = [
     badge: "Pasul 2",
     title: "Consultanță strategică",
     description:
-      "Discută cu un expert care te ghidează pas cu pas. Primești un plan de acțiune prioritizat pentru situația ta specifică.",
+      "După audit, îți oferim o sesiune de consultanță dedicată în care discutăm situația ta actuală și îți propunem o strategie digitală clară, adaptată obiectivelor tale, cu pași concreți și priorități clare.",
     highlighted: false,
   },
   {
@@ -30,7 +30,7 @@ const STEPS = [
     badge: "Pasul 3",
     title: "Implementare & creștere",
     description:
-      "Echipa noastră implementează strategia de marketing digital — de la optimizare Google la campanii pe social media.",
+      "Te ajutăm să pui în practică soluțiile recomandate. Beneficiezi de implementare completă, monitorizare a rezultatelor și suport constant. Tu te ocupi de oaspeți, noi de vizibilitate.",
     highlighted: false,
   },
 ] as const;
@@ -43,8 +43,7 @@ export function ProcessSection() {
           id="process-heading"
           className="mb-10 text-center font-display text-[clamp(1.5rem,3vw,2rem)] font-bold tracking-tight text-foreground"
         >
-          Ce face auditul nostru + ce urmează: pași simpli pentru promovare
-          turistică
+          Pașii simpli pentru afacerea ta
         </h2>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

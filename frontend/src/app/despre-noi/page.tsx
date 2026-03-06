@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Despre noi | Audit Digital Turism",
     type: "website",
-    url: "https://audit.devidevs.com/despre-noi",
+    url: "https://tourism-audit.devidevs.com/despre-noi",
     images: [
       {
         url: "/preview-image.png",

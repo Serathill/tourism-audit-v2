@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { headers } from "next/headers";
 import * as Sentry from "@sentry/nextjs";
 import { auditFormSchema } from "@/schemas/audit-form";
-import { checkRateLimit } from "@/lib/rate-limit";
+import { checkRateLimit, getClientIp, RATE_LIMITS } from "@/lib/rate-limit";
 import { isHoneypotFilled } from "@/lib/honeypot";
 import { verifyRecaptcha } from "@/lib/recaptcha";
 import { createServiceClient } from "@/lib/supabase/service";
@@ -20,12 +20,12 @@ export async function POST(request: Request) {
   try {
     // ── 1. Rate limit check ──────────────────────────────
     const headersList = await headers();
-    const ip =
-      headersList.get("x-forwarded-for")?.split(",")[0]?.trim() ??
-      headersList.get("x-real-ip") ??
-      "unknown";
+    const ip = getClientIp(headersList);
 
-    const { success: rateLimitOk } = await checkRateLimit(ip);
+    const { success: rateLimitOk } = await checkRateLimit(
+      ip,
+      RATE_LIMITS.auditSubmit
+    );
     if (!rateLimitOk) {
       return NextResponse.json(
         { message: "Prea multe cereri. Încercați din nou în câteva minute." },

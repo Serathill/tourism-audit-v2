@@ -21,14 +21,19 @@ export function HeroSection() {
               id="hero-heading"
               className="font-display text-[clamp(1.75rem,5vw,3rem)] font-extrabold leading-[1.1] tracking-tight text-foreground"
             >
-              Marketing pentru turism &amp; audit digital gratuit pentru
-              unități de cazare
+              Descoperă cum poți dubla numărul de rezervări directe cu un
+              audit gratuit
             </h1>
 
+            <p className="text-lg font-medium leading-snug text-foreground/80 sm:text-xl">
+              Află unde pierzi vizibilitate online. Raport personalizat
+              în 30‑90 de minute.
+            </p>
+
             <p className="max-w-xl text-lg leading-relaxed text-muted-foreground">
-              Află unde pierzi vizibilitate online — raport personalizat cu
-              recomandări practice, livrat în 30-90 de minute. Fără costuri,
-              fără acces la datele tale.
+              Primești un plan de acțiune personalizat pentru a atrage
+              clienții potriviți și a crește numărul de rezervări, fără efort
+              și fără acces la datele tale interne.
             </p>
 
             <TeamStrip />

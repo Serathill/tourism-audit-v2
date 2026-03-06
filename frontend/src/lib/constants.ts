@@ -96,23 +96,23 @@ export type TeamMember = {
 
 export const TEAM_MEMBERS: TeamMember[] = [
   {
-    name: "Alexandru Mihailă",
-    role: "CMO — ex-Deloitte",
-    description:
-      "Strategie de marketing digital și consultanță pentru turism",
-    image: "/images/team/alexandru-mihaila.jpg",
-  },
-  {
     name: "Petru Constantin",
-    role: "CEO",
+    role: "CEO & Founder",
     description: "Dezvoltare de business și relații cu clienții",
     image: "/images/team/petru-constantin.webp",
   },
   {
     name: "Nicu Constantin",
-    role: "CTO",
+    role: "CTO & Co-Founder",
     description: "Tehnologie AI și automatizare de marketing",
     image: "/images/team/nicu-constantin.webp",
+  },
+  {
+    name: "Alexandru Mihailă",
+    role: "Developer",
+    description:
+      "Strategie de marketing digital și consultanță pentru turism",
+    image: "/images/team/alexandru-mihaila.jpg",
   },
 ];
 

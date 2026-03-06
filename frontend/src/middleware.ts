@@ -29,22 +29,11 @@ export async function middleware(request: NextRequest) {
     request: { headers: requestHeaders },
   });
 
-  // Set CSP header
+  // Set CSP header (needs per-request nonce — can't live in next.config.ts)
   response.headers.set("Content-Security-Policy", buildCspHeader(nonce));
 
-  // Security headers
-  response.headers.set("X-Content-Type-Options", "nosniff");
-  response.headers.set("X-Frame-Options", "DENY");
-  response.headers.set("X-XSS-Protection", "1; mode=block");
-  response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
-  response.headers.set(
-    "Permissions-Policy",
-    "camera=(), microphone=(), geolocation=()"
-  );
-  response.headers.set(
-    "Strict-Transport-Security",
-    "max-age=63072000; includeSubDomains; preload"
-  );
+  // All other security headers live in next.config.ts headers()
+  // to avoid duplication and value conflicts.
 
   return response;
 }
