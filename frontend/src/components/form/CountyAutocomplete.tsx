@@ -56,9 +56,12 @@ export function CountyAutocomplete({
       {/* Trigger button */}
       <button
         type="button"
+        id="county-combobox"
         role="combobox"
         aria-expanded={open}
         aria-haspopup="listbox"
+        aria-controls={open ? "county-listbox" : undefined}
+        aria-labelledby="county-label"
         aria-invalid={!!error}
         onClick={() => setOpen(!open)}
         className={cn(
@@ -91,7 +94,7 @@ export function CountyAutocomplete({
           </div>
 
           {/* Options list */}
-          <div role="listbox" className="max-h-[min(15rem,50vh)] overflow-y-auto overscroll-contain p-1">
+          <div id="county-listbox" role="listbox" aria-label="Județe" className="max-h-[min(15rem,50vh)] overflow-y-auto overscroll-contain p-1">
             {filteredRegions.length === 0 ? (
               <p className="px-3 py-4 text-center text-sm text-muted-foreground">
                 Niciun județ găsit

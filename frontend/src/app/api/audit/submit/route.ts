@@ -48,16 +48,20 @@ export async function POST(request: Request) {
       );
     }
 
-    // ── 4. reCAPTCHA verification (skip if not configured) ──
+    // ── 4. reCAPTCHA verification (enforced when secret key is configured) ──
     const recaptchaToken = body.recaptcha_token;
-    if (recaptchaToken) {
+    const recaptchaConfigured = !!process.env.RECAPTCHA_SECRET_KEY;
+    if (recaptchaConfigured) {
+      if (!recaptchaToken) {
+        return NextResponse.json(
+          { message: "Lipsește verificarea de securitate. Te rugăm reîncarcă pagina." },
+          { status: 403 }
+        );
+      }
       const { success: captchaOk } = await verifyRecaptcha(recaptchaToken);
       if (!captchaOk) {
         return NextResponse.json(
-          {
-            message:
-              "Verificarea de securitate a eșuat. Te rugăm încearcă din nou.",
-          },
+          { message: "Verificarea de securitate a eșuat. Te rugăm încearcă din nou." },
           { status: 403 }
         );
       }

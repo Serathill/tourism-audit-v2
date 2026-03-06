@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import Link from "next/link";
 import { X, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -25,6 +25,8 @@ export function ExitIntentPopup() {
   const [show, setShow] = useState(false);
   const [ready, setReady] = useState(false);
   const [triggered, setTriggered] = useState(false);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (getCookie(COOKIE_NAME)) return;
@@ -75,6 +77,39 @@ export function ExitIntentPopup() {
     };
   }, [ready, triggered]);
 
+  // Focus trap + keyboard handling
+  useEffect(() => {
+    if (!show) return;
+
+    // Focus close button on open
+    closeRef.current?.focus();
+
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") {
+        dismiss();
+        return;
+      }
+      if (e.key !== "Tab" || !dialogRef.current) return;
+
+      const focusable = dialogRef.current.querySelectorAll<HTMLElement>(
+        'button, [href], input, [tabindex]:not([tabindex="-1"])'
+      );
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last?.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first?.focus();
+      }
+    }
+
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [show, dismiss]);
+
   if (!show) return null;
 
   return (
@@ -83,10 +118,15 @@ export function ExitIntentPopup() {
       onClick={dismiss}
     >
       <div
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="exit-intent-heading"
         onClick={(e) => e.stopPropagation()}
         className="relative mx-4 w-full max-w-md rounded-2xl bg-white p-6 shadow-xl sm:p-8"
       >
         <button
+          ref={closeRef}
           onClick={dismiss}
           className="absolute right-3 top-3 rounded-full p-2 text-muted-foreground hover:text-foreground"
           aria-label="Închide"
@@ -94,7 +134,7 @@ export function ExitIntentPopup() {
           <X className="size-5" />
         </button>
         <div className="text-center">
-          <h2 className="font-display text-xl font-bold text-foreground sm:text-2xl">
+          <h2 id="exit-intent-heading" className="font-display text-xl font-bold text-foreground sm:text-2xl">
             Nu pleca fără auditul tău gratuit!
           </h2>
           <p className="mt-3 text-sm text-muted-foreground">

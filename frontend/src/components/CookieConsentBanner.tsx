@@ -101,13 +101,13 @@ export function CookieConsentBanner() {
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
-          <Button onClick={reject} variant="outline" size="sm">
+          <Button onClick={reject} variant="outline" size="default">
             Refuză
           </Button>
-          <Button onClick={acceptAnalyticsOnly} variant="secondary" size="sm">
+          <Button onClick={acceptAnalyticsOnly} variant="secondary" size="default">
             Doar analitice
           </Button>
-          <Button onClick={accept} size="sm">
+          <Button onClick={accept} size="default">
             Accept toate
           </Button>
         </div>
@@ -125,7 +125,7 @@ export function ManageCookiesButton() {
   return (
     <button
       onClick={resetConsent}
-      className="text-sm text-slate-400 transition-colors hover:text-white"
+      className="text-sm text-slate-300 transition-colors hover:text-white"
     >
       Gestionează cookie-uri
     </button>

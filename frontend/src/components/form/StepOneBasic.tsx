@@ -91,7 +91,7 @@ export function StepOneBasic({ form }: StepOneBasicProps) {
 
       {/* Județul */}
       <div>
-        <Label>
+        <Label id="county-label">
           Județul <span className="text-destructive" aria-hidden="true">*</span>
         </Label>
         <div className="mt-1.5">

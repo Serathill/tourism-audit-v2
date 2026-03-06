@@ -176,7 +176,7 @@ export function FormWizardClient({ meetingLink }: FormWizardClientProps) {
       </div>
 
       {/* Step content */}
-      <div className="min-h-[280px]">
+      <div className="min-h-[280px]" role="region" aria-live="polite" aria-atomic="true">
         {step === 1 && <StepOneBasic form={form} />}
         {step === 2 && <StepTwoDetails form={form} />}
         {step === 3 && (

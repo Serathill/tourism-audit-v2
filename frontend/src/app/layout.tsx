@@ -151,6 +151,12 @@ function JsonLd({ nonce }: { nonce: string }) {
     name: "DeviDevs Agency",
     url: "https://devidevs-agency.com",
     logo: `${siteUrl}/android-chrome-512x512.png`,
+    contactPoint: {
+      "@type": "ContactPoint",
+      email: "contact@devidevs-agency.com",
+      contactType: "customer service",
+      availableLanguage: ["Romanian", "English"],
+    },
   };
 
   const serviceSchema = {
