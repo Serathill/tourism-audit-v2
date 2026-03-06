@@ -14,7 +14,7 @@ const STEPS = [
     badge: "Pasul 1",
     title: "Audit gratuit",
     description:
-      "În aproximativ 5 minute, primești un raport complet, fără niciun efort din partea ta și fără să ne dai acces la date interne. Folosim inteligența artificială și date publice pentru a identifica rapid nevoile și oportunitățile de creștere.",
+      "În aproximativ 5 minute, primești un raport complet, fără niciun efort din partea ta și fără să ne dai acces la date interne. Analizăm date publice pentru a identifica rapid ce pierzi și ce poți îmbunătăți.",
     highlighted: true,
   },
   {
@@ -22,13 +22,13 @@ const STEPS = [
     badge: "Pasul 2",
     title: "Consultanță strategică",
     description:
-      "După audit, îți oferim o sesiune de consultanță dedicată în care discutăm situația ta actuală și îți propunem o strategie digitală clară, adaptată obiectivelor tale, cu pași concreți și priorități clare.",
+      "După audit, discutăm situația ta actuală și îți propunem pași concreți ca să nu mai pierzi vizibilitate și rezervări. Totul adaptat la nevoile tale.",
     highlighted: false,
   },
   {
     icon: Rocket,
     badge: "Pasul 3",
-    title: "Implementare & creștere",
+    title: "Implementare & rezultate",
     description:
       "Te ajutăm să pui în practică soluțiile recomandate. Beneficiezi de implementare completă, monitorizare a rezultatelor și suport constant. Tu te ocupi de oaspeți, noi de vizibilitate.",
     highlighted: false,

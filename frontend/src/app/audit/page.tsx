@@ -3,6 +3,9 @@ import { FormWizardClient } from "@/components/form/FormWizardClient";
 import { TeamStrip } from "@/components/trust/TeamStrip";
 import { TrustBadge } from "@/components/trust/TrustBadge";
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://tourism-audit.devidevs.com";
+
 export const metadata: Metadata = {
   title: "Solicită audit digital gratuit",
   description:
@@ -12,8 +15,10 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Solicită audit digital gratuit | Audit Digital Turism",
+    description:
+      "Completează formularul și primește un raport personalizat cu recomandări practice pentru prezența ta online, în 30-90 de minute.",
     type: "website",
-    url: "https://tourism-audit.devidevs.com/audit",
+    url: `${siteUrl}/audit`,
     images: [
       {
         url: "/preview-image.png",
@@ -23,7 +28,12 @@ export const metadata: Metadata = {
       },
     ],
   },
-  twitter: { card: "summary_large_image", images: ["/preview-image.png"] },
+  twitter: {
+    card: "summary_large_image",
+    title: "Solicită audit digital gratuit | Audit Digital Turism",
+    description: "Raport personalizat cu recomandări practice pentru prezența ta online, în 30-90 de minute.",
+    images: ["/preview-image.png"],
+  },
 };
 
 // ISR: revalidate every 7 days
@@ -37,13 +47,13 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "Acasă",
-      item: "https://tourism-audit.devidevs.com/marketing-pentru-turism",
+      item: `${siteUrl}/marketing-pentru-turism`,
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Audit digital gratuit",
-      item: "https://tourism-audit.devidevs.com/audit",
+      item: `${siteUrl}/audit`,
     },
   ],
 };

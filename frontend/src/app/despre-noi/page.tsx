@@ -12,6 +12,9 @@ import {
 } from "@/components/ui/card";
 import { TEAM_MEMBERS, BRAND } from "@/lib/constants";
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://tourism-audit.devidevs.com";
+
 export const metadata: Metadata = {
   title: "Despre noi",
   description:
@@ -21,8 +24,10 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Despre noi | Audit Digital Turism",
+    description:
+      "Echipa de marketing digital din spatele Audit Digital Turism. Alexandru Mihailă, Petru Constantin și Nicu Constantin.",
     type: "website",
-    url: "https://tourism-audit.devidevs.com/despre-noi",
+    url: `${siteUrl}/despre-noi`,
     images: [
       {
         url: "/preview-image.png",
@@ -32,7 +37,12 @@ export const metadata: Metadata = {
       },
     ],
   },
-  twitter: { card: "summary_large_image", images: ["/preview-image.png"] },
+  twitter: {
+    card: "summary_large_image",
+    title: "Despre noi | Audit Digital Turism",
+    description: "Echipa de marketing digital din spatele Audit Digital Turism.",
+    images: ["/preview-image.png"],
+  },
 };
 
 export const revalidate = 604800; // 7 days

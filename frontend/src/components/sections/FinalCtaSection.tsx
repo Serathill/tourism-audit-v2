@@ -14,13 +14,12 @@ export function FinalCtaSection() {
             id="final-cta-heading"
             className="font-display text-[clamp(1.5rem,3vw,2.25rem)] font-bold tracking-tight text-white"
           >
-            Ești gata să-ți crești vizibilitatea și să atragi mai mulți
-            clienți?
+            Nu mai lăsa concurența să-ți ia clienții
           </h2>
 
           <p className="text-lg leading-relaxed text-brand-teal-lighter">
-            Solicită acum auditul digital gratuit și începe să descoperi
-            potențialul real al unității tale de cazare!
+            Solicită auditul digital gratuit și află exact unde pierzi
+            vizibilitate și rezervări. Raport personalizat, fără obligații.
           </p>
 
           <Button

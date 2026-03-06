@@ -25,7 +25,7 @@ export function StepOneBasic({ form }: StepOneBasicProps) {
       {/* Nume complet */}
       <div>
         <Label htmlFor="owner_name">
-          Nume complet <span className="text-destructive">*</span>
+          Nume complet <span className="text-destructive" aria-hidden="true">*</span>
         </Label>
         <Input
           id="owner_name"
@@ -33,11 +33,12 @@ export function StepOneBasic({ form }: StepOneBasicProps) {
           autoComplete="name"
           aria-required="true"
           aria-invalid={!!errors.owner_name}
+          aria-describedby={errors.owner_name ? "owner_name-error" : undefined}
           className="mt-1.5 h-11"
           {...register("owner_name")}
         />
         {errors.owner_name && (
-          <p className="mt-1 text-sm text-destructive" role="alert">
+          <p id="owner_name-error" className="mt-1 text-sm text-destructive" role="alert">
             {errors.owner_name.message}
           </p>
         )}
@@ -46,7 +47,7 @@ export function StepOneBasic({ form }: StepOneBasicProps) {
       {/* Email */}
       <div>
         <Label htmlFor="owner_email">
-          Email <span className="text-destructive">*</span>
+          Email <span className="text-destructive" aria-hidden="true">*</span>
         </Label>
         <Input
           id="owner_email"
@@ -55,11 +56,12 @@ export function StepOneBasic({ form }: StepOneBasicProps) {
           autoComplete="email"
           aria-required="true"
           aria-invalid={!!errors.owner_email}
+          aria-describedby={errors.owner_email ? "owner_email-error" : undefined}
           className="mt-1.5 h-11"
           {...register("owner_email")}
         />
         {errors.owner_email && (
-          <p className="mt-1 text-sm text-destructive" role="alert">
+          <p id="owner_email-error" className="mt-1 text-sm text-destructive" role="alert">
             {errors.owner_email.message}
           </p>
         )}
@@ -68,7 +70,7 @@ export function StepOneBasic({ form }: StepOneBasicProps) {
       {/* Numele pensiunii */}
       <div>
         <Label htmlFor="property_name">
-          Numele pensiunii <span className="text-destructive">*</span>
+          Numele pensiunii <span className="text-destructive" aria-hidden="true">*</span>
         </Label>
         <Input
           id="property_name"
@@ -76,11 +78,12 @@ export function StepOneBasic({ form }: StepOneBasicProps) {
           autoComplete="organization"
           aria-required="true"
           aria-invalid={!!errors.property_name}
+          aria-describedby={errors.property_name ? "property_name-error" : undefined}
           className="mt-1.5 h-11"
           {...register("property_name")}
         />
         {errors.property_name && (
-          <p className="mt-1 text-sm text-destructive" role="alert">
+          <p id="property_name-error" className="mt-1 text-sm text-destructive" role="alert">
             {errors.property_name.message}
           </p>
         )}
@@ -89,7 +92,7 @@ export function StepOneBasic({ form }: StepOneBasicProps) {
       {/* Județul */}
       <div>
         <Label>
-          Județul <span className="text-destructive">*</span>
+          Județul <span className="text-destructive" aria-hidden="true">*</span>
         </Label>
         <div className="mt-1.5">
           <CountyAutocomplete
@@ -99,7 +102,7 @@ export function StepOneBasic({ form }: StepOneBasicProps) {
           />
         </div>
         {errors.property_address && (
-          <p className="mt-1 text-sm text-destructive" role="alert">
+          <p id="property_address-error" className="mt-1 text-sm text-destructive" role="alert">
             {errors.property_address.message}
           </p>
         )}

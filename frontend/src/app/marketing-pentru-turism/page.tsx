@@ -63,42 +63,50 @@ const faqJsonLd = {
   mainEntity: [
     {
       "@type": "Question",
-      name: "De ce este auditul gratuit? Care e 'șmecheria'?",
+      name: "De ce este auditul gratuit? Care e smecheria?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Nu există nicio 'șmecherie'. Auditul gratuit este modul nostru de a demonstra ce putem face. Vrem să vezi concret valoarea analizei noastre înainte de orice discuție despre colaborare. Nu ai nicio obligație după audit.",
+        text: "Nu exista nicio smecherie. Auditul gratuit este modul nostru de a demonstra ce putem face. Vrem sa vezi concret valoarea analizei noastre inainte de orice discutie despre colaborare. Nu ai nicio obligatie dupa audit.",
       },
     },
     {
       "@type": "Question",
-      name: "Ce se întâmplă, concret, după ce solicit auditul?",
+      name: "Ce se intampla, concret, dupa ce solicit auditul?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Completezi formularul (durează ~2 minute), iar noi analizăm automat prezența ta online folosind doar informații publice. În 30-90 de minute primești pe email un raport detaliat cu recomandări personalizate.",
+        text: "Completezi formularul (dureaza ~2 minute), iar noi analizam automat prezenta ta online folosind doar informatii publice. In 30-90 de minute primesti pe email un raport detaliat cu recomandari personalizate. Dupa aceea, daca doresti, programam o discutie gratuita de follow-up.",
       },
     },
     {
       "@type": "Question",
-      name: "Sunt obligat(ă) să cumpăr ceva după audit?",
+      name: "Sunt obligat(a) sa cumpar ceva dupa audit?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Nu. Auditul și discuția de follow-up sunt 100% gratuite, fără nicio obligație. Dacă rezonezi cu recomandările noastre și vrei să mergem mai departe, discutăm opțiunile.",
+        text: "Nu. Auditul si discutia de follow-up sunt 100% gratuite, fara nicio obligatie. Daca rezonezi cu recomandarile noastre si vrei sa mergem mai departe, discutam optiunile. Daca nu, pastrezi raportul si il folosesti cum doresti.",
       },
     },
     {
       "@type": "Question",
-      name: "Aveți nevoie de acces la conturile mele?",
+      name: "Acest serviciu este pentru mine daca nu am o echipa de marketing?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Nu. Nu cerem parole, acces la conturi sau date financiare. Tot procesul de audit se bazează pe informații publice disponibile online.",
+        text: "Da, exact pentru tine este. Majoritatea proprietarilor de pensiuni si case de vacanta nu au o echipa dedicata de marketing. Auditul iti arata clar ce poti imbunatati, iar daca decizi sa colaboram, noi preluam totul.",
       },
     },
     {
       "@type": "Question",
-      name: "În cât timp pot vedea rezultate?",
+      name: "Aveti nevoie de acces la conturile mele?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Raportul de audit ajunge pe email în 30-90 de minute. Dacă decizi să implementezi recomandările, primele îmbunătățiri ale vizibilității online se văd de obicei în 4-8 săptămâni.",
+        text: "Nu. Nu cerem parole, acces la conturi sau date financiare. Tot procesul de audit se bazeaza pe informatii publice disponibile online. Este complet sigur si transparent.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "In cat timp pot vedea rezultate?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Raportul de audit ajunge pe email in 30-90 de minute. Daca decizi sa implementezi recomandarile (singur sau cu noi), primele imbunatatiri ale vizibilitatii online se vad de obicei in 4-8 saptamani.",
       },
     },
   ],

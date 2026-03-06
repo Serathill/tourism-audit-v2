@@ -11,6 +11,9 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://tourism-audit.devidevs.com";
+
 export const metadata: Metadata = {
   title: "Servicii",
   description:
@@ -20,8 +23,10 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Servicii | Audit Digital Turism",
+    description:
+      "Audit digital gratuit, consultanță strategică și implementare completă pentru pensiuni și case de vacanță din România.",
     type: "website",
-    url: "https://tourism-audit.devidevs.com/servicii",
+    url: `${siteUrl}/servicii`,
     images: [
       {
         url: "/preview-image.png",
@@ -31,7 +36,12 @@ export const metadata: Metadata = {
       },
     ],
   },
-  twitter: { card: "summary_large_image", images: ["/preview-image.png"] },
+  twitter: {
+    card: "summary_large_image",
+    title: "Servicii | Audit Digital Turism",
+    description: "Audit digital gratuit, consultanță strategică și implementare completă pentru turism.",
+    images: ["/preview-image.png"],
+  },
 };
 
 export const revalidate = 604800; // 7 days

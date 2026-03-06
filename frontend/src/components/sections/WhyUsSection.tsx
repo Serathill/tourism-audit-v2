@@ -11,7 +11,7 @@ import { BRAND } from "@/lib/constants";
 const BENEFITS = [
   {
     icon: TrendingUp,
-    title: "Mai multe rezervări directe",
+    title: "Nu mai pierzi rezervări directe",
     description:
       "Reducem dependența de platformele care percep comisioane mari.",
   },

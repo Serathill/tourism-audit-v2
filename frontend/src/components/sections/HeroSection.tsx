@@ -21,8 +21,7 @@ export function HeroSection() {
               id="hero-heading"
               className="font-display text-[clamp(1.75rem,5vw,3rem)] font-extrabold leading-[1.1] tracking-tight text-foreground"
             >
-              Descoperă cum poți dubla numărul de rezervări directe cu un
-              audit gratuit
+              Află câte rezervări pierzi fără o prezență online corectă
             </h1>
 
             <p className="text-lg font-medium leading-snug text-foreground/80 sm:text-xl">
@@ -31,9 +30,9 @@ export function HeroSection() {
             </p>
 
             <p className="max-w-xl text-lg leading-relaxed text-muted-foreground">
-              Primești un plan de acțiune personalizat pentru a atrage
-              clienții potriviți și a crește numărul de rezervări, fără efort
-              și fără acces la datele tale interne.
+              Primești un plan de acțiune personalizat ca să nu mai pierzi
+              clienți în favoarea concurenței, fără efort și fără acces la
+              datele tale interne.
             </p>
 
             <TeamStrip />

@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { BRAND } from "@/lib/constants";
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://tourism-audit.devidevs.com";
+
 export const metadata: Metadata = {
   title: "Termeni și condiții",
   description:
@@ -11,8 +14,9 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Termeni și condiții | Audit Digital Turism",
+    description: "Termenii și condițiile de utilizare pentru Audit Digital Turism, un serviciu de la DeviDevs Agency.",
     type: "website",
-    url: "https://tourism-audit.devidevs.com/terms-and-conditions",
+    url: `${siteUrl}/terms-and-conditions`,
     images: [
       {
         url: "/preview-image.png",
@@ -22,7 +26,12 @@ export const metadata: Metadata = {
       },
     ],
   },
-  twitter: { card: "summary_large_image", images: ["/preview-image.png"] },
+  twitter: {
+    card: "summary_large_image",
+    title: "Termeni și condiții | Audit Digital Turism",
+    description: "Termenii și condițiile de utilizare pentru Audit Digital Turism.",
+    images: ["/preview-image.png"],
+  },
 };
 
 export const revalidate = 2592000; // 30 days

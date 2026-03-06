@@ -38,11 +38,12 @@ export function StepTwoDetails({ form }: StepTwoDetailsProps) {
           placeholder="ex: pensiuneaflorilor.ro"
           autoComplete="url"
           aria-invalid={!!errors.website_url}
+          aria-describedby={errors.website_url ? "website_url-error" : undefined}
           className="mt-1.5 h-11"
           {...register("website_url")}
         />
         {errors.website_url && (
-          <p className="mt-1 text-sm text-destructive" role="alert">
+          <p id="website_url-error" className="mt-1 text-sm text-destructive" role="alert">
             {errors.website_url.message}
           </p>
         )}
@@ -59,6 +60,7 @@ export function StepTwoDetails({ form }: StepTwoDetailsProps) {
           placeholder={"ex: booking.com/pensiunea-florilor\nairbnb.com/rooms/123456"}
           rows={3}
           aria-invalid={!!errors.booking_platform_links}
+          aria-describedby={errors.booking_platform_links ? "booking_platform_links-error" : undefined}
           className="mt-1.5"
           {...register("booking_platform_links")}
         />
@@ -66,7 +68,7 @@ export function StepTwoDetails({ form }: StepTwoDetailsProps) {
           Câte un link pe fiecare rând
         </p>
         {errors.booking_platform_links && (
-          <p className="mt-1 text-sm text-destructive" role="alert">
+          <p id="booking_platform_links-error" className="mt-1 text-sm text-destructive" role="alert">
             {errors.booking_platform_links.message}
           </p>
         )}
@@ -83,6 +85,7 @@ export function StepTwoDetails({ form }: StepTwoDetailsProps) {
           placeholder={"ex: facebook.com/pensiuneaflorilor\ninstagram.com/pensiuneaflorilor"}
           rows={3}
           aria-invalid={!!errors.social_media_links}
+          aria-describedby={errors.social_media_links ? "social_media_links-error" : undefined}
           className="mt-1.5"
           {...register("social_media_links")}
         />
@@ -90,7 +93,7 @@ export function StepTwoDetails({ form }: StepTwoDetailsProps) {
           Câte un link pe fiecare rând
         </p>
         {errors.social_media_links && (
-          <p className="mt-1 text-sm text-destructive" role="alert">
+          <p id="social_media_links-error" className="mt-1 text-sm text-destructive" role="alert">
             {errors.social_media_links.message}
           </p>
         )}
@@ -107,11 +110,12 @@ export function StepTwoDetails({ form }: StepTwoDetailsProps) {
           type="url"
           placeholder="ex: g.co/kgs/xyz sau maps.google.com/..."
           aria-invalid={!!errors.google_my_business_link}
+          aria-describedby={errors.google_my_business_link ? "google_my_business_link-error" : undefined}
           className="mt-1.5 h-11"
           {...register("google_my_business_link")}
         />
         {errors.google_my_business_link && (
-          <p className="mt-1 text-sm text-destructive" role="alert">
+          <p id="google_my_business_link-error" className="mt-1 text-sm text-destructive" role="alert">
             {errors.google_my_business_link.message}
           </p>
         )}
@@ -128,6 +132,7 @@ export function StepTwoDetails({ form }: StepTwoDetailsProps) {
           placeholder="Descrie pe scurt unitatea ta de cazare, serviciile oferite și ce te diferențiază..."
           rows={4}
           aria-invalid={!!errors.business_description}
+          aria-describedby={errors.business_description ? "business_description-error" : undefined}
           className="mt-1.5"
           {...register("business_description")}
         />
@@ -135,7 +140,7 @@ export function StepTwoDetails({ form }: StepTwoDetailsProps) {
           {descriptionLength} / {MAX_DESCRIPTION_LENGTH} caractere
         </p>
         {errors.business_description && (
-          <p className="mt-1 text-sm text-destructive" role="alert">
+          <p id="business_description-error" className="mt-1 text-sm text-destructive" role="alert">
             {errors.business_description.message}
           </p>
         )}
