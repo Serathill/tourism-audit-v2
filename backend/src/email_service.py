@@ -106,6 +106,83 @@ class EmailService:
         )
         return False
 
+    def send_email_raw(
+        self,
+        to_email: str,
+        subject: str,
+        html_content: str,
+        text_content: str,
+        cc: list[str] | None = None,
+    ) -> bool:
+        """Send a raw email with arbitrary subject/body."""
+        email_data = {
+            "from": FROM_EMAIL,
+            "to": to_email,
+            "subject": subject,
+            "html": html_content,
+            "text": text_content,
+        }
+        if cc:
+            email_data["cc"] = cc
+
+        try:
+            response = resend.Emails.send(email_data)
+            if response and "id" in response:
+                logger.info("Raw email sent to %s — ID: %s", to_email, response["id"])
+                return True
+            logger.warning("Unexpected Resend response: %s", response)
+            return False
+        except Exception as e:
+            logger.error("Error sending raw email to %s: %s", to_email, e)
+            return False
+
+    def send_internal_failure_alert(
+        self,
+        primary_to: str,
+        cc_emails: list[str],
+        property_name: str | None,
+        owner_email: str,
+        error_context: str,
+    ) -> bool:
+        """Send a technical failure alert to the team."""
+        subject = f"[ALERT] Audit failure - {property_name or 'Unknown'}"
+        html_content = f"""
+        <html>
+        <body style="font-family: Arial, sans-serif; color:#111;">
+            <h3 style="margin:0 0 10px 0;">Audit failure alert</h3>
+            <ul>
+                <li><strong>Property</strong>: {property_name or 'N/A'}</li>
+                <li><strong>Owner email</strong>: {owner_email}</li>
+                <li><strong>Context</strong>: {error_context}</li>
+            </ul>
+            <p>Verificati <code>audit_logs</code> si <code>audit_results</code>.
+            Clientul a fost notificat automat.</p>
+        </body>
+        </html>
+        """
+        text_content = (
+            f"Audit failure alert\n"
+            f"Property: {property_name or 'N/A'}\n"
+            f"Owner email: {owner_email}\n"
+            f"Context: {error_context}\n"
+            "Clientul a fost notificat. Verificati audit_logs/audit_results."
+        )
+        try:
+            payload: dict = {
+                "from": FROM_EMAIL,
+                "to": primary_to,
+                "subject": subject,
+                "html": html_content,
+                "text": text_content,
+            }
+            if cc_emails:
+                payload["cc"] = cc_emails
+            response = resend.Emails.send(payload)
+            return bool(response and "id" in response)
+        except Exception as e:
+            logger.error("Error sending internal alert to %s: %s", primary_to, e)
+            return False
+
     def send_error_notification(
         self,
         to_email: str,

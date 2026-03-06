@@ -123,18 +123,21 @@ class SupabaseService:
 
     def insert_audit_log(
         self,
-        property_id: str,
+        property_id: Optional[str],
         message: str,
         status_text: Optional[str] = None,
     ) -> bool:
         try:
-            data: dict = {"property_id": property_id, "message": message}
+            data: dict = {"message": message}
+            if property_id is not None:
+                data["property_id"] = property_id
             if status_text is not None:
                 data["status_text"] = status_text
 
             response = self._table("audit_logs").insert(data).execute()
             if response.data:
-                logger.info("Audit log [%s]: %s", property_id[:8], message)
+                label = property_id[:8] if property_id else "system"
+                logger.info("Audit log [%s]: %s", label, message)
                 return True
             return False
         except Exception as e:
@@ -157,6 +160,62 @@ class SupabaseService:
         except Exception as e:
             logger.error("Failed to fetch report subscribers: %s", e)
             return []
+
+    # ── Daily report metrics ────────────────────────────────
+
+    def get_audit_counts_for_day(self, target_date) -> dict:
+        """Fetch counts of started, completed, running, and failed audits for a day."""
+        import datetime as _dt
+
+        start_of_day = _dt.datetime.combine(target_date, _dt.time.min).isoformat()
+        end_of_day = _dt.datetime.combine(target_date, _dt.time.max).isoformat()
+
+        try:
+            started = (
+                self._table("audit_logs")
+                .select("id", count="exact")
+                .eq("status_text", "running")
+                .gte("inserted_at", start_of_day)
+                .lte("inserted_at", end_of_day)
+                .execute()
+            )
+
+            completed = (
+                self._table("properties")
+                .select("id", count="exact")
+                .eq("status", 99)
+                .gte("last_status_update_at", start_of_day)
+                .lte("last_status_update_at", end_of_day)
+                .execute()
+            )
+
+            running = (
+                self._table("properties")
+                .select("id", count="exact")
+                .eq("status", 1)
+                .lte("last_status_update_at", end_of_day)
+                .execute()
+            )
+
+            failed = (
+                self._table("properties")
+                .select("id", count="exact")
+                .eq("status", 0)
+                .neq("status_text", "migrated_from_v1")
+                .gte("last_status_update_at", start_of_day)
+                .lte("last_status_update_at", end_of_day)
+                .execute()
+            )
+
+            return {
+                "started": started.count or 0,
+                "completed": completed.count or 0,
+                "running": running.count or 0,
+                "failed": failed.count or 0,
+            }
+        except Exception as e:
+            logger.error("Failed to fetch audit counts for %s: %s", target_date, e)
+            raise DatabaseError(f"Failed to fetch audit counts: {e}")
 
     # ── Helpers ─────────────────────────────────────────────
 

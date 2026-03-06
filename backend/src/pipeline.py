@@ -67,6 +67,28 @@ def run_audit_pipeline(property_data: PropertyData) -> None:
         except Exception as e:
             logger.error("Failed to notify client: %s", e)
 
+    def _notify_team_failure(error_context: str) -> None:
+        """Send internal failure alert to team subscribers."""
+        try:
+            subscribers = db_service.get_report_subscribers()
+            if not subscribers:
+                return
+            svc = email_service
+            if svc is None:
+                try:
+                    svc = EmailService()
+                except Exception:
+                    return
+            svc.send_internal_failure_alert(
+                primary_to=subscribers[0],
+                cc_emails=subscribers[1:],
+                property_name=property_data.property_name,
+                owner_email=property_data.owner_email,
+                error_context=error_context,
+            )
+        except Exception as e:
+            logger.error("Failed to send internal failure alert: %s", e)
+
     # Mark as running
     try:
         db_service.update_property_status(property_id, 1)
@@ -170,6 +192,7 @@ def run_audit_pipeline(property_data: PropertyData) -> None:
                 status_text="email_failed",
             )
             db_service.update_property_status(property_id, 0)
+            _notify_team_failure("Email delivery failed after retries")
 
     except AuditGenerationError as e:
         error_str = str(e)
@@ -178,16 +201,17 @@ def run_audit_pipeline(property_data: PropertyData) -> None:
             property_id, f"Gemini error: {e}", status_text="gemini_error"
         )
         db_service.update_property_status(property_id, 0)
+        _notify_team_failure(f"AuditGenerationError: {e}")
 
         if "QUOTA_ERROR" in error_str:
             _notify_client_error(
-                "Din cauza volumului mare de solicitări, auditul nu a putut fi "
-                "generat momentan. Te rugăm să încerci din nou mai târziu."
+                "Din cauza volumului mare de solicitari, auditul nu a putut fi "
+                "generat momentan. Te rugam sa incerci din nou mai tarziu."
             )
         else:
             _notify_client_error(
                 "Din cauza unei probleme tehnice temporare, auditul nu a putut "
-                "fi generat. Te rugăm să încerci din nou mai târziu."
+                "fi generat. Te rugam sa incerci din nou mai tarziu."
             )
 
     except TemplateProcessingError as e:
@@ -198,9 +222,10 @@ def run_audit_pipeline(property_data: PropertyData) -> None:
             status_text="template_error",
         )
         db_service.update_property_status(property_id, 0)
+        _notify_team_failure(f"TemplateProcessingError: {e}")
         _notify_client_error(
-            "A apărut o problemă la procesarea auditului. Echipa noastră "
-            "a fost notificată și lucrăm la rezolvare."
+            "A aparut o problema la procesarea auditului. Echipa noastra "
+            "a fost notificata si lucram la rezolvare."
         )
 
     except Exception as e:
@@ -211,9 +236,10 @@ def run_audit_pipeline(property_data: PropertyData) -> None:
             status_text="unexpected_error",
         )
         db_service.update_property_status(property_id, 0)
+        _notify_team_failure(f"Unexpected: {e}")
         _notify_client_error(
-            "A apărut o eroare neașteptată. Echipa noastră a fost notificată "
-            "și lucrăm la rezolvare."
+            "A aparut o eroare neasteptata. Echipa noastra a fost notificata "
+            "si lucram la rezolvare."
         )
 
 
