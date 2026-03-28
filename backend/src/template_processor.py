@@ -463,7 +463,7 @@ Acțiuni Prioritare
 07 [Strategic action — next 3 months, with impact estimate].
 08 [Strategic action — next 3 months, with impact estimate].
 
-Implementarea acestor acțiuni poate părea complexă, dar nu trebuie să faci totul singur. Soluțiile moderne de automatizare AI pot prelua multe dintre aceste sarcini (social media, răspunsuri la recenzii, optimizare conținut), economisind timp și asigurând consistență. Dacă vrei să discutăm despre un plan personalizat de implementare adaptat bugetului și obiectivelor tale, suntem aici să te ajutăm.
+Implementarea acestor acțiuni poate părea complexă, dar nu trebuie să faci totul singur. Dacă vrei să discutăm despre un plan personalizat de implementare adaptat bugetului și obiectivelor tale, suntem aici să te ajutăm.
 
 === DECISION EXAMPLES ===
 
