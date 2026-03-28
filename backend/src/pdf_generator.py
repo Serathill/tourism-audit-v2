@@ -453,9 +453,8 @@ class TourismAuditPDF(FPDF):
         self.multi_cell(
             CONTENT_W, 5,
             self._safe(
-                "Solutiile moderne de automatizare AI pot prelua multe dintre "
-                "aceste sarcini (social media, raspunsuri la recenzii, optimizare "
-                "continut), economisind timp si asigurand consistenta."
+                "Daca vrei sa discutam despre un plan personalizat de implementare "
+                "adaptat bugetului si obiectivelor tale, suntem aici sa te ajutam."
             ),
             align="C",
         )

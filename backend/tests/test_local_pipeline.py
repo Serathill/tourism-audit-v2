@@ -215,7 +215,7 @@ Acțiuni Prioritare
 07 Dezvoltă un calendar de conținut: 4 postări Instagram/săptămână, 2 postări Facebook/săptămână, 1 Reel/săptămână cu experiențe oaspeți, priveliști la diferite ore, peisaje sezoniere.
 08 Creează listing Airbnb pentru a captura 28% din turiștii care caută exclusiv pe Airbnb. Target: Superhost în 6 luni.
 
-Implementarea acestor acțiuni poate părea complexă, dar nu trebuie să faci totul singur. Soluțiile moderne de automatizare AI pot prelua multe dintre aceste sarcini (social media, răspunsuri la recenzii, optimizare conținut), economisind timp și asigurând consistență. Dacă vrei să discutăm despre un plan personalizat de implementare adaptat bugetului și obiectivelor tale, suntem aici să te ajutăm.
+Implementarea acestor acțiuni poate părea complexă, dar nu trebuie să faci totul singur. Dacă vrei să discutăm despre un plan personalizat de implementare adaptat bugetului și obiectivelor tale, suntem aici să te ajutăm.
 """
 
         html_content = tp.generate_html_email(
