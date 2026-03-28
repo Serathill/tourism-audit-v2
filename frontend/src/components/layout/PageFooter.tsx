@@ -30,7 +30,7 @@ export function PageFooter() {
             {/* Social icons */}
             <div className="mt-2 flex gap-3">
               <a
-                href="https://www.facebook.com/devidevs"
+                href="https://www.facebook.com/profile.php?id=61587879097298"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
@@ -41,7 +41,7 @@ export function PageFooter() {
                 </svg>
               </a>
               <a
-                href="https://www.instagram.com/devidevs/"
+                href="https://instagram.com/_devi_devs_"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"

@@ -100,14 +100,14 @@ export function CookieConsentBanner() {
             .
           </p>
         </div>
-        <div className="flex flex-wrap gap-2">
-          <Button onClick={reject} variant="outline" size="default">
+        <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row">
+          <Button onClick={reject} variant="outline" size="default" className="w-full sm:w-auto">
             Refuză
           </Button>
-          <Button onClick={acceptAnalyticsOnly} variant="secondary" size="default">
+          <Button onClick={acceptAnalyticsOnly} variant="secondary" size="default" className="w-full sm:w-auto">
             Doar analitice
           </Button>
-          <Button onClick={accept} size="default">
+          <Button onClick={accept} size="default" className="w-full sm:w-auto">
             Accept toate
           </Button>
         </div>
