@@ -26,7 +26,7 @@ export function HeroSection() {
 
             <p className="text-lg font-medium leading-snug text-foreground/80 sm:text-xl">
               Află unde pierzi vizibilitate online. Raport personalizat
-              în 30‑90 de minute.
+              în 30-90 de minute.
             </p>
 
             <p className="max-w-xl text-lg leading-relaxed text-muted-foreground">

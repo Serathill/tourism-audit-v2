@@ -5,7 +5,7 @@ type RateLimitConfig = { limit: number; windowSeconds: number };
 
 /** Pre-defined rate limit profiles per route type. */
 export const RATE_LIMITS = {
-  /** Audit submission — AI generation is expensive (Gemini API costs). */
+  /** Audit submission — generation is resource-intensive. */
   auditSubmit: { limit: 3, windowSeconds: 3600 } as RateLimitConfig,
   /** Contact / consultation forms. */
   contactForm: { limit: 5, windowSeconds: 60 } as RateLimitConfig,

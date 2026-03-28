@@ -104,7 +104,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
   {
     name: "Nicu Constantin",
     role: "CTO & Co-Founder",
-    description: "Tehnologie AI și automatizare de marketing",
+    description: "Infrastructură tehnică și securitate",
     image: "/images/team/nicu-constantin.webp",
   },
   {

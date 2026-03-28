@@ -97,7 +97,7 @@ export default function DespreNoiPage() {
               {BRAND.parentName}
             </p>
             <p className="text-sm text-muted-foreground">
-              Automatizare de marketing cu AI pentru turism, ecommerce și health
+              Soluții de marketing digital pentru turism, ecommerce și health
             </p>
             <a
               href={BRAND.parentUrl}

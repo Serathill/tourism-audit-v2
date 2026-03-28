@@ -74,7 +74,7 @@ export async function GET(request: NextRequest) {
             maxWidth: "700px",
           }}
         >
-          Analiză automată cu AI din surse publice
+          Analiză detaliată a prezenței tale online
         </div>
 
         {/* CTA pill */}

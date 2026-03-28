@@ -25,7 +25,7 @@ export function AudienceSection() {
         <p className="mx-auto mb-10 max-w-2xl text-center text-lg leading-relaxed text-muted-foreground">
           Acest audit gratuit este creat special pentru proprietarii și managerii
           de unități de cazare deosebite din România: pensiuni boutique, tiny
-          houses, A‑frames și alte case de vacanță cu potențial de creștere.
+          houses, A-frames și alte case de vacanță cu potențial de creștere.
         </p>
 
         <div className="mx-auto max-w-2xl">

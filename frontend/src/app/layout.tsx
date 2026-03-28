@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     template: "%s | Audit Digital Turism",
   },
   description:
-    "Primeste un audit digital gratuit pentru pensiunea sau unitatea ta de cazare. Analizam prezenta online folosind doar informatii publice. Rezultate in 30-90 minute.",
+    "Primește un audit digital gratuit pentru pensiunea sau unitatea ta de cazare. Analizăm prezența online folosind doar informații publice. Rezultate în 30-90 minute.",
   keywords: [
     "marketing pentru turism",
     "audit digital turism",
@@ -73,7 +73,7 @@ export const metadata: Metadata = {
     siteName: "Audit Digital Turism",
     title: "Audit Digital Gratuit pentru Turism | DeviDevs Agency",
     description:
-      "Primeste un audit digital gratuit pentru pensiunea sau unitatea ta de cazare. Analizam prezenta online folosind doar informatii publice.",
+      "Primește un audit digital gratuit pentru pensiunea sau unitatea ta de cazare. Analizăm prezența online folosind doar informații publice.",
     url: siteUrl,
     images: [
       {
@@ -95,7 +95,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Audit Digital Gratuit pentru Turism",
     description:
-      "Primeste un audit digital gratuit pentru pensiunea ta. Rezultate in 30-90 minute.",
+      "Primește un audit digital gratuit pentru pensiunea ta. Rezultate în 30-90 minute.",
     images: ["/preview-image.png"],
     site: "@Devi__Devs",
     creator: "@Devi__Devs",
@@ -164,7 +164,7 @@ function JsonLd({ nonce }: { nonce: string }) {
     "@type": "ProfessionalService",
     name: "Audit Digital Turism",
     description:
-      "Audit digital gratuit pentru unitati de cazare din Romania. Analiza automata cu AI folosind informatii publice.",
+      "Audit digital gratuit pentru unitati de cazare din Romania. Analiza detaliata a prezentei online din surse publice.",
     url: siteUrl,
     provider: {
       "@type": "Organization",

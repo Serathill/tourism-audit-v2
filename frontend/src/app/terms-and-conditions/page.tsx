@@ -73,7 +73,7 @@ export default function TermsAndConditionsPage() {
 
         <h2>3. Serviciul de audit</h2>
         <ul>
-          <li>Auditul este generat automat folosind inteligență artificială</li>
+          <li>Auditul este generat automat pe baza informațiilor publice disponibile online</li>
           <li>Rezultatele sunt orientative și nu constituie consultanță profesională garantată</li>
           <li>Timpul de livrare estimat este de 30-90 de minute, dar poate varia</li>
           <li>Ne rezervăm dreptul de a refuza cereri care nu respectă termenii de utilizare</li>
