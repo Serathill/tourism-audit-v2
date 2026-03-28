@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/card";
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://tourism-audit.devidevs.com";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://audit-turism.ro";
 
 export const metadata: Metadata = {
   title: "Servicii",

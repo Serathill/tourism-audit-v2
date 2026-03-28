@@ -3,7 +3,7 @@ import Link from "next/link";
 import { BRAND } from "@/lib/constants";
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://tourism-audit.devidevs.com";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://audit-turism.ro";
 
 export const metadata: Metadata = {
   title: "Termeni și condiții",

@@ -8,7 +8,7 @@ import { FinalCtaSection } from "@/components/sections/FinalCtaSection";
 import { SectionDivider } from "@/components/layout/SectionDivider";
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://tourism-audit.devidevs.com";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://audit-turism.ro";
 
 export const metadata: Metadata = {
   title:

@@ -4,7 +4,7 @@ import { TeamStrip } from "@/components/trust/TeamStrip";
 import { TrustBadge } from "@/components/trust/TrustBadge";
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://tourism-audit.devidevs.com";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://audit-turism.ro";
 
 export const metadata: Metadata = {
   title: "Solicită audit digital gratuit",

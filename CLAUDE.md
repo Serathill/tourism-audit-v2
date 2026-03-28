@@ -487,7 +487,7 @@ NEXT_PUBLIC_GA_ID=
 NEXT_PUBLIC_SENTRY_DSN=
 
 # Site
-NEXT_PUBLIC_SITE_URL=https://tourism-audit.devidevs.com
+NEXT_PUBLIC_SITE_URL=https://audit-turism.ro
 NEXT_PUBLIC_HONEYPOT_FIELD_NAME=_hp_website
 MEETING_LINK=
 ```
