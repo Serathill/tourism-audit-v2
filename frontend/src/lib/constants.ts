@@ -109,7 +109,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
   },
   {
     name: "Alexandru Mihailă",
-    role: "Developer",
+    role: "Partner & Marketing",
     description:
       "Strategie de marketing digital și consultanță pentru turism",
     image: "/images/team/alexandru-mihaila.jpg",
