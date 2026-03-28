@@ -123,7 +123,7 @@ export const BRAND = {
   tagline: "Un serviciu de la DeviDevs Agency",
   parentName: "DeviDevs Agency",
   parentUrl: "https://devidevs-agency.com",
-  email: "contact@devidevs-agency.com",
+  email: "contact@audit-turism.ro",
 } as const;
 
 // ── Form ────────────────────────────────────────────────

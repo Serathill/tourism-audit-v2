@@ -153,7 +153,7 @@ function JsonLd({ nonce }: { nonce: string }) {
     logo: `${siteUrl}/android-chrome-512x512.png`,
     contactPoint: {
       "@type": "ContactPoint",
-      email: "contact@devidevs-agency.com",
+      email: "contact@audit-turism.ro",
       contactType: "customer service",
       availableLanguage: ["Romanian", "English"],
     },

@@ -192,7 +192,7 @@ class TourismAuditPDF(FPDF):
         self.cell(0, 5, "Bucuresti, Romania", align="C")
         self.ln(6)
         self.set_text_color(*TEAL_LIGHT)
-        self.cell(0, 5, "devidevs.com  |  petru@devidevs.com", align="C")
+        self.cell(0, 5, "audit-turism.ro  |  contact@audit-turism.ro", align="C")
 
         # Confidentiality-style notice
         self.set_y(264)
