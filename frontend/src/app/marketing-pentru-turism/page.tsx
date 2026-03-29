@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { AudienceSection } from "@/components/sections/AudienceSection";
 import { ProcessSection } from "@/components/sections/ProcessSection";
@@ -128,6 +131,21 @@ export default function MarketingPentruTurismPage() {
       <AudienceSection />
       <SectionDivider />
       <ProcessSection />
+      {/* Mid-page CTA */}
+      <div className="bg-white py-8">
+        <div className="mx-auto flex max-w-[1200px] justify-center px-4 sm:px-6">
+          <Button
+            asChild
+            size="lg"
+            className="bg-gradient-cta text-foreground font-semibold shadow-md hover:shadow-lg transition-shadow"
+          >
+            <Link href="#audit-form">
+              Solicita auditul gratuit
+              <ArrowRight className="size-4" />
+            </Link>
+          </Button>
+        </div>
+      </div>
       <SectionDivider />
       <WhyUsSection />
       <SectionDivider />

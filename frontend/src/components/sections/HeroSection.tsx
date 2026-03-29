@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Clock } from "lucide-react";
+import { ArrowRight, CheckCircle, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { TeamStrip } from "@/components/trust/TeamStrip";
 import { TrustBadge } from "@/components/trust/TrustBadge";
@@ -36,6 +36,11 @@ export function HeroSection() {
             </p>
 
             <TeamStrip />
+
+            <p className="inline-flex items-center gap-1.5 text-sm text-muted-foreground">
+              <CheckCircle className="size-4 text-primary" />
+              <span className="font-medium text-foreground">10+</span> proprietati analizate in Romania
+            </p>
 
             {/* Mobile CTA (visible only on mobile/tablet where form isn't side-by-side) */}
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center lg:hidden">
