@@ -109,14 +109,22 @@ class TemplateProcessor:
     def parse_formatted_content_to_dict(self, formatted_content: str) -> dict:
         """Parse AI structured text → Python dict using stateful line-by-line approach.
 
-        Handles the V2 richer format: 3 main sections with many subsections,
-        scoring data, gaps, and prioritized actions.
+        Supports both p0 (score at end) and p1 (score/gaps/actions before detail sections).
         """
         logger.info("Parsing formatted text into sections...")
-        audit_data: dict = {"sections": []}
+
+        # Strip markdown code fences if Gemini wraps output
+        formatted_content = re.sub(r"^```\w*\n?", "", formatted_content)
+        formatted_content = re.sub(r"\n?```$", "", formatted_content)
+
+        audit_data: dict = {
+            "sections": [],
+            "score_summary": None,   # p1: score card at top
+            "top_gaps": None,        # p1: gaps before detail sections
+            "actions": None,         # p1: actions before detail sections
+        }
 
         try:
-            # Case-insensitive split on "Legenda status:" marker
             lower_content = formatted_content.lower()
             marker = "legenda status:"
             marker_pos = lower_content.find(marker)
@@ -134,14 +142,100 @@ class TemplateProcessor:
 
         current_section = None
         current_subsection = None
-        parsing_context = None  # 'subsections', 'gaps', 'actions', 'scoring'
+        parsing_context = None  # 'subsections', 'gaps', 'actions', 'scoring', 'top_score', 'top_gaps', 'top_actions'
 
         for line in content_body.strip().split("\n"):
             line = line.strip()
             if not line:
                 continue
 
-            # Main section title (e.g. "1. Evaluarea..." / "2. Conținut..." / "3. Oportunități...")
+            # Skip legend items, dividers, and decorative lines
+            if line.startswith("- ✅ Bine") or line.startswith("- ⚠️ De") or line.startswith("- ❌ Lipsă") or line.startswith("- ✅ Bine") or line.startswith("- ⚠️ Necesită") or line.startswith("- ❌ Lipsă/absent"):
+                continue
+            if line.startswith("---"):
+                continue
+
+            # ── p1: Score summary at top (before any numbered section) ──
+            if "Scorul Tău Digital" in line and not current_section:
+                audit_data["score_summary"] = {"title": line, "interpretation": "", "scores": [], "total": ""}
+                parsing_context = "top_score"
+                continue
+
+            if parsing_context == "top_score":
+                # Score lines with dots alignment: "Prezență Digitală .......... 7/10"
+                if "....." in line:
+                    clean = re.sub(r"\.{3,}", ":", line).strip("- ").strip()
+                    parts = clean.split(":", 1)
+                    title = parts[0].strip()
+                    score = parts[1].strip() if len(parts) > 1 else ""
+                    priority = "← prioritate" in line
+                    score = score.replace("← prioritate", "").strip()
+                    audit_data["score_summary"]["scores"].append(
+                        {"title": title, "score": score, "priority": priority}
+                    )
+                    continue
+                if line.startswith("- TOTAL:") or line.startswith("TOTAL:"):
+                    audit_data["score_summary"]["total"] = line.replace("- ", "").strip()
+                    continue
+                # Score lines without dots (p0 format): "- Prezență Digitală: X/10"
+                if line.startswith("-") and "/" in line and any(cat in line for cat in ["Prezență", "Website", "SEO", "Vizibilitate", "Platforme", "Social", "Reputație", "Conținut", "Poziție", "Comunitate", "Conformitate"]):
+                    item = self._parse_item_line(line)
+                    audit_data["score_summary"]["scores"].append(
+                        {"title": item["title"], "score": item["details"], "priority": False}
+                    )
+                    continue
+                # Interpretation sentence (not a bullet, not a score)
+                if not line.startswith("-") and "/" not in line and "Ce Te Cost" not in line and not re.match(r"^(1\.|2\.|3\.)\s", line):
+                    audit_data["score_summary"]["interpretation"] = line
+                    continue
+                # Fall through if we hit something else — don't continue, let it be caught below
+
+            # ── p1: Top gaps ("Ce Te Costă Cel Mai Mult") before sections ──
+            if ("Ce Te Cost" in line or ("Lipsuri" in line and ("Gaps" in line or "Identificate" in line))) and not current_section:
+                audit_data["top_gaps"] = {"title": line, "item_list": []}
+                parsing_context = "top_gaps"
+                continue
+
+            if parsing_context == "top_gaps":
+                if line.startswith("-"):
+                    item = self._parse_item_line(line)
+                    audit_data["top_gaps"]["item_list"].append(item)
+                    continue
+                # Non-bullet line means we left gaps section — fall through
+
+            # ── p1: Top actions before detail sections ──
+            if "Acțiuni Prioritare" in line and not current_section:
+                audit_data["actions"] = {"title": line, "item_list": []}
+                parsing_context = "top_actions"
+                continue
+
+            if parsing_context == "top_actions":
+                # Timeframe headers — skip them (visual only)
+                if line in ("Săptămâna Aceasta (impact imediat)", "Luna Aceasta", "Următoarele 3 Luni") or re.match(r"^(Săptămâna|Luna|Următoarele)\b", line):
+                    continue
+                # Numbered action items: "01." or "01 "
+                action_match = re.match(r"(\d+)\.?\s+(.*)", line)
+                if action_match:
+                    num, text = action_match.groups()
+                    # Closing message — stop actions
+                    if text.startswith("Primele") or text.startswith("Implementarea"):
+                        parsing_context = None
+                        continue
+                    audit_data["actions"]["item_list"].append(
+                        {
+                            "number": f"{int(num):02d}",
+                            "text_bold": text.strip(),
+                            "text_regular": "",
+                        }
+                    )
+                    continue
+                # Closing message without number
+                if line.startswith("Primele") or line.startswith("Implementarea"):
+                    parsing_context = None
+                    continue
+                # Non-action, non-timeframe line — fall through
+
+            # ── Main section titles (1. / 2. / 3.) ──
             main_section_match = re.match(r"^(1\.|2\.|3\.)\s.*", line)
             if main_section_match:
                 title = main_section_match.group(0)
@@ -161,35 +255,38 @@ class TemplateProcessor:
             if not current_section:
                 continue
 
-            # Section 3 special titles — gaps and actions
+            # ── Section 3 special titles (gaps/actions/scoring inside section 3) ──
             if current_section["is_action_plan"]:
                 if "Lipsuri" in line and ("Gaps" in line or "Identificate" in line):
                     current_section["gaps"] = {"title": line, "item_list": []}
                     parsing_context = "gaps"
                     current_subsection = None
                     continue
+                if "Ce Te Cost" in line:
+                    current_section["gaps"] = {"title": line, "item_list": []}
+                    parsing_context = "gaps"
+                    current_subsection = None
+                    continue
                 if "Acțiuni Prioritare" in line:
-                    current_section["actions"] = {
-                        "title": line,
-                        "item_list": [],
-                    }
+                    current_section["actions"] = {"title": line, "item_list": []}
                     parsing_context = "actions"
                     current_subsection = None
                     continue
-                # Scoring data in section 3 — treat as regular subsection
                 if "Scorul Tău Digital" in line or "TOTAL:" in line:
                     current_subsection = {"title": line, "item_list": []}
                     current_section["subsections"].append(current_subsection)
                     parsing_context = "subsections"
                     continue
 
-            # Numbered action items (01, 02, etc.)
-            action_match = re.match(r"(\d+)\s+(.*)", line)
+            # ── Numbered action items (01, 02, etc.) ──
+            action_match = re.match(r"(\d+)\.?\s+(.*)", line)
             if parsing_context == "actions" and action_match:
                 num, text = action_match.groups()
-                # Stop capturing actions if we hit the closing message
-                if text.startswith("Implementarea"):
+                if text.startswith("Implementarea") or text.startswith("Primele"):
                     parsing_context = None
+                    continue
+                # Skip timeframe headers that start with a number by accident
+                if int(num) > 20:
                     continue
                 current_section["actions"]["item_list"].append(
                     {
@@ -200,17 +297,29 @@ class TemplateProcessor:
                 )
                 continue
 
-            # Bullet point items
+            # Skip timeframe headers in actions context
+            if parsing_context == "actions" and re.match(r"^(Săptămâna|Luna|Următoarele)\b", line):
+                continue
+
+            # ── Bullet point items ──
             if line.startswith("-"):
                 item = self._parse_item_line(line)
                 if parsing_context == "gaps":
                     if not current_section["gaps"]:
-                        current_section["gaps"] = {
-                            "title": "Lipsuri (Gaps) Identificate",
-                            "item_list": [],
-                        }
+                        current_section["gaps"] = {"title": "Lipsuri (Gaps) Identificate", "item_list": []}
                     current_section["gaps"]["item_list"].append(item)
                 elif current_subsection:
+                    current_subsection["item_list"].append(item)
+                continue
+
+            # ── Review quote lines (♥ / △) — treat as items in current subsection ──
+            if line.startswith("♥") or line.startswith("△"):
+                parts = line.lstrip("♥△ ").split(":", 1)
+                title = parts[0].strip()
+                details = parts[1].strip().strip('"') if len(parts) > 1 else ""
+                icon = "♥" if line.startswith("♥") else "△"
+                item = {"icon": icon, "title": title, "details": details}
+                if current_subsection:
                     current_subsection["item_list"].append(item)
                 continue
 
@@ -218,10 +327,48 @@ class TemplateProcessor:
             if parsing_context is None:
                 continue
 
-            # Subsection title — any non-bullet, non-empty line in subsections context
+            # ── Skip verdict/intro lines that aren't subsection titles ──
+            # "Ce faci bine:", "Ce spun oaspeții", single-sentence verdicts
+            if line.startswith("Ce faci bine"):
+                # Store as metadata on current section if desired, but skip as subsection
+                continue
+            if line.startswith("Ce spun oaspeți"):
+                # Next lines will be ♥ items, keep current subsection
+                continue
+            if line.startswith("Ce vor oaspeți"):
+                # Next lines will be △ items, keep current subsection
+                continue
+
+            # Score lines with dots in detail sections
+            if "....." in line and parsing_context == "subsections":
+                clean = re.sub(r"\.{3,}", ":", line).strip("- ").strip()
+                parts = clean.split(":", 1)
+                title = parts[0].strip()
+                score = parts[1].strip().replace("← prioritate", "").strip() if len(parts) > 1 else ""
+                item = {"icon": "", "title": title, "details": score}
+                if current_subsection:
+                    current_subsection["item_list"].append(item)
+                continue
+
+            # ── Subsection title vs verdict line ──
             if parsing_context == "subsections":
-                current_subsection = {"title": line, "item_list": []}
-                current_section["subsections"].append(current_subsection)
+                # Known subsection titles (from p0 and p1 template)
+                known_subsections = (
+                    "Profil Digital", "Site web", "SEO Tehnic", "Vizibilitate Google",
+                    "Platforme de rezerv", "Social Media", "Reputație Online",
+                    "Comunitate & Forumuri", "Calitatea Conținut", "Analiza Competi",
+                    "Conformitate", "Scorul Tău", "Ce Ai Tu", "Poziția Ta",
+                    "Avantajele tale", "Unde pierzi",
+                )
+                is_known = any(line.startswith(k) or k in line for k in known_subsections)
+                if is_known:
+                    current_subsection = {"title": line, "item_list": []}
+                    current_section["subsections"].append(current_subsection)
+                else:
+                    # Verdict/intro line — store as description on current subsection, don't create new one
+                    if current_subsection and not current_subsection.get("description"):
+                        current_subsection["description"] = line
+                    # If no current subsection, skip
                 continue
 
         logger.info(
@@ -304,197 +451,24 @@ class TemplateProcessor:
     def _build_template_prompt(
         self, raw_audit: str, property_data: PropertyData
     ) -> str:
-        return f"""
-=== YOUR MISSION ===
-You are an EXPERT in digital marketing for Romanian accommodation businesses with 10+ years of SEO and social media audit experience. Transform the RAW AUDIT below into a structured Romanian report following the EXACT template structure.
+        # Load prompt from templates/prompts/p1-layered.txt
+        import os
+        prompt_path = os.path.join(
+            os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+            "templates", "prompts", "p1-layered.txt",
+        )
+        with open(prompt_path, encoding="utf-8") as f:
+            template = f.read()
 
-=== PRECISE TASK ===
-Analyze the RAW AUDIT and transform it into the structured Romanian template below. Follow the structure strictly, but analyze intelligently to assign the correct status icons based on the audit data.
-
-=== GOLDEN RULES (MANDATORY) ===
-
-STATUS ICONS — How to decide:
-✅ GOOD = Audit shows the element works EXCELLENTLY, no major issues
-⚠️ NEEDS IMPROVEMENT = Element EXISTS but has concrete problems or limitations
-❌ MISSING/ABSENT = Element DOES NOT EXIST at all or is completely non-functional
-
-EXACT FORMATTING:
-- Each bullet line: "- [ICON] TITLE: Short, concrete explanation based on audit data"
-- Actions: "01 Specific action with period."
-- NO extra text, NO explanations outside the structure
-
-INTELLIGENT FLEXIBILITY:
-- FOLLOW the section/subsection structure (MANDATORY)
-- INCLUDE the base elements specified (MANDATORY)
-- ADD any additional information found in the audit (RECOMMENDED)
-- If the audit has more details — INCLUDE THEM
-- If the audit doesn't mention something — MARK as ❌ with explanation
-- INCLUDE scores (X/10) from the audit for each subsection when available
-- INCLUDE competitor comparison data when found in the audit
-- INCLUDE review quotes when found in the audit
-- INCLUDE community/forum findings when found in the audit
-- INCLUDE business registry findings when found in the audit
-
-=== MANDATORY STRUCTURE ===
-
-AUDIT DIGITAL - {property_data.property_name}
-
-Legenda status:
-- ✅ Bine: Elementul este optimizat și funcționează corespunzător.
-- ⚠️ Necesită îmbunătățiri: Elementul există, dar necesită optimizări.
-- ❌ Lipsă/absent: Elementul nu există și este recomandată implementarea sa.
-
-1. Evaluarea Prezenței Online și Vizibilității
-
-Profil Digital
-
-- [DECIDE ✅/⚠️/❌] Prezență generală: [Summarize all digital touchpoints found]
-[ADD lines for each platform discovered with its status and key metric]
-
-Site web
-
-- [DECIDE ✅/⚠️/❌] Existență & funcționalitate: [Details from audit]
-- [DECIDE ✅/⚠️/❌] Certificat SSL: [HTTPS status from audit]
-- [DECIDE ✅/⚠️/❌] Viteză de încărcare (PageSpeed): [Numeric score from audit]
-- [DECIDE ✅/⚠️/❌] Optimizare mobil (responsive): [Mobile-specific findings]
-- [DECIDE ✅/⚠️/❌] CTA "Rezervă acum": [Visibility and effectiveness]
-- [DECIDE ✅/⚠️/❌] Structură URL & navigație: [Clean URLs, navigation clarity]
-- [DECIDE ✅/⚠️/❌] Motor de rezervare directă: [Direct booking vs OTA redirect]
-[ADD any other technical issues from audit — hosting, performance, etc.]
-
-SEO Tehnic
-
-- [DECIDE ✅/⚠️/❌] Title tag & meta descriere: [Exact tags found or missing]
-- [DECIDE ✅/⚠️/❌] Heading-uri (H1, H2 etc.): [Hierarchy assessment]
-- [DECIDE ✅/⚠️/❌] Alt text imagini: [X din Y imagini au alt text - percentage]
-- [DECIDE ✅/⚠️/❌] Schema.org (date structurate): [Type found or missing]
-- [DECIDE ✅/⚠️/❌] Sitemap.xml: [Found or missing]
-- [DECIDE ✅/⚠️/❌] Multilingual: [Languages available]
-
-Vizibilitate Google & SEO Local
-
-- [DECIDE ✅/⚠️/❌] Poziționare "cazare [tip] [localitate]": [Position from audit]
-- [DECIDE ✅/⚠️/❌] Poziționare brand name: [What appears when searching property name]
-- [DECIDE ✅/⚠️/❌] Google Business Profile: [Rating X.X/5, N recenzii, completeness]
-- [DECIDE ✅/⚠️/❌] Google Local Pack / Hotel Pack: [Appears or not]
-[ADD GMB specific details — photos count, categories, recent posts]
-
-Platforme de rezervări
-
-- [DECIDE ✅/⚠️/❌] Booking.com: [Rating X.X/10, N recenzii, photos, badges]
-- [DECIDE ✅/⚠️/❌] TripAdvisor: [Rating X.X/5, N recenzii, ranking #X in area]
-- [DECIDE ✅/⚠️/❌] Airbnb: [Rating X.X/5, Superhost status]
-[ADD any other platforms found — Pensiuni.info, Travelminit, etc.]
-
-2. Conținut, Reputație și Comunitate
-
-Social Media & Conținut
-
-- [DECIDE ✅/⚠️/❌] Facebook: [Followers, posting frequency, engagement rate]
-- [DECIDE ✅/⚠️/❌] Instagram: [Followers, posts, Reels, Stories, engagement rate]
-- [DECIDE ✅/⚠️/❌] TikTok: [Found or missing]
-- [DECIDE ✅/⚠️/❌] Fotografii & Video: [Quality assessment - professional/amateur]
-- [DECIDE ✅/⚠️/❌] Conținut UGC (de la oaspeți): [Found or missing]
-[ADD any other social platforms found — YouTube, etc.]
-
-Reputație Online & Recenzii
-
-- [DECIDE ✅/⚠️/❌] Total recenzii: [N total across all platforms, aggregate rating]
-- [DECIDE ✅/⚠️/❌] Răspuns la recenzii: [Response rate XX%, tone assessment]
-- [DECIDE ✅/⚠️/❌] Trend recenzii: [Improving / Stable / Declining]
-- [DECIDE ✅/⚠️/❌] Ce spun oaspeții (pozitiv): [Top 3 positive themes with quotes]
-- [DECIDE ✅/⚠️/❌] Ce spun oaspeții (de îmbunătățit): [Top 3 negative themes with quotes]
-
-Comunitate & Forumuri
-
-- [DECIDE ✅/⚠️/❌] Reddit & forumuri RO: [Mentions found or absent]
-- [DECIDE ✅/⚠️/❌] Blog-uri de călătorie: [Featured in X blogs or not found]
-- [DECIDE ✅/⚠️/❌] Grupuri Facebook: [Mentioned/recommended or absent]
-- [DECIDE ✅/⚠️/❌] Liste "Top X" locale: [Appears in X lists or absent]
-
-Calitatea Conținutului
-
-- [DECIDE ✅/⚠️/❌] Fotografii (calitate): [Professional / Amateur / Phone]
-- [DECIDE ✅/⚠️/❌] Fotografii (cantitate): [N total, seasonal coverage]
-- [DECIDE ✅/⚠️/❌] Descrieri (calitate): [Compelling / Generic / Minimal]
-- [DECIDE ✅/⚠️/❌] Blog / Conținut marketing: [Active / Inactive / Missing]
-
-3. Oportunități și Plan de Acțiune
-
-Analiza Competiției
-
-[INCLUDE competitor comparison data from audit — top 3-5 competitors with their ratings, review counts, social media]
-- [ICON] [Competitor name]: [Key metrics and how they compare]
-[INCLUDE "Unde ești mai bine" and "Unde poți îmbunătăți" from audit]
-
-Conformitate & Înregistrare
-
-- [DECIDE ✅/⚠️/❌] Firmă înregistrată: [Registration status, CUI if found]
-- [DECIDE ✅/⚠️/❌] Clasificare turism: [Margarete/stele or not found]
-- [DECIDE ✅/⚠️/❌] Membru ANTREC/FPTR: [Found or not]
-- [DECIDE ✅/⚠️/❌] Consistență date: [Cross-reference findings]
-
-Scorul Tău Digital
-
-[INCLUDE the 11-category scoring table from audit]
-- Prezență Digitală: X/10
-- Website Tehnic: X/10
-- SEO Tehnic: X/10
-- Vizibilitate Google: X/10
-- Platforme Booking: X/10
-- Social Media: X/10
-- Reputație & Recenzii: X/10
-- Conținut & Fotografii: X/10
-- Poziție Competitivă: X/10
-- Comunitate & Forumuri: X/10
-- Conformitate Turism: X/10
-- TOTAL: XX/110 (XX%)
-
-Lipsuri (Gaps) Identificate
-
-[GENERATE 3-5 MAJOR PROBLEMS from audit with COMPETITIVE CONTEXT]
-
-- [ICON] [Problem area]: [Specific problem] + [Competitive context with percentages]
-- [ICON] [Problem area]: [Specific problem] + [Competitive context]
-- [ICON] [Problem area]: [Specific problem] + [Competitive context]
-- [ICON] [Problem area]: [Specific problem] + [Competitive context]
-- [ICON] [Problem area]: [Specific problem] + [Competitive context]
-
-Acțiuni Prioritare
-
-[GENERATE 8-10 SPECIFIC ACTIONS organized by timeframe]
-
-01 [Immediate action — this week, with impact estimate].
-02 [Immediate action — this week, with impact estimate].
-03 [Immediate action — this week, with impact estimate].
-04 [Short-term action — this month, with impact estimate].
-05 [Short-term action — this month, with impact estimate].
-06 [Short-term action — this month, with impact estimate].
-07 [Strategic action — next 3 months, with impact estimate].
-08 [Strategic action — next 3 months, with impact estimate].
-
-Implementarea acestor acțiuni poate părea complexă, dar nu trebuie să faci totul singur. Dacă vrei să discutăm despre un plan personalizat de implementare adaptat bugetului și obiectivelor tale, suntem aici să te ajutăm.
-
-=== DECISION EXAMPLES ===
-
-BAD: "- ✅ Facebook: Active presence" (when audit says they haven't posted in months)
-GOOD: "- ❌ Facebook: Nu există postări recente, cont inactiv de 6+ luni"
-
-BAD: "- ❌ Website: Not working" (when audit says it exists but is slow)
-GOOD: "- ⚠️ Website: Funcționează dar PageSpeed mobil este 35/100, sub media de 70/100"
-
-=== RAW AUDIT TO ANALYZE ===
-```
-{raw_audit}
-```
-
-=== PROPERTY DATA ===
-Name: {property_data.property_name}
-County: {property_data.property_address}
-Website: {property_data.website_url or "Not available"}
-
-=== YOUR RESPONSE (ONLY THE STRUCTURED TEXT, NO MARKDOWN CODE BLOCKS) ===
-"""
+        return template.replace(
+            "{PROPERTY_NAME}", property_data.property_name
+        ).replace(
+            "{PROPERTY_ADDRESS}", property_data.property_address or ""
+        ).replace(
+            "{WEBSITE_URL}", property_data.website_url or "Not available"
+        ).replace(
+            "{RAW_AUDIT}", raw_audit
+        )
 
     def _validate_formatted_content(self, content: str) -> None:
         required = [
@@ -505,9 +479,10 @@ Website: {property_data.website_url or "Not available"}
             "3.",
             "Acțiuni Prioritare",
         ]
-        if any(s not in content for s in required):
+        missing = [s for s in required if s not in content]
+        if missing:
             raise TemplateProcessingError(
-                f"Formatted audit is missing required sections. "
+                f"Formatted audit is missing required sections: {missing}. "
                 f"Content:\n{content[:500]}"
             )
         logger.info("Formatted audit content validation passed.")

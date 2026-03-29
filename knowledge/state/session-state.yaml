@@ -1,0 +1,133 @@
+# Session State - Tourism Audit V2
+# READ at start of every session. UPDATE at end of every session.
+
+last_session:
+  date: "2026-03-29"
+  what_was_done:
+    # Formatter prompt rewrite (P0 task)
+    - "p1-layered.txt written: layered prompt serving 3 personas (Maria 60%, Andrei 25%, Elena 15%)"
+    - "5 BMAD agents ran in parallel (Storyteller, UX Designer, Editorial Prose, Design Thinking, Adversarial)"
+    - "All 5 agent recommendations compiled into single p1 prompt"
+    - "p1 tested on BOTH properties:"
+    - "  - Pensiunea Test V2 Deploy (8/110): all markers present, 10,089 chars, 101.9s"
+    - "  - Amont Chalet (95/110): all markers present, 10,550 chars, 68.0s"
+    - "p1 output quality confirmed: jargon translated inline, impact on every finding, DIY/Specialist on actions"
+    # Email template (previous session)
+    - "v8-final-mix DEPLOYED as production template (audit_email.html)"
+    - "Branding aligned: 'Audit Digital Turism', sender, subject"
+    - "Prompt versioning system: templates/prompts/ + test_prompt.py + tests/README.md"
+    - "20 BMAD agent reviews completed (knowledge/reviews/)"
+  blockers:
+    # RESOLVED 2026-03-29: MEETING_LINK set (calendar.app.google/eHH7fDyWcbYNLpk29)
+    - "pg_cron URLs still ping old domain (needs Supabase SQL Editor)"
+  next_steps:
+    # P0 — Formatter p1 to production (IN PROGRESS)
+    # Parser-ul curent (template_processor.py) NU înțelege structura p1.
+    # Trebuie adaptat ÎNAINTE de a pune p1 inline.
+    # Ordine strictă — NU sări pași:
+    #
+    # STEP 1: Adaptează parser-ul (parse_formatted_content_to_dict)
+    #   Probleme identificate (9 puncte):
+    #   1. Scor + Gaps + Acțiuni apar ÎNAINTE de secțiunile 1/2/3
+    #      - Parser-ul le caută doar în secțiunea 3 (is_action_plan)
+    #      - Fix: detectează "Scorul Tău Digital", "Ce Te Costă", "Acțiuni Prioritare" ORIUNDE
+    #   2. "--- DETALII COMPLETE ---" e linie nouă
+    #      - Parser-ul o va trata ca subsection title
+    #      - Fix: skip lines matching "---"
+    #   3. Timeframe headers ("Săptămâna Aceasta", "Luna Aceasta", "Următoarele 3 Luni")
+    #      - Parser-ul le tratează ca action items (match pe regex \d+)
+    #      - Fix: skip non-numeric lines în context "actions"
+    #   4. Action format "01." cu punct vs "01 " fără punct
+    #      - Parser regex: (\d+)\s+(.*)
+    #      - Fix: regex (\d+)\.?\s+(.*)
+    #   5. "Nu a fost evaluat" fără icon pe bullet lines
+    #      - Parser-ul setează icon="" — funcționează dar renderizarea poate fi ciudată
+    #      - Fix: în prompt, adaugă instrucțiune să pună mereu icon
+    #   6. ♥ / △ linii (review quotes)
+    #      - Nu sunt bullets (-), parser-ul le sare
+    #      - Fix: adaugă parsing pentru linii ♥/△ ca items în subsecțiunea curentă
+    #   7. "Ce faci bine:" / verdict lines
+    #      - Linii text fără bullet — devin subsection titles false
+    #      - Fix: skip lines care încep cu "Ce faci bine" sau sunt single-sentence verdicts
+    #   8. Dots alignment pe scoruri ("Prezență Digitală .......... 7/10")
+    #      - Nu e bullet, parser-ul o tratează ca subsection title
+    #      - Fix: detectează pattern "....." și parsează ca score items
+    #   9. Closing "Primele 3 acțiuni..." vs "Implementarea..."
+    #      - Parser verifică text.startswith("Implementarea")
+    #      - Fix: verifică și "Primele"
+    #
+    # STEP 2: Înlocuiește prompt-ul inline în template_processor.py
+    #   - _build_template_prompt() — copiază conținutul p1-layered.txt
+    #   - Păstrează f-string cu {property_data.property_name} etc.
+    #   - Actualizează system_instruction dacă e nevoie
+    #
+    # STEP 3: Actualizează _validate_formatted_content()
+    #   - Adaugă markeri noi: "Scorul Tău Digital", "Ce Te Costă"
+    #   - Păstrează markerii existenți
+    #
+    # STEP 4: Test parser pe output-ul p1 existent
+    #   - Folosește fișierele din tests/prompt-outputs/ (deja generate)
+    #   - Verifică că parse_formatted_content_to_dict() produce dict corect
+    #   - Verifică că generate_html_email() produce HTML valid
+    #
+    # STEP 5: Test end-to-end cu Gemini
+    #   - Rulează test_prompt.py --prompt p1 și verifică email preview
+    #   - Verifică PDF generation cu noul output
+    #
+    # STEP 6: Deploy pe Render
+    #   - git push
+    #   - Verifică healthz
+    #   - Trimite un audit test și verifică email-ul primit
+    #
+    # STEP 7: Actualizează CLAUDE.md
+    #   - Output structure section — reflectă noua structură p1
+    #   - Key files — menționează templates/prompts/
+    #
+    # După p1 deploy:
+    # DONE 2026-03-29: Google Calendar Appointment setup (MEETING_LINK set on Render+Vercel+.env.local)
+    # Link: https://calendar.app.google/eHH7fDyWcbYNLpk29 (devideviart Workspace, 30 min)
+    # Guide: knowledge/guides/google-calendar-appointment-setup.md
+    - "pg_cron URLs update in Supabase SQL Editor"
+    - "Website fixes from 20-agent reviews (25 items)"
+    - "Google Search Console verification"
+    - "48h experiment: 5 audits proactive, 5 phone calls"
+    - "Reactivate 7 V1 clients"
+
+production:
+  frontend_status: "ok"
+  backend_status: "ok"
+  last_verified: "2026-03-29"
+  email_template:
+    production: "v8-final-mix (deployed)"
+    validated_by: "Petru"
+    validated_date: "2026-03-29"
+  formatter_prompt:
+    production: "p0-current (inline in template_processor.py)"
+    next_version: "p1-layered (tested, NOT yet in production)"
+    p1_test_results:
+      amont_chalet: "95/110, 10550 chars, all markers present"
+      test_property: "8/110, 10089 chars, all markers present"
+    p1_improvements:
+      - "Score + gaps + actions FIRST (not buried at end)"
+      - "Jargon translated inline on first use"
+      - "Impact rule: every finding states cost in guests/bookings"
+      - "Actions: DIY/Specialist + effort estimate + why it matters"
+      - "Ce faci bine at start of each section"
+      - "Ce Ai Tu si Competitia Nu Are (pivot moment)"
+      - "Data integrity: never invent, use 'Nu a fost evaluat'"
+      - "3 personas served: Maria (clear), Andrei (competitive data), Elena (verifiable)"
+    parser_changes_needed: 9  # see next_steps for full list
+  branding:
+    name: "Audit Digital Turism"
+    sender: "Audit Digital Turism <no-reply@audit-turism.ro>"
+    subject: "Raportul tau digital - {property_name}"
+  testing:
+    email_previews: "python3 tests/preview_email.py --all (zero cost)"
+    prompt_testing: "python3 tests/test_prompt.py --prompt p1 (~$0.02/test)"
+    docs: "backend/tests/README.md"
+  known_issues:
+    - "Formatter p0 still in production (p1 ready but parser not adapted)"
+    # RESOLVED: MEETING_LINK set 2026-03-29
+    - "pg_cron URLs point to old domain"
+    - "25 website fixes approved but not yet implemented"
+    - "Zero automated tests"
