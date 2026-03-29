@@ -4,27 +4,21 @@
 last_session:
   date: "2026-03-30"
   what_was_done:
+    - "Fixed Render deploy: all env vars were missing (only MEETING_LINK remained)"
+    - "Restored 10 env vars via Render API (GOOGLE_API_KEY, SUPABASE_URL, SUPABASE_KEY, RESEND_API_KEY, BACKEND_API_KEY, FROM_EMAIL, ALLOWED_ORIGINS, MEETING_LINK, GEMINI_DEEP_RESEARCH_MODEL, GEMINI_FORMATTER_MODEL)"
+    - "Triggered manual deploy via Render API - deployed successfully"
+    - "25 website fixes from 20-agent reviews done (separate chat)"
+    # Previous session (2026-03-30 earlier)
     - "p1-layered formatter prompt: written, tested, parser adapted, deployed to main"
-    - "5 BMAD agents in parallel: Storyteller, UX Designer, Editorial Prose, Design Thinking, Adversarial"
-    - "Parser rewritten: supports p1 structure (score/gaps/actions at top, verdict lines, ♥/△ quotes)"
+    - "Parser rewritten: supports p1 structure (score/gaps/actions at top, verdict lines)"
     - "Prompt loaded from file (templates/prompts/p1-layered.txt) instead of inline"
-    - "Tested on Amont Chalet (95/110) + Test property (8/110): parser OK, HTML OK, PDF OK"
     - "CLAUDE.md updated with new output structure + prompt versioning"
-    - "session-state.yaml maintained throughout session (RULE 12/13)"
-    # Previous session (2026-03-29)
-    - "v8-final-mix email template deployed"
-    - "Branding aligned: Audit Digital Turism"
-    - "Prompt versioning system created"
-    - "MEETING_LINK set (Google Calendar Appointment)"
   blockers:
-    - "pg_cron URLs still ping old domain (needs Supabase SQL Editor)"
+    - "No active blockers"
   next_steps:
     # P0 — Verify in production
-    - "Render auto-deploys from main — verify healthz after deploy"
     - "Run a real audit end-to-end to verify p1 output in actual email"
     # P1 — Launch readiness
-    - "pg_cron URLs update in Supabase SQL Editor"
-    - "Website fixes from 20-agent reviews (25 items)"
     - "Google Search Console verification"
     # P2 — Growth
     - "48h experiment: 5 audits proactive, 5 phone calls"
@@ -33,7 +27,7 @@ last_session:
 
 production:
   frontend_status: "ok"
-  backend_status: "ok — p1 formatter deploying via Render auto-deploy"
+  backend_status: "ok — deployed with all env vars restored"
   last_verified: "2026-03-30"
   email_template:
     production: "v8-final-mix (deployed)"
@@ -59,6 +53,4 @@ production:
     prompt_testing: "python3 tests/test_prompt.py --prompt p1 (~$0.02/test)"
     docs: "backend/tests/README.md"
   known_issues:
-    - "pg_cron URLs point to old domain"
-    - "25 website fixes approved but not yet implemented"
     - "Email template doesn't yet render top-level score_summary/gaps/actions separately"

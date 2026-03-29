@@ -573,6 +573,30 @@ Phase fails → catch exception
 - Separate pages: Despre Noi (`/despre-noi`), Servicii (`/servicii`) — NOT bundled into landing page
 - OpenGraph + Twitter cards on all pages
 
+### Google Search Console API
+
+```
+GCP Project: cohesive-idiom-398915
+Service Account: gsc-indexing@cohesive-idiom-398915.iam.gserviceaccount.com
+SA Key: tools/gsc-sa-key.json (gitignored, copy from devidevs-frontend/tools/)
+Google Account: devi.deviart33@gmail.com (= devideviart, same account)
+Property: sc-domain:audit-turism.ro (SA added as Owner)
+API Quota: 2000 inspections/day (shared with browser UI)
+```
+
+```bash
+# Check indexing status of all sitemap URLs
+python3 tools/gsc-check.py
+
+# Submit sitemap + check
+python3 tools/gsc-check.py --submit-sitemap
+
+# Show only non-indexed
+python3 tools/gsc-check.py --not-indexed
+```
+
+**Setup for new properties:** Add SA as Owner in Search Console (Settings > Users and permissions), then change `SITE_URL` in script.
+
 ---
 
 ## Development

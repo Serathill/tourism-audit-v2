@@ -32,3 +32,7 @@ __pycache__/
 .venv/
 venv/
 *.egg
+
+# Service account keys (NEVER commit)
+tools/gsc-sa-key.json
+*-sa-key.json

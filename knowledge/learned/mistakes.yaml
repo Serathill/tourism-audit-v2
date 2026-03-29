@@ -1,0 +1,98 @@
+# Mistakes & Lessons Learned — Tourism Audit V2
+# READ THIS FIRST before any action. ADD to it after any mistake.
+# Format: date, category, what happened, root cause, fix, rule added
+
+mistakes:
+  # === V1 MISTAKES (migrated) ===
+
+  - id: M-001
+    date: "2026-02-09"
+    category: security
+    what: "Secrets (.env with API keys) committed to git in v1"
+    root_cause: "No .gitignore, no awareness"
+    fix: ".gitignore added, all keys rotated, Vercel/Render env vars"
+    rule: "RULE 3: NO SECRETS IN GIT"
+
+  - id: M-002
+    date: "2026-02-09"
+    category: architecture
+    what: "778-line homepage, 679-line form — monolithic, unmaintainable"
+    root_cause: "No component extraction discipline"
+    fix: "V2: max ~200 lines/component, sections extracted"
+    rule: "RULE 6: NO MONOLITHIC COMPONENTS"
+
+  - id: M-003
+    date: "2026-02-09"
+    category: performance
+    what: "22MB page weight, 5-15s mobile load time"
+    root_cause: "Uncompressed hero video, unoptimized images"
+    fix: "V2: <100KB budget, next/image AVIF/WebP, no hero video"
+    rule: "Anti-pattern: NO unoptimized images"
+
+  - id: M-004
+    date: "2026-02-09"
+    category: ai-engine
+    what: "V1 used OpenAI Deep Research + GPT-4, V2 migrated to Google Gemini"
+    root_cause: "Business decision — Gemini Deep Research Pro better for audit depth"
+    fix: "All references updated to google-genai, GOOGLE_API_KEY"
+    rule: "RULE 4: THIS IS GEMINI, NOT OPENAI"
+
+  - id: M-005
+    date: "2026-02-09"
+    category: conversion
+    what: "Zero conversions from ad campaigns in v1"
+    root_cause: "Growth messaging wrong for crisis market (73% operators report revenue decline)"
+    fix: "V2: loss-prevention messaging ('afla ce te costa vizibilitatea slaba')"
+    rule: "Anti-pattern: growth messaging → loss-prevention messaging"
+
+  - id: M-006
+    date: "2026-02-09"
+    category: trust
+    what: "Fabricated testimonials in v1"
+    root_cause: "No real users yet, faked social proof"
+    fix: "V2: real team credentials, parent brand endorsement, no fake testimonials"
+    rule: "NEVER fabricate testimonials or social proof"
+
+  - id: M-007
+    date: "2026-02-09"
+    category: ux
+    what: "14-field form on separate page, high abandonment"
+    root_cause: "Too many fields, no progressive disclosure"
+    fix: "V2: 3-step wizard, 4 required fields only"
+    rule: "Forms: minimal required fields, progressive disclosure"
+
+  # === V1 FRONTEND LESSONS ===
+
+  - id: M-008
+    date: "2026-03-01"
+    category: frontend
+    what: "Lint strict blocked build (react/no-unescaped-entities)"
+    root_cause: "Legal copy had unescaped quotes"
+    fix: "Escape quotes with &quot; in JSX legal text"
+    rule: "Escape special chars in JSX copy"
+
+  - id: M-009
+    date: "2026-03-01"
+    category: frontend
+    what: "reCAPTCHA site key not available client-side"
+    root_cause: "Key not in NEXT_PUBLIC_* prefix"
+    fix: "Duplicate to NEXT_PUBLIC_RECAPTCHA_SITE_KEY"
+    rule: "Client-side env vars MUST have NEXT_PUBLIC_ prefix"
+
+  # === V2 MISTAKES (add new ones here) ===
+
+  - id: M-010
+    date: "2026-03-30"
+    category: supabase
+    what: "Lost 10+ min trying to update pg_cron jobs: UPDATE denied, wrong function signature, JS quoting hell"
+    root_cause: "Didn't know cron.alter_job signature (bigint, not integer), tried UPDATE on cron.job (permission denied), JS eval mangled single quotes for Monaco editor"
+    fix: "Use cron.alter_job(job_id := N::bigint, command := '...'); For Monaco editor: xclip to clipboard + Ctrl+V paste, never JS insertText with quotes"
+    rule: "pg_cron: cron.alter_job with ::bigint. Monaco editor: clipboard paste, not JS type/fill"
+
+  - id: M-011
+    date: "2026-03-30"
+    category: infrastructure
+    what: "Render env vars disappeared - all 9 vars gone except MEETING_LINK, deploy failed with ValueError"
+    root_cause: "Unknown - possibly accidental deletion or Render glitch. No audit trail."
+    fix: "Restored 10 env vars via Render API (PUT /v1/services/{id}/env-vars). Triggered manual deploy."
+    rule: "After any Render env var change, verify all vars exist with GET /v1/services/{id}/env-vars. Keep .env.local as backup source of truth."
