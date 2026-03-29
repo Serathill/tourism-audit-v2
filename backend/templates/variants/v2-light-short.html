@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ro" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="x-apple-disable-message-reformatting">
+    <meta name="color-scheme" content="light">
+    <meta name="supported-color-schemes" content="light">
+    <title>Audit Digital – {{ property_name }}</title>
+    <!--[if mso]>
+    <noscript>
+        <xml>
+            <o:OfficeDocumentSettings>
+                <o:PixelsPerInch>96</o:PixelsPerInch>
+            </o:OfficeDocumentSettings>
+        </xml>
+    </noscript>
+    <style>
+        table { border-collapse: collapse; }
+        td { font-family: Arial, sans-serif; }
+    </style>
+    <![endif]-->
+    <style>
+        body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+        table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+        img { -ms-interpolation-mode: bicubic; border: 0; outline: none; text-decoration: none; }
+        body { height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important; background-color: #F3F4F6; }
+        .font-sans { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+
+        @media screen and (max-width: 620px) {
+            .responsive-table { width: 100% !important; }
+            .main-pad { padding: 24px 16px !important; }
+            .header-pad { padding: 24px 16px 20px 16px !important; }
+            h1.font-sans { font-size: 22px !important; }
+            h2.font-sans { font-size: 17px !important; }
+            .action-num { font-size: 24px !important; }
+            .cta-btn { padding: 14px 28px !important; font-size: 15px !important; }
+        }
+    </style>
+</head>
+<body style="margin: 0; padding: 0; background-color: #F3F4F6;">
+    <!-- Preheader (hidden text for inbox preview) -->
+    <div style="display: none; max-height: 0; overflow: hidden; mso-hide: all;">
+        Am analizat {{ property_name }} exact cum ar face-o un potential oaspete. Iata ce am gasit.
+        &zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;
+    </div>
+
+    <table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation">
+        <tr>
+            <td align="center" style="padding: 32px 10px;">
+                <!--[if (gte mso 9)|(IE)]>
+                <table align="center" border="0" cellspacing="0" cellpadding="0" width="600">
+                <tr>
+                <td align="center" valign="top" width="600">
+                <![endif]-->
+                <table class="responsive-table" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px; border-collapse: collapse;">
+
+                    <!-- ============ HEADER ============ -->
+                    <tr>
+                        <td style="background-color: #FFFFFF; border-radius: 12px 12px 0 0; border-top: 4px solid #0D9488;">
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation">
+                                <tr>
+                                    <td class="header-pad" style="padding: 32px 40px 24px 40px;">
+                                        <h1 class="font-sans" style="margin: 0; font-size: 26px; font-weight: 700; color: #0F172A; letter-spacing: -0.5px;">Audit Digital</h1>
+                                        <p class="font-sans" style="margin: 6px 0 0 0; font-size: 15px; font-weight: 500; color: #0D9488;">{{ property_name | upper }}</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <!-- ============ INTRO ============ -->
+                    <tr>
+                        <td style="background-color: #FFFFFF;">
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation">
+                                <tr>
+                                    <td class="main-pad" style="padding: 0 40px 24px 40px;">
+                                        <p class="font-sans" style="margin: 0; font-size: 15px; line-height: 1.65; color: #374151;">
+                                            Salut, {{ property_data.owner_name }}, am analizat <strong style="color: #0F172A;">{{ property_name }}</strong> exact cum ar face-o un potențial oaspete. Iată ce am găsit:
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <!-- ============ TOP FINDINGS ============ -->
+                    {% for section in audit_data.sections %}
+                    {% if not section.is_action_plan %}
+                    <tr>
+                        <td style="background-color: #FFFFFF;">
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation">
+                                <tr>
+                                    <td class="main-pad" style="padding: 0 40px 20px 40px;">
+                                        <!-- Section divider -->
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation">
+                                            <tr>
+                                                <td style="padding-bottom: 16px; border-bottom: 1px solid #E5E7EB;"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-top: 16px;">
+                                                    <h2 class="font-sans" style="margin: 0 0 14px 0; font-size: 18px; font-weight: 700; color: #0F172A;">{{ section.title }}</h2>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                        <!-- Show first 2-3 items from each subsection (max 5 total per section) -->
+                                        {% set ns = namespace(shown=0) %}
+                                        {% for subsection in section.subsections %}
+                                        {% if ns.shown < 5 %}
+                                        {% for item in subsection.item_list %}
+                                        {% if ns.shown < 5 %}
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" style="margin-bottom: 8px;">
+                                            <tr>
+                                                <td valign="top" width="28" style="padding-top: 1px;">
+                                                    <span style="font-size: 14px;">{{ item.icon }}</span>
+                                                </td>
+                                                <td valign="top">
+                                                    <p class="font-sans" style="margin: 0; font-size: 14px; line-height: 1.55; color: #374151;">
+                                                        {% if item.icon == '✅' %}
+                                                        <strong style="color: #059669;">{{ item.title }}</strong>
+                                                        {% elif item.icon == '⚠️' %}
+                                                        <strong style="color: #D97706;">{{ item.title }}</strong>
+                                                        {% elif item.icon == '❌' %}
+                                                        <strong style="color: #DC2626;">{{ item.title }}</strong>
+                                                        {% else %}
+                                                        <strong style="color: #0F172A;">{{ item.title }}</strong>
+                                                        {% endif %}
+                                                        {% if item.details %}<span style="color: #6B7280;"> - {{ item.details | striptags | truncate(80) }}</span>{% endif %}
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        {% set ns.shown = ns.shown + 1 %}
+                                        {% endif %}
+                                        {% endfor %}
+                                        {% endif %}
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+
+                    <!-- ============ ACTION PLAN (First 3 only) ============ -->
+                    {% for section in audit_data.sections %}
+                    {% if section.is_action_plan and section.actions %}
+                    <tr>
+                        <td style="background-color: #FFFFFF;">
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation">
+                                <tr>
+                                    <td class="main-pad" style="padding: 0 40px 28px 40px;">
+                                        <!-- Section divider -->
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation">
+                                            <tr>
+                                                <td style="padding-bottom: 16px; border-bottom: 1px solid #E5E7EB;"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-top: 16px;">
+                                                    <h2 class="font-sans" style="margin: 0 0 20px 0; font-size: 18px; font-weight: 700; color: #0F172A;">Acțiuni Prioritare</h2>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                        {% for action in section.actions.item_list[:3] %}
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" style="margin-bottom: {% if not loop.last %}16px{% else %}0{% endif %};">
+                                            <tr>
+                                                <td valign="top" width="44">
+                                                    <span class="font-sans action-num" style="font-size: 28px; font-weight: 700; color: #0D9488; line-height: 1;">{{ action.number }}</span>
+                                                </td>
+                                                <td valign="top" style="padding-top: 4px;">
+                                                    <p class="font-sans" style="margin: 0; font-size: 14px; line-height: 1.55; color: #374151;">
+                                                        <strong style="color: #0F172A;">{{ action.text_bold }}</strong>{{ action.text_regular | striptags | truncate(100) }}
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+
+                    <!-- ============ URGENCY BANNER ============ -->
+                    {% if urgency %}
+                    <tr>
+                        <td style="background-color: #FFFFFF;">
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation">
+                                <tr>
+                                    <td class="main-pad" style="padding: 0 40px 28px 40px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" style="background-color: #FFFBEB; border-radius: 8px; border: 1px solid #FDE68A;">
+                                            <tr>
+                                                <td style="padding: 18px 20px;">
+                                                    <p class="font-sans" style="margin: 0 0 6px 0; font-size: 15px; font-weight: 700; color: #92400E;">
+                                                        {{ urgency.icon }} {{ urgency.title }}
+                                                    </p>
+                                                    <p class="font-sans" style="margin: 0; font-size: 13px; line-height: 1.55; color: #78350F;">
+                                                        {{ urgency.message }}
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    {% endif %}
+
+                    <!-- ============ CTA BUTTON ============ -->
+                    <tr>
+                        <td style="background-color: #FFFFFF;">
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation">
+                                <tr>
+                                    <td align="center" class="main-pad" style="padding: 4px 40px 28px 40px;">
+                                        <!--[if mso]>
+                                        <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="{{ meeting_link }}" style="height:48px;v-text-anchor:middle;width:320px;" arcsize="17%" fillcolor="#FBBF24" stroke="f">
+                                        <w:anchorlock/>
+                                        <center style="color:#1E1E1E;font-family:Arial,sans-serif;font-size:16px;font-weight:bold;">Programeaz&#259; o discu&#539;ie gratuit&#259;</center>
+                                        </v:roundrect>
+                                        <![endif]-->
+                                        <!--[if !mso]><!-->
+                                        <a href="{{ meeting_link }}" target="_blank" class="cta-btn" style="font-family: 'Inter', Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 700; color: #1E1E1E; text-decoration: none; padding: 14px 36px; display: inline-block; border-radius: 8px; background-color: #FBBF24; mso-hide: all;">
+                                            Programeaza o discutie gratuita
+                                        </a>
+                                        <!--<![endif]-->
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <!-- ============ PDF NOTE ============ -->
+                    <tr>
+                        <td style="background-color: #FFFFFF;">
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation">
+                                <tr>
+                                    <td class="main-pad" style="padding: 0 40px 28px 40px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" style="background-color: #F0FDFA; border-radius: 8px; border: 1px solid #CCFBF1;">
+                                            <tr>
+                                                <td style="padding: 14px 18px;">
+                                                    <p class="font-sans" style="margin: 0; font-size: 13px; line-height: 1.55; color: #0F766E;">
+                                                        📎 Raportul complet cu toate detaliile este atașat ca PDF.
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <!-- ============ SIGN-OFF ============ -->
+                    <tr>
+                        <td style="background-color: #FFFFFF;">
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation">
+                                <tr>
+                                    <td class="main-pad" style="padding: 0 40px 32px 40px;">
+                                        <p class="font-sans" style="margin: 0 0 4px 0; font-size: 14px; line-height: 1.6; color: #6B7280;">
+                                            O zi buna,
+                                        </p>
+                                        <p class="font-sans" style="margin: 0; font-size: 14px; line-height: 1.6; color: #0F172A; font-weight: 700;">
+                                            Petru Constantin
+                                        </p>
+                                        <p class="font-sans" style="margin: 0; font-size: 13px; line-height: 1.5; color: #6B7280;">
+                                            DeviDevs
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <!-- ============ FOOTER ============ -->
+                    <tr>
+                        <td style="background-color: #F9FAFB; border-radius: 0 0 12px 12px; border-top: 1px solid #E5E7EB;">
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation">
+                                <tr>
+                                    <td align="center" style="padding: 24px 40px;">
+                                        <p class="font-sans" style="margin: 0 0 6px 0; font-size: 12px; color: #9CA3AF;">
+                                            Raport generat de <strong style="color: #0D9488;">DeviDevs</strong> | audit-turism.ro
+                                        </p>
+                                        <p class="font-sans" style="margin: 0; font-size: 11px; color: #D1D5DB;">
+                                            Solutii digitale pentru industria ospitalitatii
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                </table>
+                <!--[if (gte mso 9)|(IE)]>
+                </td>
+                </tr>
+                </table>
+                <![endif]-->
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

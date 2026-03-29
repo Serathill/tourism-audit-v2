@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ro" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="x-apple-disable-message-reformatting">
+    <title>Audit Digital – {{ property_name }}</title>
+    <!--[if mso]>
+    <noscript>
+        <xml>
+            <o:OfficeDocumentSettings>
+                <o:PixelsPerInch>96</o:PixelsPerInch>
+            </o:OfficeDocumentSettings>
+        </xml>
+    </noscript>
+    <![endif]-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+        table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+        img { -ms-interpolation-mode: bicubic; border: 0; outline: none; text-decoration: none; }
+        body { height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important; background-color: #FFFFFF; }
+        .font-sans { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+        :root { color-scheme: light dark; supported-color-schemes: light dark; }
+
+        @media screen and (max-width: 767px) {
+            .responsive-table {
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+            .main-content-area-td {
+                padding: 0 12px !important;
+            }
+            h1.font-sans {
+                font-size: 26px !important;
+            }
+            h2.font-sans {
+                font-size: 18px !important;
+            }
+            h3.font-sans {
+                font-size: 14px !important;
+            }
+            p.font-sans {
+                font-size: 13px !important;
+                line-height: 1.7 !important;
+                margin-bottom: 6px !important;
+            }
+            p.font-sans:last-of-type {
+                margin-bottom: 0 !important;
+            }
+            td[style*="font-size: 40px"] {
+                font-size: 28px !important;
+            }
+        }
+
+        p.font-sans { line-height: 1.6; }
+    </style>
+</head>
+<body style="margin: 0; padding: 0; background-color: #FFFFFF;">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+            <td align="center" style="padding: 40px 10px;">
+                <!--[if (gte mso 9)|(IE)]>
+                <table align="center" border="0" cellspacing="0" cellpadding="0" width="70%">
+                <tr>
+                <td align="center" valign="top" width="70%">
+                <![endif]-->
+                <table class="responsive-table" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 70%; border-collapse: collapse; background-color: #1E1E1E; border-radius: 12px;">
+                    <tr>
+                        <td align="center" style="padding: 40px 40px 30px 40px;">
+                            <h1 class="font-sans" style="margin: 0; font-size: 36px; font-weight: 700; color: #F8FAFC; letter-spacing: -1px;">Audit Digital</h1>
+                            <p class="font-sans" style="margin: 4px 0 0 0; font-size: 20px; font-weight: 500; color: #A1A1AA;">{{ property_name | upper }}</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="main-content-area-td" style="padding: 0 40px;">
+                            <p class="font-sans" style="margin: 0 0 15px 0; font-size: 15px; line-height: 1.6; color: #F8FAFC;">
+                                Salut, {{ property_data.owner_name }},
+                            </p>
+                            <p class="font-sans" style="margin: 0 0 15px 0; font-size: 15px; line-height: 1.6; color: #A1A1AA;">
+                                Mulțumim pentru interesul acordat serviciilor noastre. Așa cum am promis, echipa DeviDevs a realizat un audit digital preliminar pentru proprietatea ta, <strong style="color: #FBBF24;">{{ property_name }}</strong>.
+                            </p>
+                            <p class="font-sans" style="margin: 0 0 15px 0; font-size: 15px; line-height: 1.6; color: #A1A1AA;">
+                                Această analiză este bazată exclusiv pe date publice și este concepută pentru a-ți oferi o imagine de ansamblu clară asupra prezenței online actuale, identificând atât punctele forte, cât și oportunitățile imediate de creștere.
+                            </p>
+                            <p class="font-sans" style="margin: 0 0 25px 0; font-size: 15px; line-height: 1.6; color: #A1A1AA;">
+                                Mai jos regăsești raportul detaliat. După cum poți vedea, există câteva oportunități excelente care, odată implementate corect, pot crește semnificativ vizibilitatea online a proprietății și pot atrage mai mulți clienți direct, reducând dependența de platformele de rezervări.
+                            </p>
+                            <p class="font-sans" style="margin: 0 0 10px 0; font-size: 15px; line-height: 1.6; color: #FBBF24;">
+                                Acest audit este însă doar primul pas. Adevărata valoare constă într-un plan de acțiune personalizat, adaptat specificului și obiectivelor tale.
+                            </p>
+                            <p class="font-sans" style="margin: 0 0 25px 0; font-size: 16px; font-weight: 700; color: #F8FAFC;">
+                                Vrei să discutăm despre un plan concret?
+                            </p>
+
+                            <!-- Meeting Link Button -->
+                            <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="margin-bottom: 30px;">
+                                <tr>
+                                    <td align="center" bgcolor="#FBBF24" style="border-radius: 8px;">
+                                        <a href="{{ meeting_link }}" target="_blank" style="font-family: 'Inter', Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 700; color: #1E1E1E; text-decoration: none; padding: 15px 25px; display: inline-block; border-radius: 8px;">
+                                            Click aici pentru a programa o întâlnire
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <p class="font-sans" style="margin: 0 0 15px 0; font-size: 14px; line-height: 1.6; color: #A1A1AA;">
+                                În cadrul acestei discuții, vom putea:
+                            </p>
+                            <p class="font-sans" style="margin: 0 0 30px 0; font-size: 14px; line-height: 1.6; color: #A1A1AA;">
+                                - Răspunde la orice întrebare ai legată de raport.<br>
+                                - Identifica cele mai rapide și eficiente acțiuni pe care le poți lua.<br>
+                                - Explora cum soluțiile moderne îți pot economisi timp și pot aduce mai multe rezervări.
+                            </p>
+
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                <tr>
+                                    <td style="padding: 10px 0;">
+                                        <p class="font-sans" style="margin: 0; font-size: 13px; line-height: 1.7; color: #A1A1AA !important;">
+                                            <strong style="font-weight: 500;">Legenda status:</strong><br>
+                                            ✅ <strong style="color: #F8FAFC !important;">Bine:</strong> Elementul este optimizat și funcționează corespunzător.<br>
+                                            ⚠️ <strong style="color: #F8FAFC !important;">Necesită îmbunătățiri:</strong> Elementul există, dar necesită optimizări.<br>
+                                            ❌ <strong style="color: #F8FAFC !important;">Lipsă/absent:</strong> Elementul nu există și este recomandată implementarea sa.
+                                        </p>
+                                    </td>
+                                </tr>
+
+                                {% for section in audit_data.sections %}
+                                <tr><td style="padding-top: 30px;"><div style="border-top: 1px solid #3A3A3C;"></div></td></tr>
+                                <tr>
+                                    {% if section.is_action_plan %}
+                                    <!-- SECTION 3: ACTION PLAN -->
+                                    <td style="padding: 40px 0;">
+                                        <h2 class="font-sans" style="margin: 0 0 30px 0; font-size: 22px; font-weight: 700; color: #F8FAFC;">{{ section.title }}</h2>
+
+                                        {% if section.gaps %}
+                                        <h3 class="font-sans" style="margin: 0 0 20px 0; font-size: 16px; font-weight: 700; color: #FBBF24;">{{ section.gaps.title }}</h3>
+                                        {% for item in section.gaps.item_list %}
+                                        <p class="font-sans" style="margin-bottom: 8px; font-size: 14px; line-height: 1.6; color: #A1A1AA !important;">
+                                            {{ item.icon }} <strong style="color: #F8FAFC !important;">{{ item.title }}:</strong> {{ item.details | safe }}
+                                        </p>
+                                        {% endfor %}
+                                        {% endif %}
+
+                                        {% if section.actions %}
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-top: 40px;">
+                                            <tr>
+                                                <td width="5" style="background-color: #FBBF24; border-radius: 3px;"></td>
+                                                <td style="padding-left: 25px;">
+                                                    <h3 class="font-sans" style="margin: 0; font-size: 16px; font-weight: 700; color: #FBBF24;">Acțiuni Prioritare</h3>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-top: 25px;">
+                                            {% for action in section.actions.item_list %}
+                                            <tr>
+                                                <td valign="top" width="60" style="padding-bottom: {% if not loop.last %}20px{% else %}0{% endif %};">
+                                                    <p class="font-sans" style="margin: 0; font-size: 40px; font-weight: 700; color: #F8FAFC; line-height: 1;">{{ action.number }}</p>
+                                                </td>
+                                                <td valign="top" style="padding: 0 0 {% if not loop.last %}20px{% else %}0{% endif %} 15px;">
+                                                    <p class="font-sans" style="margin: 0; font-size: 15px; color: #F8FAFC; line-height: 1.5;"><strong style="color: #FBBF24;">{{ action.text_bold }}</strong>{{ action.text_regular }}</p>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                        </table>
+                                        {% endif %}
+                                    </td>
+                                    {% else %}
+                                    <!-- SECTIONS 1 & 2: REGULAR -->
+                                    <td style="padding: 40px 0 0 0;">
+                                        <h2 class="font-sans" style="margin: 0 0 25px 0; font-size: 22px; font-weight: 700; color: #F8FAFC;">{{ section.title }}</h2>
+                                        {% for subsection in section.subsections %}
+                                        <h3 class="font-sans" style="margin: {% if not loop.first %}30px{% else %}0{% endif %} 0 15px 0; font-size: 16px; font-weight: 700; color: #F8FAFC;">{{ subsection.title }}</h3>
+                                        {% for item in subsection.item_list %}
+                                        <p class="font-sans" style="margin-bottom: 8px; font-size: 14px; line-height: 1.6; color: #A1A1AA !important;">
+                                            {{ item.icon }} <strong style="color: #F8FAFC !important;">{{ item.title }}{% if item.details %}:{% endif %}</strong> {{ item.details | safe }}
+                                        </p>
+                                        {% endfor %}
+                                        {% endfor %}
+                                    </td>
+                                    {% endif %}
+                                </tr>
+                                {% endfor %}
+                            </table>
+
+                            <!-- SEASONAL URGENCY MESSAGE -->
+                            {% if urgency %}
+                            <table cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 40px 0; background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%); border-radius: 12px; padding: 24px;">
+                                <tr>
+                                    <td>
+                                        <p class="font-sans" style="margin: 0 0 12px 0; font-size: 20px; color: #1F2937; font-weight: 700;">
+                                            {{ urgency.icon }} {{ urgency.title }}
+                                        </p>
+                                        <p class="font-sans" style="margin: 0; font-size: 15px; line-height: 1.6; color: #3F3F46;">
+                                            {{ urgency.message }}
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                            {% endif %}
+
+                            <p class="font-sans" style="margin: 40px 0 10px 0; font-size: 15px; line-height: 1.6; color: #A1A1AA;">
+                                O zi excelentă,
+                            </p>
+                            <p class="font-sans" style="margin: 0; font-size: 15px; line-height: 1.6; color: #F8FAFC; font-weight: 700;">
+                                Echipa DeviDevs
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" style="padding: 40px;">
+                            <table cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width: 500px; margin: 0 auto;">
+                                <tr>
+                                    <td align="center" style="padding-bottom: 16px;">
+                                        <p class="font-sans" style="margin: 0 0 8px 0; font-size: 14px; color: #A1A1AA; font-weight: 600;">
+                                            Rapoarte generate cu încredere pentru cazări din România
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" style="padding-bottom: 16px;">
+                                        <p class="font-sans" style="margin: 0; font-size: 13px; line-height: 1.7; color: #71717A;">
+                                            Serviciile DeviDevs ajută proprietari de cazări să crească rezervările directe,
+                                            să reducă dependența de platforme și să economisească timp.
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center">
+                                        <p class="font-sans" style="margin: 0; font-size: 12px; color: #71717A;">
+                                            Raport generat de <strong style="color: #FBBF24; font-weight: 700;">DeviDevs</strong> | Soluții digitale pentru industria ospitalității
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                <!--[if (gte mso 9)|(IE)]>
+                </td>
+                </tr>
+                </table>
+                <![endif]-->
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

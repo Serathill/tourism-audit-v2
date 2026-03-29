@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ro" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="x-apple-disable-message-reformatting">
+    <title>Raportul tău digital – {{ property_name }}</title>
+    <!--[if mso]>
+    <noscript>
+        <xml>
+            <o:OfficeDocumentSettings>
+                <o:PixelsPerInch>96</o:PixelsPerInch>
+            </o:OfficeDocumentSettings>
+        </xml>
+    </noscript>
+    <![endif]-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+        table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+        img { -ms-interpolation-mode: bicubic; border: 0; outline: none; text-decoration: none; }
+        body { height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important; background-color: #F3F4F6; }
+        .font-sans { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+        :root { color-scheme: light; supported-color-schemes: light; }
+
+        @media screen and (max-width: 620px) {
+            .responsive-table {
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+            .content-td {
+                padding-left: 16px !important;
+                padding-right: 16px !important;
+            }
+            .block-td {
+                padding: 16px !important;
+            }
+            h1.font-sans {
+                font-size: 22px !important;
+            }
+            h2.font-sans {
+                font-size: 17px !important;
+            }
+            .item-text {
+                font-size: 13px !important;
+            }
+        }
+    </style>
+</head>
+<body style="margin: 0; padding: 0; background-color: #F3F4F6;">
+    <!-- Outer wrapper -->
+    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #F3F4F6;">
+        <tr>
+            <td align="center" style="padding: 32px 16px;">
+                <!--[if (gte mso 9)|(IE)]>
+                <table align="center" border="0" cellspacing="0" cellpadding="0" width="600">
+                <tr>
+                <td align="center" valign="top" width="600">
+                <![endif]-->
+                <table class="responsive-table" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px; border-collapse: collapse;">
+
+                    <!-- HEADER -->
+                    <tr>
+                        <td>
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #FFFFFF; border-radius: 12px 12px 0 0; border-collapse: collapse;">
+                                <!-- Teal top line -->
+                                <tr>
+                                    <td style="height: 4px; background-color: #0D9488; border-radius: 12px 12px 0 0; font-size: 0; line-height: 0;">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td class="content-td" style="padding: 32px 40px 24px 40px;">
+                                        <h1 class="font-sans" style="margin: 0 0 4px 0; font-size: 24px; font-weight: 700; color: #0F172A; letter-spacing: -0.5px;">Raportul tău digital</h1>
+                                        <p class="font-sans" style="margin: 0; font-size: 15px; font-weight: 500; color: #0D9488;">{{ property_name }}</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <!-- INTRO -->
+                    <tr>
+                        <td>
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #FFFFFF; border-collapse: collapse;">
+                                <tr>
+                                    <td class="content-td" style="padding: 0 40px 28px 40px;">
+                                        <p class="font-sans" style="margin: 0; font-size: 14px; line-height: 1.7; color: #374151;">
+                                            Salut, {{ property_data.owner_name }}, am verificat cum arată <strong style="color: #0F172A;">{{ property_name }}</strong> pe internet. Iată rezultatele:
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <!-- Spacer between intro and blocks -->
+                    <tr><td style="height: 8px; background-color: #F3F4F6; font-size: 0; line-height: 0;">&nbsp;</td></tr>
+
+                    <!-- GREEN BLOCK: Ce faci bine -->
+                    <tr>
+                        <td>
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #F0FDF4; border-collapse: collapse;">
+                                <tr>
+                                    <td style="width: 4px; background-color: #22C55E;" width="4"></td>
+                                    <td class="block-td" style="padding: 24px 36px;">
+                                        <h2 class="font-sans" style="margin: 0 0 16px 0; font-size: 18px; font-weight: 700; color: #166534;">
+                                            &#9989; Ce faci bine
+                                        </h2>
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
+                                            {% set ns = namespace(has_items=false) %}
+                                            {% for section in audit_data.sections %}
+                                                {% if not section.is_action_plan %}
+                                                    {% for subsection in section.subsections %}
+                                                        {% for item in subsection.item_list %}
+                                                            {% if item.icon == "\u2705" %}
+                                                                {% set ns.has_items = true %}
+                                                                <tr>
+                                                                    <td style="padding: 4px 0;">
+                                                                        <p class="font-sans item-text" style="margin: 0; font-size: 14px; line-height: 1.6; color: #374151;">
+                                                                            <strong style="color: #0F172A;">{{ item.title }}</strong>{% if item.details %} &#8212; {{ item.details | safe }}{% endif %}
+                                                                        </p>
+                                                                    </td>
+                                                                </tr>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endfor %}
+                                            {% if not ns.has_items %}
+                                            <tr>
+                                                <td style="padding: 4px 0;">
+                                                    <p class="font-sans item-text" style="margin: 0; font-size: 14px; line-height: 1.6; color: #6B7280; font-style: italic;">
+                                                        Niciun element identificat in această categorie.
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                            {% endif %}
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <!-- Spacer -->
+                    <tr><td style="height: 8px; background-color: #F3F4F6; font-size: 0; line-height: 0;">&nbsp;</td></tr>
+
+                    <!-- YELLOW BLOCK: De îmbunătățit -->
+                    <tr>
+                        <td>
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #FEFCE8; border-collapse: collapse;">
+                                <tr>
+                                    <td style="width: 4px; background-color: #EAB308;" width="4"></td>
+                                    <td class="block-td" style="padding: 24px 36px;">
+                                        <h2 class="font-sans" style="margin: 0 0 16px 0; font-size: 18px; font-weight: 700; color: #854D0E;">
+                                            &#9888;&#65039; De îmbunătățit
+                                        </h2>
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
+                                            {% set ns_yellow = namespace(has_items=false) %}
+                                            {% for section in audit_data.sections %}
+                                                {% if not section.is_action_plan %}
+                                                    {% for subsection in section.subsections %}
+                                                        {% for item in subsection.item_list %}
+                                                            {% if item.icon == "\u26a0\ufe0f" %}
+                                                                {% set ns_yellow.has_items = true %}
+                                                                <tr>
+                                                                    <td style="padding: 4px 0;">
+                                                                        <p class="font-sans item-text" style="margin: 0; font-size: 14px; line-height: 1.6; color: #374151;">
+                                                                            <strong style="color: #0F172A;">{{ item.title }}</strong>{% if item.details %} &#8212; {{ item.details | safe }}{% endif %}
+                                                                        </p>
+                                                                    </td>
+                                                                </tr>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endfor %}
+                                            {% if not ns_yellow.has_items %}
+                                            <tr>
+                                                <td style="padding: 4px 0;">
+                                                    <p class="font-sans item-text" style="margin: 0; font-size: 14px; line-height: 1.6; color: #6B7280; font-style: italic;">
+                                                        Niciun element identificat in această categorie.
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                            {% endif %}
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <!-- Spacer -->
+                    <tr><td style="height: 8px; background-color: #F3F4F6; font-size: 0; line-height: 0;">&nbsp;</td></tr>
+
+                    <!-- RED BLOCK: Te costă rezervări -->
+                    <tr>
+                        <td>
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #FEF2F2; border-collapse: collapse;">
+                                <tr>
+                                    <td style="width: 4px; background-color: #EF4444;" width="4"></td>
+                                    <td class="block-td" style="padding: 24px 36px;">
+                                        <h2 class="font-sans" style="margin: 0 0 16px 0; font-size: 18px; font-weight: 700; color: #991B1B;">
+                                            &#10060; Te costă rezervări
+                                        </h2>
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
+                                            {% set ns_red = namespace(has_items=false) %}
+                                            {% for section in audit_data.sections %}
+                                                {% if not section.is_action_plan %}
+                                                    {% for subsection in section.subsections %}
+                                                        {% for item in subsection.item_list %}
+                                                            {% if item.icon == "\u274c" %}
+                                                                {% set ns_red.has_items = true %}
+                                                                <tr>
+                                                                    <td style="padding: 4px 0;">
+                                                                        <p class="font-sans item-text" style="margin: 0; font-size: 14px; line-height: 1.6; color: #374151;">
+                                                                            <strong style="color: #0F172A;">{{ item.title }}</strong>{% if item.details %} &#8212; {{ item.details | safe }}{% endif %}
+                                                                        </p>
+                                                                    </td>
+                                                                </tr>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endfor %}
+                                            {% if not ns_red.has_items %}
+                                            <tr>
+                                                <td style="padding: 4px 0;">
+                                                    <p class="font-sans item-text" style="margin: 0; font-size: 14px; line-height: 1.6; color: #6B7280; font-style: italic;">
+                                                        Niciun element identificat in această categorie.
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                            {% endif %}
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <!-- Spacer -->
+                    <tr><td style="height: 8px; background-color: #F3F4F6; font-size: 0; line-height: 0;">&nbsp;</td></tr>
+
+                    <!-- CTA + FOOTER SECTION -->
+                    <tr>
+                        <td>
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #FFFFFF; border-radius: 0 0 12px 12px; border-collapse: collapse;">
+                                <tr>
+                                    <td class="content-td" style="padding: 32px 40px;">
+                                        <!-- CTA Button -->
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation">
+                                            <tr>
+                                                <td align="center" style="padding-bottom: 24px;">
+                                                    <!--[if mso]>
+                                                    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="{{ meeting_link }}" style="height:50px;v-text-anchor:middle;width:320px;" arcsize="16%" fillcolor="#F59E0B">
+                                                        <w:anchorlock/>
+                                                        <center style="color:#0F172A;font-family:'Inter',Helvetica,sans-serif;font-size:16px;font-weight:700;">Vreau să rezolv problemele</center>
+                                                    </v:roundrect>
+                                                    <![endif]-->
+                                                    <!--[if !mso]><!-->
+                                                    <a href="{{ meeting_link }}" target="_blank" style="font-family: 'Inter', Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 700; color: #0F172A; text-decoration: none; padding: 14px 40px; display: inline-block; border-radius: 8px; background: linear-gradient(135deg, #F59E0B, #FBBF24); mso-hide: all;">
+                                                        Vreau să rezolv problemele
+                                                    </a>
+                                                    <!--<![endif]-->
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                        <!-- PDF note -->
+                                        <p class="font-sans" style="margin: 0 0 24px 0; font-size: 13px; line-height: 1.6; color: #6B7280; text-align: center;">
+                                            Raportul tehnic complet este atașat ca PDF.
+                                        </p>
+
+                                        <!-- Seasonal urgency -->
+                                        {% if urgency %}
+                                        <table cellspacing="0" cellpadding="0" border="0" width="100%" style="margin-bottom: 24px; background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%); border-radius: 8px;">
+                                            <tr>
+                                                <td style="padding: 20px 24px;">
+                                                    <p class="font-sans" style="margin: 0 0 8px 0; font-size: 16px; color: #0F172A; font-weight: 700;">
+                                                        {{ urgency.icon }} {{ urgency.title }}
+                                                    </p>
+                                                    <p class="font-sans" style="margin: 0; font-size: 14px; line-height: 1.6; color: #374151;">
+                                                        {{ urgency.message }}
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        {% endif %}
+
+                                        <!-- Sign-off -->
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-top: 1px solid #E5E7EB;">
+                                            <tr>
+                                                <td style="padding-top: 24px;">
+                                                    <p class="font-sans" style="margin: 0 0 4px 0; font-size: 14px; color: #374151;">O zi excelentă,</p>
+                                                    <p class="font-sans" style="margin: 0; font-size: 14px; font-weight: 700; color: #0F172A;">Petru Constantin, DeviDevs</p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <!-- Footer -->
+                    <tr>
+                        <td style="padding: 24px 16px;" align="center">
+                            <p class="font-sans" style="margin: 0 0 8px 0; font-size: 12px; color: #9CA3AF;">
+                                Rapoarte generate cu încredere pentru cazări din România
+                            </p>
+                            <p class="font-sans" style="margin: 0; font-size: 11px; color: #9CA3AF;">
+                                <strong style="color: #0D9488;">DeviDevs</strong> | audit-turism.ro | contact@audit-turism.ro
+                            </p>
+                        </td>
+                    </tr>
+
+                </table>
+                <!--[if (gte mso 9)|(IE)]>
+                </td>
+                </tr>
+                </table>
+                <![endif]-->
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

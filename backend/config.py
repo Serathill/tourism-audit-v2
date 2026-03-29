@@ -19,7 +19,7 @@ DB_SCHEMA = "tourism_audit_v2"
 
 # ─── Email (Resend) ──────────────────────────────────────
 RESEND_API_KEY = os.getenv("RESEND_API_KEY", "")
-FROM_EMAIL = os.getenv("FROM_EMAIL", "Digital Audit <no-reply@devidevs.com>")
+FROM_EMAIL = os.getenv("FROM_EMAIL", "Audit Digital Turism <no-reply@audit-turism.ro>")
 
 # ─── API Auth ────────────────────────────────────────────
 BACKEND_API_KEY = os.getenv("BACKEND_API_KEY", "")

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ro" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="x-apple-disable-message-reformatting">
+    <title>Audit Digital – {{ property_name }}</title>
+    <!--[if mso]>
+    <noscript>
+        <xml>
+            <o:OfficeDocumentSettings>
+                <o:PixelsPerInch>96</o:PixelsPerInch>
+            </o:OfficeDocumentSettings>
+        </xml>
+    </noscript>
+    <![endif]-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+        table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+        img { -ms-interpolation-mode: bicubic; border: 0; outline: none; text-decoration: none; }
+        body { height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important; background-color: #F3F4F6; }
+        .font-sans { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+
+        @media screen and (max-width: 620px) {
+            .responsive-table { width: 100% !important; max-width: 100% !important; }
+            .main-td { padding: 24px 16px !important; }
+            h1.font-sans { font-size: 22px !important; }
+            h2.font-sans { font-size: 17px !important; }
+            p.font-sans { font-size: 14px !important; }
+            .bar-label { font-size: 11px !important; }
+            .finding-td { padding: 10px 12px !important; }
+            .action-number { font-size: 28px !important; }
+        }
+    </style>
+</head>
+<body style="margin: 0; padding: 0; background-color: #F3F4F6;">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #F3F4F6;">
+        <tr>
+            <td align="center" style="padding: 30px 10px;">
+                <!--[if (gte mso 9)|(IE)]>
+                <table align="center" border="0" cellspacing="0" cellpadding="0" width="600">
+                <tr>
+                <td align="center" valign="top" width="600">
+                <![endif]-->
+                <table class="responsive-table" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px; border-collapse: collapse;">
+
+                    <!-- Teal accent bar -->
+                    <tr>
+                        <td style="background-color: #0D9488; height: 6px; font-size: 1px; line-height: 1px;">&nbsp;</td>
+                    </tr>
+
+                    <!-- Main card -->
+                    <tr>
+                        <td class="main-td" style="background-color: #FFFFFF; padding: 36px 32px;">
+
+                            <!-- Title -->
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                <tr>
+                                    <td align="center">
+                                        <h1 class="font-sans" style="margin: 0 0 4px 0; font-size: 26px; font-weight: 700; color: #111827; letter-spacing: -0.5px;">Audit Digital</h1>
+                                        <p class="font-sans" style="margin: 0 0 28px 0; font-size: 16px; font-weight: 500; color: #0D9488;">{{ property_name }}</p>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Intro -->
+                            <p class="font-sans" style="margin: 0 0 28px 0; font-size: 15px; line-height: 1.7; color: #374151;">
+                                Salut, {{ property_data.owner_name }}, am analizat <strong style="color: #111827;">{{ property_name }}</strong> exact cum ar face-o un potential oaspete. Iata ce am gasit.
+                            </p>
+
+                            <!-- Score bars -->
+                            {% set ns = namespace(good=0, warn=0, bad=0) %}
+                            {% for section in audit_data.sections %}
+                                {% if not section.is_action_plan %}
+                                    {% for subsection in section.subsections %}
+                                        {% for item in subsection.item_list %}
+                                            {% if item.icon == '\u2705' %}{% set ns.good = ns.good + 1 %}
+                                            {% elif item.icon == '\u26a0\ufe0f' %}{% set ns.warn = ns.warn + 1 %}
+                                            {% elif item.icon == '\u274c' %}{% set ns.bad = ns.bad + 1 %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                {% endif %}
+                            {% endfor %}
+                            {% set total = ns.good + ns.warn + ns.bad %}
+                            {% if total == 0 %}{% set total = 1 %}{% endif %}
+                            {% set pct_good = (ns.good * 100 / total) | round | int %}
+                            {% set pct_warn = (ns.warn * 100 / total) | round | int %}
+                            {% set pct_bad = (ns.bad * 100 / total) | round | int %}
+
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 24px;">
+                                <!-- Green bar -->
+                                <tr>
+                                    <td width="80" style="padding: 4px 0;">
+                                        <p class="font-sans bar-label" style="margin: 0; font-size: 12px; color: #6B7280;">Bine ({{ ns.good }})</p>
+                                    </td>
+                                    <td style="padding: 4px 0;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #F3F4F6; border-radius: 4px;">
+                                            <tr>
+                                                <td style="background-color: #10B981; height: 12px; border-radius: 4px; width: {{ pct_good }}%;"></td>
+                                                {% if pct_good < 100 %}
+                                                <td style="height: 12px;"></td>
+                                                {% endif %}
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td width="40" style="padding: 4px 0; text-align: right;">
+                                        <p class="font-sans bar-label" style="margin: 0; font-size: 12px; font-weight: 600; color: #10B981;">{{ pct_good }}%</p>
+                                    </td>
+                                </tr>
+                                <!-- Amber bar -->
+                                <tr>
+                                    <td width="80" style="padding: 4px 0;">
+                                        <p class="font-sans bar-label" style="margin: 0; font-size: 12px; color: #6B7280;">Partial ({{ ns.warn }})</p>
+                                    </td>
+                                    <td style="padding: 4px 0;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #F3F4F6; border-radius: 4px;">
+                                            <tr>
+                                                <td style="background-color: #FBBF24; height: 12px; border-radius: 4px; width: {{ pct_warn }}%;"></td>
+                                                {% if pct_warn < 100 %}
+                                                <td style="height: 12px;"></td>
+                                                {% endif %}
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td width="40" style="padding: 4px 0; text-align: right;">
+                                        <p class="font-sans bar-label" style="margin: 0; font-size: 12px; font-weight: 600; color: #FBBF24;">{{ pct_warn }}%</p>
+                                    </td>
+                                </tr>
+                                <!-- Red bar -->
+                                <tr>
+                                    <td width="80" style="padding: 4px 0;">
+                                        <p class="font-sans bar-label" style="margin: 0; font-size: 12px; color: #6B7280;">Lipsa ({{ ns.bad }})</p>
+                                    </td>
+                                    <td style="padding: 4px 0;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #F3F4F6; border-radius: 4px;">
+                                            <tr>
+                                                <td style="background-color: #EF4444; height: 12px; border-radius: 4px; width: {{ pct_bad }}%;"></td>
+                                                {% if pct_bad < 100 %}
+                                                <td style="height: 12px;"></td>
+                                                {% endif %}
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td width="40" style="padding: 4px 0; text-align: right;">
+                                        <p class="font-sans bar-label" style="margin: 0; font-size: 12px; font-weight: 600; color: #EF4444;">{{ pct_bad }}%</p>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- CE AM GASIT -->
+                            <h2 class="font-sans" style="margin: 0 0 16px 0; font-size: 16px; font-weight: 700; color: #111827; text-transform: uppercase; letter-spacing: 0.5px;">Ce am gasit:</h2>
+
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 28px;">
+                                {% set findings = namespace(items=[], count=0) %}
+                                {% for section in audit_data.sections %}
+                                    {% if not section.is_action_plan and findings.count < 5 %}
+                                        {% for subsection in section.subsections %}
+                                            {% if findings.count < 5 and subsection.item_list | length > 0 %}
+                                                {% set item = subsection.item_list[0] %}
+                                                {% if item.icon == '\u2705' %}
+                                                    {% set border_color = '#10B981' %}
+                                                    {% set bg_color = '#F0FDF4' %}
+                                                {% elif item.icon == '\u26a0\ufe0f' %}
+                                                    {% set border_color = '#FBBF24' %}
+                                                    {% set bg_color = '#FFFBEB' %}
+                                                {% else %}
+                                                    {% set border_color = '#EF4444' %}
+                                                    {% set bg_color = '#FEF2F2' %}
+                                                {% endif %}
+                                                <tr>
+                                                    <td class="finding-td" style="padding: 12px 16px; border-left: 4px solid {{ border_color }}; background-color: {{ bg_color }}; margin-bottom: 8px;">
+                                                        <p class="font-sans" style="margin: 0; font-size: 14px; line-height: 1.6; color: #374151;">
+                                                            {{ item.icon }} <strong style="color: #111827;">{{ item.title }}{% if item.details %}:{% endif %}</strong> {{ item.details | safe }}
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                                <tr><td style="height: 8px; font-size: 1px; line-height: 1px;">&nbsp;</td></tr>
+                                                {% set findings.count = findings.count + 1 %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endfor %}
+                            </table>
+
+                            <!-- Urgency banner -->
+                            {% if urgency %}
+                            <table cellspacing="0" cellpadding="0" border="0" width="100%" style="margin-bottom: 28px;">
+                                <tr>
+                                    <td style="background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%); border-radius: 8px; padding: 18px 20px;">
+                                        <p class="font-sans" style="margin: 0 0 6px 0; font-size: 16px; color: #111827; font-weight: 700;">
+                                            {{ urgency.icon }} {{ urgency.title }}
+                                        </p>
+                                        <p class="font-sans" style="margin: 0; font-size: 14px; line-height: 1.6; color: #374151;">
+                                            {{ urgency.message }}
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                            {% endif %}
+
+                            <!-- ACTIUNI PRIORITARE -->
+                            {% for section in audit_data.sections %}
+                                {% if section.is_action_plan and section.actions %}
+                                <h2 class="font-sans" style="margin: 0 0 16px 0; font-size: 16px; font-weight: 700; color: #111827; text-transform: uppercase; letter-spacing: 0.5px;">Actiuni prioritare:</h2>
+
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 28px;">
+                                    {% for action in section.actions.item_list[:3] %}
+                                    <tr>
+                                        <td valign="top" width="44" style="padding-bottom: {% if not loop.last %}16px{% else %}0{% endif %};">
+                                            <p class="font-sans action-number" style="margin: 0; font-size: 32px; font-weight: 700; color: #0D9488; line-height: 1;">{{ action.number }}</p>
+                                        </td>
+                                        <td valign="top" style="padding: 4px 0 {% if not loop.last %}16px{% else %}0{% endif %} 10px;">
+                                            <p class="font-sans" style="margin: 0; font-size: 14px; line-height: 1.6; color: #374151;">
+                                                <strong style="color: #111827;">{{ action.text_bold }}</strong>{{ action.text_regular }}
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </table>
+                                {% endif %}
+                            {% endfor %}
+
+                            <!-- CTA button -->
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 24px;">
+                                <tr>
+                                    <td align="center">
+                                        <!--[if mso]>
+                                        <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" href="{{ meeting_link }}" style="height:52px;v-text-anchor:middle;width:100%;" arcsize="15%" fillcolor="#FBBF24" stroke="f">
+                                        <center style="color:#111827;font-family:'Inter',Helvetica,Arial,sans-serif;font-size:16px;font-weight:700;">Programeaza o discutie gratuita</center>
+                                        </v:roundrect>
+                                        <![endif]-->
+                                        <!--[if !mso]><!-->
+                                        <a href="{{ meeting_link }}" target="_blank" style="font-family: 'Inter', Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 700; color: #111827; text-decoration: none; background-color: #FBBF24; padding: 16px 32px; display: block; border-radius: 8px; text-align: center;">
+                                            Programeaza o discutie gratuita
+                                        </a>
+                                        <!--<![endif]-->
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- PDF note -->
+                            <p class="font-sans" style="margin: 0 0 28px 0; font-size: 13px; color: #9CA3AF; text-align: center;">
+                                Raportul complet: vezi PDF-ul atasat.
+                            </p>
+
+                            <!-- Divider -->
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                <tr><td style="border-top: 1px solid #E5E7EB; padding-top: 20px;"></td></tr>
+                            </table>
+
+                            <!-- Sign-off -->
+                            <p class="font-sans" style="margin: 0 0 4px 0; font-size: 14px; color: #6B7280;">O zi buna,</p>
+                            <p class="font-sans" style="margin: 0; font-size: 14px; font-weight: 700; color: #111827;">Petru Constantin, DeviDevs</p>
+
+                        </td>
+                    </tr>
+
+                    <!-- Footer -->
+                    <tr>
+                        <td align="center" style="padding: 20px 32px;">
+                            <p class="font-sans" style="margin: 0; font-size: 12px; color: #9CA3AF; line-height: 1.6;">
+                                Raport generat de <strong style="color: #0D9488;">DeviDevs</strong> | audit-turism.ro
+                            </p>
+                        </td>
+                    </tr>
+
+                </table>
+                <!--[if (gte mso 9)|(IE)]>
+                </td>
+                </tr>
+                </table>
+                <![endif]-->
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -38,7 +38,7 @@ class EmailService:
         If pdf_bytes is provided, attaches it as a PDF file to the email.
         """
         subject = (
-            f"Audit Digital de Marketing pentru {property_data.property_name}"
+            f"Raportul tau digital - {property_data.property_name}"
         )
 
         email_data: dict = {
@@ -190,7 +190,7 @@ class EmailService:
         error_message: str,
     ) -> bool:
         """Notify the customer about an error (no technical details)."""
-        subject = "Notificare privind auditul digital – intervenim imediat"
+        subject = "Notificare privind auditul digital - intervenim imediat"
         html_content = f"""
         <html>
         <body style="font-family: Arial, sans-serif; color:#111;">

@@ -327,7 +327,7 @@ INTELLIGENT FLEXIBILITY:
 
 === MANDATORY STRUCTURE ===
 
-AUDIT DIGITAL – {property_data.property_name}
+AUDIT DIGITAL - {property_data.property_name}
 
 Legenda status:
 - ✅ Bine: Elementul este optimizat și funcționează corespunzător.
