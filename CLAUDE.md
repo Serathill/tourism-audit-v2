@@ -249,16 +249,23 @@ User → /marketing-pentru-turism → 3-step form wizard
 | 2. Format | Structure into 3 sections + 11-category scoring | `gemini-3-pro-preview` (google-genai) | 10-20 sec |
 | 3. Deliver | PDF generation + HTML email with retry | fpdf2 + Resend (3 retries, 2s→4s→8s backoff) | 5-10 sec |
 
-**Output structure:**
+**Output structure (p1-layered):**
 ```
 AUDIT DIGITAL – [Property Name]
-  1. Evaluarea Prezentei Online si Vizibilitatii
-  2. Continut, Reputatie si Comunitate
-  3. Oportunitati si Plan de Actiune
-  Status icons: ✅ Bine / ⚠️ Necesita imbunatatiri / ❌ Lipsa/absent
-  Scoring: 11 categories × 0-10 = 110 total
-  Actiuni Prioritare: numbered action plan
+  Legenda status: ✅ Bine / ⚠️ De îmbunătățit / ❌ Lipsă
+  Scorul Tău Digital: XX/110 (XX%) — score card at top with 11 categories
+  Ce Te Costă Cel Mai Mult — top 3-5 gaps with impact
+  Acțiuni Prioritare — grouped by timeframe (week/month/3months), DIY/Specialist
+  --- DETALII COMPLETE ---
+  1. Evaluarea Prezenței Online și Vizibilității
+  2. Conținut, Reputație și Comunitate
+  3. Oportunități și Plan de Acțiune
+  Each subsection: verdict line + bullet items with inline jargon translation
+  Review quotes: ♥ positive / △ improvement
 ```
+
+**Prompt versioning:** Production prompt loaded from `templates/prompts/p1-layered.txt` (not inline).
+Test with: `python3 tests/test_prompt.py --prompt p1` (~$0.02/test)
 
 Quality filter (`quality_filter.py`) removes defensive language via regex patterns — replaces with actionable recommendations.
 
@@ -361,13 +368,14 @@ Quality filter (`quality_filter.py`) removes defensive language via regex patter
 | `backend/src/routes.py` | Endpoints: GET /healthz, POST /api/generate-audit, POST /api/daily-report |
 | `backend/src/pipeline.py` | 3-phase orchestrator, non-daemon threads, error cascade |
 | `backend/src/audit_generator.py` | GeminiAuditor: Deep Research API + polling (30s interval, 90 min max) |
-| `backend/src/template_processor.py` | Gemini formatter → parse to 3-section structure |
+| `backend/src/template_processor.py` | Gemini formatter → parse to structured dict → HTML email |
+| `backend/templates/prompts/p1-layered.txt` | Production formatter prompt (loaded by template_processor) |
 | `backend/src/quality_filter.py` | Regex removal of defensive language |
 | `backend/src/pdf_generator.py` | fpdf2: cover page (dark, teal/amber), content, CTA page |
 | `backend/src/email_service.py` | Resend: HTML + PDF attachment, 3 retries, seasonal urgency |
 | `backend/src/database_service.py` | Supabase CRUD for properties, audit_results, audit_logs |
 | `backend/src/models.py` | Pydantic PropertyData with validators |
-| `backend/templates/audit_email.html` | Jinja2 email template (dark theme, responsive) |
+| `backend/templates/audit_email.html` | Jinja2 email template (v8-final-mix, light theme, responsive) |
 | `backend/Dockerfile` | Python 3.13-slim, gunicorn 1 worker / 4 threads / timeout=0 |
 | `backend/Procfile` | Render deployment: gunicorn with graceful-timeout 5500s |
 
