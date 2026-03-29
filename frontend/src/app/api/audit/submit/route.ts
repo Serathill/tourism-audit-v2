@@ -7,15 +7,6 @@ import { isHoneypotFilled } from "@/lib/honeypot";
 import { verifyRecaptcha } from "@/lib/recaptcha";
 import { createServiceClient } from "@/lib/supabase/service";
 
-function escapeHtml(str: string): string {
-  return str
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
-
 export async function POST(request: Request) {
   try {
     // ── 1. Rate limit check ──────────────────────────────
@@ -128,17 +119,15 @@ export async function POST(request: Request) {
     const { data: property, error: insertError } = await supabase
       .from("properties")
       .insert({
-        owner_name: escapeHtml(data.owner_name),
+        owner_name: data.owner_name,
         owner_email: data.owner_email,
-        property_name: escapeHtml(data.property_name),
-        property_address: escapeHtml(data.property_address),
+        property_name: data.property_name,
+        property_address: data.property_address,
         website_url: data.website_url || null,
         booking_platform_links: bookingLinks.length > 0 ? bookingLinks : null,
         social_media_links: socialLinks.length > 0 ? socialLinks : null,
         google_my_business_link: data.google_my_business_link || null,
-        business_description: data.business_description
-          ? escapeHtml(data.business_description)
-          : null,
+        business_description: data.business_description || null,
         status: 10, // pending
       })
       .select("id")
@@ -163,7 +152,7 @@ export async function POST(request: Request) {
     if (backendUrl && backendApiKey && property?.id) {
       // Fire-and-forget with 10s timeout — don't block user response
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 10_000);
+      const timeoutId = setTimeout(() => controller.abort(), 60_000);
 
       fetch(`${backendUrl}/api/generate-audit`, {
         method: "POST",
@@ -177,7 +166,7 @@ export async function POST(request: Request) {
         .catch((err) => {
           if (err.name === "AbortError") {
             console.warn(
-              "Backend trigger timed out (10s) — audit may still start if Render responds later"
+              "Backend trigger timed out (60s) — audit may still start if Render responds later"
             );
           } else {
             console.error("Backend trigger failed:", err);

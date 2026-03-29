@@ -59,7 +59,7 @@ const SERVICES = [
       "Benchmark competitiv",
       "Livrare în 30-90 de minute",
     ],
-    cta: { label: "Solicită auditul gratuit", href: "/audit" },
+    cta: { label: "Solicită auditul gratuit", href: "/marketing-pentru-turism#audit-form" },
     ctaPrimary: true,
   },
   {
@@ -74,7 +74,7 @@ const SERVICES = [
       "Suport pe email",
       "Raportare lunară",
     ],
-    cta: { label: "Programează consultanță", href: "/audit" },
+    cta: { label: "Programează consultanță", href: "mailto:contact@audit-turism.ro" },
     ctaPrimary: false,
   },
   {
@@ -89,7 +89,7 @@ const SERVICES = [
       "Optimizare website",
       "Raportare săptămânală",
     ],
-    cta: { label: "Discută cu noi", href: "/audit" },
+    cta: { label: "Discută cu noi", href: "mailto:contact@audit-turism.ro" },
     ctaPrimary: false,
   },
 ] as const;

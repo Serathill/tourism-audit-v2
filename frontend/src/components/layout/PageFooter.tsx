@@ -94,7 +94,8 @@ export function PageFooter() {
 
         {/* Bottom bar */}
         <div className="mt-10 border-t border-slate-800 pt-6 text-center text-xs text-slate-400">
-          &copy; {currentYear} {BRAND.parentName}. Toate drepturile rezervate.
+          <p>&copy; {currentYear} {BRAND.parentName}. Toate drepturile rezervate.</p>
+          <p className="mt-1">DeviDevs Technologies S.R.L. | CUI: 48553919 | J40/13982/2023</p>
         </div>
       </div>
     </footer>

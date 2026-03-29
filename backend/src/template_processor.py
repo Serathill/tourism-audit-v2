@@ -116,8 +116,18 @@ class TemplateProcessor:
         audit_data: dict = {"sections": []}
 
         try:
-            content_body = formatted_content.split("Legenda status:", 1)[1]
-        except IndexError:
+            # Case-insensitive split on "Legenda status:" marker
+            lower_content = formatted_content.lower()
+            marker = "legenda status:"
+            marker_pos = lower_content.find(marker)
+            if marker_pos == -1:
+                raise TemplateProcessingError(
+                    "Could not find 'Legenda status:' marker in content."
+                )
+            content_body = formatted_content[marker_pos + len(marker):]
+        except TemplateProcessingError:
+            raise
+        except Exception:
             raise TemplateProcessingError(
                 "Could not find 'Legenda status:' marker in content."
             )

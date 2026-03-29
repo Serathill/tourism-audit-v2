@@ -32,9 +32,17 @@ def require_api_key(f):
 
 @api.route("/healthz", methods=["GET"])
 def health_check():
-    """Health check endpoint for Render."""
+    """Health check endpoint for Render.
+    Also resets stale audits stuck at status=1 for >120 min.
+    """
     logger.debug("Health check pinged")
-    return jsonify({"status": "ok"}), 200
+    stale_count = 0
+    try:
+        db_service = SupabaseService()
+        stale_count = db_service.reset_stale_audits(max_age_minutes=120)
+    except Exception as e:
+        logger.warning("Stale audit cleanup failed during healthz: %s", e)
+    return jsonify({"status": "ok", "stale_reset": stale_count}), 200
 
 
 @api.route("/api/generate-audit", methods=["POST"])

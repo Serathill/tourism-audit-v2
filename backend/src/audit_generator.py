@@ -534,6 +534,10 @@ Include inline citations `[source.com]` for ALL data points.
                 logger.info("[%02dm] Status: %s", minutes, status)
 
                 if status == "completed":
+                    if not interaction.outputs:
+                        raise AuditGenerationError(
+                            "Deep Research completed but returned empty outputs"
+                        )
                     raw_audit_text = interaction.outputs[-1].text
 
                     logger.info(

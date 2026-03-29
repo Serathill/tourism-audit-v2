@@ -319,14 +319,14 @@ Quality filter (`quality_filter.py`) removes defensive language via regex patter
 | Vercel | Frontend hosting | ISR caching 7-30 days |
 | Render | Backend hosting | Free tier, spins down after 15 min inactivity |
 | Supabase | PostgreSQL database | Schema: `tourism_audit_v2`, RLS enabled |
-| Resend | Transactional email | Domain: devidevs.com |
+| Resend | Transactional email | Domain: audit-turism.ro |
 | Google Gemini | AI audit generation | Deep Research Pro + Gemini 3 Pro |
 | Upstash Redis | Rate limiting | Sliding window, per-IP |
 | Sentry | Error tracking | Frontend + backend |
 | GA4 | Analytics | Page views, scroll depth, UTM, conversions |
 | HubSpot/Calendly | Meeting CTA | Post-audit consultation booking |
 
-**Render keep-alive:** pg_cron should ping `/healthz` every 10 min to prevent spin-down (Render free tier stops after 15 min inactivity). Documented in `PRODUCTION-DEPLOY-PLAN.md` but **migration not deployed yet** — only daily report cron (06:00 UTC) is active.
+**Render keep-alive:** pg_cron pings `/healthz` every 10 min to prevent spin-down (Render free tier stops after 15 min inactivity). Daily report cron runs at 06:00 UTC (09:00 Bucharest). Healthz also resets stale audits (status=1 >120 min).
 
 ---
 
@@ -443,7 +443,7 @@ SUPABASE_KEY=                      # Service role key
 
 # Email
 RESEND_API_KEY=
-FROM_EMAIL=Digital Audit <no-reply@devidevs.com>
+FROM_EMAIL=Audit Digital Turism <no-reply@audit-turism.ro>
 
 # API Auth
 BACKEND_API_KEY=
@@ -592,13 +592,12 @@ cd backend && python tests/test_e2e_local.py
 
 ## Known Limitations (Post-MVP Backlog)
 
-1. **Render free tier spin-down** — pg_cron keep-alive every 10 min is planned (`PRODUCTION-DEPLOY-PLAN.md`) but migration not deployed yet. Only daily report cron (06:00 UTC) is active.
+1. **MEETING_LINK not configured** — CTA post-audit duce nicaieri pana se seteaza Google Calendar Appointment Scheduling
 2. **No frontend status polling** — user can't see audit progress after form submit
-3. **No stale audit cleanup** — stuck at status=1 or status=10 requires manual DB reset
-4. **Fire-and-forget** — if backend trigger fails after form submit, user sees "success" but no audit generated
-5. **reCAPTCHA disabled** — MVP relies on honeypot + rate limit only
-6. **Single gunicorn worker** — CPU/RAM limited for concurrent audits
-7. **/healthz always 200** — returns OK even if Supabase/Resend/Gemini are down
+3. **reCAPTCHA disabled** — MVP relies on honeypot + rate limit only
+4. **Single gunicorn worker** — CPU/RAM limited for concurrent audits (semaphore limits to 3)
+5. **/healthz always 200** — returns OK even if Supabase/Resend/Gemini are down
+6. **Fire-and-forget** — if backend trigger fails after form submit (60s timeout), user sees "success" but no audit generated
 
 ---
 

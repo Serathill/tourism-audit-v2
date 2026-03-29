@@ -23,8 +23,18 @@ def run_audit_pipeline(property_data: PropertyData) -> None:
     Phase 2: Template formatting via Gemini
     Phase 3: HTML email generation + delivery via Resend
 
-    This function is designed to run in a daemon thread.
+    This function is designed to run in a non-daemon thread.
+    Acquires a semaphore to limit concurrent audits.
     """
+    _audit_semaphore.acquire()
+    try:
+        _run_audit_pipeline_inner(property_data)
+    finally:
+        _audit_semaphore.release()
+
+
+def _run_audit_pipeline_inner(property_data: PropertyData) -> None:
+    """Inner pipeline logic, called with semaphore held."""
     property_id = property_data.id
     audit_result_id = None
 
@@ -246,9 +256,20 @@ def run_audit_pipeline(property_data: PropertyData) -> None:
 # Module-level list of running pipeline threads (for graceful shutdown)
 RUNNING_THREADS: list[threading.Thread] = []
 
+# Limit concurrent audits to prevent OOM on Render free tier (512 MB)
+MAX_CONCURRENT_AUDITS = 3
+_audit_semaphore = threading.Semaphore(MAX_CONCURRENT_AUDITS)
+
+
+def _cleanup_finished_threads() -> None:
+    """Remove finished threads from RUNNING_THREADS to prevent memory leak."""
+    RUNNING_THREADS[:] = [t for t in RUNNING_THREADS if t.is_alive()]
+
 
 def start_pipeline_thread(property_data: PropertyData) -> threading.Thread:
     """Launch the audit pipeline in a non-daemon thread."""
+    _cleanup_finished_threads()
+
     thread = threading.Thread(
         target=run_audit_pipeline,
         args=(property_data,),

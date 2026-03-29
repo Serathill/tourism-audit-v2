@@ -1,5 +1,6 @@
 """Email delivery via Resend with retry + exponential backoff."""
 
+import html
 import logging
 import time
 
@@ -145,15 +146,18 @@ class EmailService:
         error_context: str,
     ) -> bool:
         """Send a technical failure alert to the team."""
-        subject = f"[ALERT] Audit failure - {property_name or 'Unknown'}"
+        safe_property = html.escape(property_name or "Unknown")
+        safe_email = html.escape(owner_email)
+        safe_context = html.escape(error_context)
+        subject = f"[ALERT] Audit failure - {safe_property}"
         html_content = f"""
         <html>
         <body style="font-family: Arial, sans-serif; color:#111;">
             <h3 style="margin:0 0 10px 0;">Audit failure alert</h3>
             <ul>
-                <li><strong>Property</strong>: {property_name or 'N/A'}</li>
-                <li><strong>Owner email</strong>: {owner_email}</li>
-                <li><strong>Context</strong>: {error_context}</li>
+                <li><strong>Property</strong>: {safe_property}</li>
+                <li><strong>Owner email</strong>: {safe_email}</li>
+                <li><strong>Context</strong>: {safe_context}</li>
             </ul>
             <p>Verificati <code>audit_logs</code> si <code>audit_results</code>.
             Clientul a fost notificat automat.</p>

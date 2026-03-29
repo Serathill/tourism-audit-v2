@@ -78,9 +78,11 @@ def create_app() -> Flask:
     origins = [o.strip() for o in ALLOWED_ORIGINS.split(",") if o.strip()]
     if os.getenv("FLASK_ENV") == "development":
         origins.append("http://localhost:3000")
+    if not origins:
+        logger.warning("ALLOWED_ORIGINS not set — CORS will reject cross-origin requests")
     CORS(
         app,
-        origins=origins or ["*"],
+        origins=origins or [],
         allow_headers=["Content-Type", "X-API-Key"],
         methods=["GET", "POST", "OPTIONS"],
     )

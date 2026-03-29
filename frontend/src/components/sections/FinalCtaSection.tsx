@@ -27,7 +27,7 @@ export function FinalCtaSection() {
             size="lg"
             className="bg-gradient-cta text-foreground font-semibold shadow-lg hover:shadow-xl transition-shadow"
           >
-            <Link href="/audit">
+            <Link href="/marketing-pentru-turism#audit-form">
               Solicită auditul gratuit
               <ArrowRight className="size-4" />
             </Link>

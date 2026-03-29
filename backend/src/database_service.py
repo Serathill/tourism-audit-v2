@@ -73,6 +73,38 @@ class SupabaseService:
             logger.error("Failed to update status for %s: %s", property_id, e)
             raise DatabaseError(f"Failed to update status for {property_id}: {e}")
 
+    def reset_stale_audits(self, max_age_minutes: int = 120) -> int:
+        """Reset audits stuck at status=1 (running) for longer than max_age_minutes.
+        Returns the number of reset audits.
+        """
+        cutoff = (
+            datetime.datetime.now(datetime.timezone.utc)
+            - datetime.timedelta(minutes=max_age_minutes)
+        ).isoformat()
+        try:
+            response = (
+                self._table("properties")
+                .update(
+                    {
+                        "status": 0,
+                        "status_text": "failed_stale_reset",
+                        "last_status_update_at": datetime.datetime.now(
+                            datetime.timezone.utc
+                        ).isoformat(),
+                    }
+                )
+                .eq("status", 1)
+                .lt("last_status_update_at", cutoff)
+                .execute()
+            )
+            count = len(response.data) if response.data else 0
+            if count:
+                logger.info("Reset %d stale audits (stuck >%d min)", count, max_age_minutes)
+            return count
+        except Exception as e:
+            logger.error("Failed to reset stale audits: %s", e)
+            return 0
+
     # ── Audit result operations ─────────────────────────────
 
     def insert_audit_result(
