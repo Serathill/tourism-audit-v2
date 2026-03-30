@@ -6,7 +6,7 @@ export function FinalCtaSection() {
   return (
     <section
       aria-labelledby="final-cta-heading"
-      className="bg-brand-teal-darkest"
+      className="bg-gradient-to-br from-brand-teal-darkest to-[#1e3a5f]"
     >
       <div className="mx-auto max-w-[1200px] px-4 py-16 sm:px-6 md:py-20">
         <div className="mx-auto flex max-w-2xl flex-col items-center gap-6 text-center">
