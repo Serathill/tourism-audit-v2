@@ -125,7 +125,7 @@ export function ManageCookiesButton() {
   return (
     <button
       onClick={resetConsent}
-      className="text-sm text-slate-300 transition-colors hover:text-white"
+      className="text-left text-sm text-slate-300 transition-colors hover:text-white"
     >
       Gestionează cookie-uri
     </button>
