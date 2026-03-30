@@ -92,7 +92,7 @@ export async function GET(request: NextRequest) {
             fontWeight: 700,
           }}
         >
-          100% Gratuit — Rezultate în 30-90 min
+          100% Gratuit - Rezultate in 30-90 min
         </div>
       </div>
     ),

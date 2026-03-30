@@ -15,7 +15,7 @@ const siteUrl =
 
 export const metadata: Metadata = {
   title:
-    "Marketing pentru turism — audit digital gratuit | DeviDevs Agency",
+    "Marketing pentru turism - audit digital gratuit | DeviDevs Agency",
   description:
     "Audit digital gratuit pentru pensiuni, case de vacanță și unități de cazare din România. Află unde pierzi vizibilitate online. Raport personalizat în 30-90 de minute, fără acces la datele tale interne.",
   alternates: {
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title:
-      "Marketing pentru turism — audit digital gratuit | DeviDevs Agency",
+      "Marketing pentru turism - audit digital gratuit | DeviDevs Agency",
     type: "website",
     url: `${siteUrl}/marketing-pentru-turism`,
     images: [

@@ -80,7 +80,7 @@ export const metadata: Metadata = {
         url: "/preview-image.png",
         width: 1200,
         height: 630,
-        alt: "Audit Digital Turism — DeviDevs Agency",
+        alt: "Audit Digital Turism - DeviDevs Agency",
       },
       {
         url: "/og",
@@ -303,7 +303,7 @@ export default async function RootLayout({
         )}
       </head>
       <body
-        className={`${inter.variable} ${plusJakartaSans.variable} antialiased`}
+        className={`${inter.variable} ${plusJakartaSans.variable} antialiased min-h-screen flex flex-col`}
       >
         <a
           href="#main-content"
@@ -312,7 +312,7 @@ export default async function RootLayout({
           Salt la conținut
         </a>
         <PageHeader />
-        <main id="main-content">{children}</main>
+        <main id="main-content" className="flex-1">{children}</main>
         <PageFooter />
         <Toaster
           theme="light"

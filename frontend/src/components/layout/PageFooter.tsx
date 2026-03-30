@@ -59,7 +59,7 @@ export function PageFooter() {
             <span className="text-sm font-semibold uppercase tracking-wider text-slate-400">
               Pagini
             </span>
-            <nav aria-label="Navigare footer — pagini" className="flex flex-col gap-2">
+            <nav aria-label="Navigare footer - pagini" className="flex flex-col gap-2">
               {[...NAV_LINKS, AUDIT_CTA_LINK].map((link) => (
                 <Link
                   key={link.href}
@@ -77,7 +77,7 @@ export function PageFooter() {
             <span className="text-sm font-semibold uppercase tracking-wider text-slate-400">
               Legal
             </span>
-            <nav aria-label="Navigare footer — legal" className="flex flex-col gap-2">
+            <nav aria-label="Navigare footer - legal" className="flex flex-col gap-2">
               {LEGAL_LINKS.map((link) => (
                 <Link
                   key={link.href}

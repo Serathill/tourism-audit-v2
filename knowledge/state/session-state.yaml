@@ -20,6 +20,8 @@ last_session:
     - "Run a real audit end-to-end to verify p1 output in actual email"
     # P1 — Launch readiness
     - "Google Search Console verification"
+    # P1.5 — Copy review (Petru verifica manual)
+    - "Verifica daca copy-ul de pe site ('afla cate rezervari pierzi', 'unde pierzi vizibilitate') se aliniaza cu ce livram in audit. Petru vrea sa confirme personal."
     # P2 — Growth
     - "48h experiment: 5 audits proactive, 5 phone calls"
     - "Reactivate 7 V1 clients"
@@ -47,7 +49,7 @@ production:
     name: "Audit Digital Turism"
     sender: "Audit Digital Turism <no-reply@audit-turism.ro>"
     subject: "Raportul tau digital - {property_name}"
-  meeting_link: "https://calendar.app.google/eHH7fDyWcbYNLpk29"
+  meeting_link: "https://meetings-eu1.hubspot.com/alexandru-damian?uuid=1480d7cd-ef6e-4784-b86a-ac2228e4b749"
   testing:
     email_previews: "python3 tests/preview_email.py --all (zero cost)"
     prompt_testing: "python3 tests/test_prompt.py --prompt p1 (~$0.02/test)"

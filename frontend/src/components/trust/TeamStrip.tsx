@@ -24,7 +24,7 @@ export function TeamStrip() {
       {/* Label */}
       <p className="text-sm text-muted-foreground">
         <span className="font-medium text-foreground">Alexandru, Petru &amp; Nicu</span>
-        {" "}— echipa DeviDevs
+        {" "}- echipa DeviDevs
       </p>
     </div>
   );

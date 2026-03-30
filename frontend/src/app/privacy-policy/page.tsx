@@ -100,10 +100,10 @@ export default function PrivacyPolicyPage() {
           Nu vindem datele tale. Folosim următorii furnizori de servicii:
         </p>
         <ul>
-          <li>Supabase (bază de date — UE)</li>
+          <li>Supabase (baza de date, UE)</li>
           <li>Resend (trimitere email)</li>
-          <li>Google Analytics (analiză trafic — date anonimizate)</li>
-          <li>Vercel (hosting — CDN global)</li>
+          <li>Google Analytics (analiza trafic, date anonimizate)</li>
+          <li>Vercel (hosting, CDN global)</li>
         </ul>
 
         <h2>6. Păstrarea datelor</h2>

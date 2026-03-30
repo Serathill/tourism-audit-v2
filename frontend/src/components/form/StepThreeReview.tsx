@@ -98,7 +98,7 @@ export function StepThreeReview({ form, onEditStep }: StepThreeReviewProps) {
           </dl>
         ) : (
           <p className="text-xs text-muted-foreground">
-            Nu ai completat detalii suplimentare — auditul va fi generat pe baza
+            Nu ai completat detalii suplimentare - auditul va fi generat pe baza
             informațiilor publice disponibile.
           </p>
         )}
