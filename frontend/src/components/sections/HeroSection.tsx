@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, CheckCircle, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -11,9 +12,21 @@ export function HeroSection() {
   return (
     <section
       aria-labelledby="hero-heading"
-      className="bg-gradient-hero"
+      className="relative overflow-hidden"
     >
-      <div className="mx-auto max-w-[1200px] px-4 py-12 sm:px-6 md:py-16 lg:py-20">
+      {/* Background image */}
+      <Image
+        src="/hero-pensiune.webp"
+        alt=""
+        fill
+        priority
+        className="object-cover"
+        sizes="100vw"
+      />
+      {/* Overlay for text readability */}
+      <div className="absolute inset-0 bg-white/80 backdrop-blur-[2px]" />
+
+      <div className="relative mx-auto max-w-[1200px] px-4 py-12 sm:px-6 md:py-16 lg:py-20">
         <div className="grid items-center gap-10 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
           {/* Left column — text content */}
           <div className="flex flex-col gap-6">
