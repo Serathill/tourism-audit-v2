@@ -100,7 +100,7 @@ const SERVICES = [
       "Proprietari de unitati de cazare care vor sa creasca digital dar nu stiu de unde sa inceapa.",
     cta: {
       label: "Programeaza o consultatie gratuita",
-      href: "mailto:contact@audit-turism.ro",
+      href: "https://meetings-eu1.hubspot.com/alexandru-damian?uuid=1480d7cd-ef6e-4784-b86a-ac2228e4b749",
     },
     ctaPrimary: false,
   },
@@ -124,7 +124,7 @@ const SERVICES = [
       "Afaceri din turism care au nevoie de prezenta digitala constanta dar nu au echipa interna.",
     cta: {
       label: "Cere o propunere",
-      href: "mailto:contact@audit-turism.ro",
+      href: "https://meetings-eu1.hubspot.com/alexandru-damian?uuid=1480d7cd-ef6e-4784-b86a-ac2228e4b749",
     },
     ctaPrimary: false,
   },
@@ -148,7 +148,7 @@ const SERVICES = [
       "Unitati de cazare care au site dar nu primesc rezervari de pe el.",
     cta: {
       label: "Discuta cu noi",
-      href: "mailto:contact@audit-turism.ro",
+      href: "https://meetings-eu1.hubspot.com/alexandru-damian?uuid=1480d7cd-ef6e-4784-b86a-ac2228e4b749",
     },
     ctaPrimary: false,
   },
@@ -171,7 +171,7 @@ const SERVICES = [
       "Proprietari sau manageri care pierd timp pe taskuri repetitive de marketing.",
     cta: {
       label: "Discuta cu noi",
-      href: "mailto:contact@audit-turism.ro",
+      href: "https://meetings-eu1.hubspot.com/alexandru-damian?uuid=1480d7cd-ef6e-4784-b86a-ac2228e4b749",
     },
     ctaPrimary: false,
   },
@@ -275,7 +275,10 @@ export default function ServiciiPage() {
                   }
                   variant={service.ctaPrimary ? "default" : "outline"}
                 >
-                  <Link href={service.cta.href}>
+                  <Link
+                    href={service.cta.href}
+                    {...(service.cta.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                  >
                     {service.cta.label}
                     <ArrowRight className="size-4" />
                   </Link>
