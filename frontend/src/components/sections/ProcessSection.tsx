@@ -14,23 +14,23 @@ const STEPS = [
     badge: "Pasul 1",
     title: "Audit gratuit",
     description:
-      "În aproximativ 5 minute, primești un raport complet, fără niciun efort din partea ta și fără să ne dai acces la date interne. Analizăm date publice pentru a identifica rapid ce pierzi și ce poți îmbunătăți.",
+      "In aproximativ 5 minute completezi formularul. Primesti un raport personalizat fara acces la datele tale interne. Analizam date publice si folosim AI pentru a identifica rapid ce pierzi si ce poti imbunatati. Acest prim pas te introduce in solutia noastra de marketing pentru turism.",
     highlighted: true,
   },
   {
     icon: Lightbulb,
     badge: "Pasul 2",
-    title: "Consultanță strategică",
+    title: "Consultanta strategica",
     description:
-      "După audit, discutăm situația ta actuală și îți propunem pași concreți ca să nu mai pierzi vizibilitate și rezervări. Totul adaptat la nevoile tale.",
+      "Dupa audit, discutam strategia ta de marketing turistic: definim prioritati, obiective si canale - de la SEO pentru turism la campanii de promovare, social media si email marketing. Totul adaptat la tipul tau de proprietate si la sezonalitate.",
     highlighted: false,
   },
   {
     icon: Rocket,
     badge: "Pasul 3",
-    title: "Implementare & rezultate",
+    title: "Implementare & crestere",
     description:
-      "Te ajutăm să pui în practică soluțiile recomandate. Beneficiezi de implementare completă, monitorizare a rezultatelor și suport constant. Tu te ocupi de oaspeți, noi de vizibilitate.",
+      "Daca decizi sa continuam impreuna, preluam implementarea: campanii de promovare turistica, optimizare continua, monitorizare si raportare transparenta. Tu te ocupi de oaspeti, noi de vizibilitate si rezervari directe.",
     highlighted: false,
   },
 ] as const;
@@ -43,7 +43,7 @@ export function ProcessSection() {
           id="process-heading"
           className="mb-10 text-center font-display text-[clamp(1.5rem,3vw,2rem)] font-bold tracking-tight text-foreground"
         >
-          Pașii simpli pentru afacerea ta
+          Ce face auditul nostru + ce urmeaza: pasi simpli pentru promovare turistica
         </h2>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

@@ -8,6 +8,7 @@ import { ProcessSection } from "@/components/sections/ProcessSection";
 import { WhyUsSection } from "@/components/sections/WhyUsSection";
 import { FaqSection } from "@/components/sections/FaqSection";
 import { FinalCtaSection } from "@/components/sections/FinalCtaSection";
+import { IntroSection } from "@/components/sections/IntroSection";
 import { SectionDivider } from "@/components/layout/SectionDivider";
 
 const siteUrl =
@@ -17,7 +18,21 @@ export const metadata: Metadata = {
   title:
     "Marketing pentru turism - audit digital gratuit | DeviDevs Agency",
   description:
-    "Audit digital gratuit pentru pensiuni, case de vacanță și unități de cazare din România. Află unde pierzi vizibilitate online. Raport personalizat în 30-90 de minute, fără acces la datele tale interne.",
+    "Audit digital gratuit pentru pensiuni, hoteluri mici, case de vacanta si agentii de turism din Romania. Plan de actiune personalizat pentru mai multe rezervari directe. Raport in 30-90 minute, fara acces la date interne.",
+  keywords: [
+    "marketing pentru turism",
+    "audit digital turism",
+    "promovare turistica",
+    "marketing turistic",
+    "marketing pensiuni",
+    "marketing hoteluri",
+    "rezervari directe",
+    "turism experiential",
+    "promovare tiny house",
+    "marketing A-frame",
+    "glamping promovare",
+    "cazare inedita Romania",
+  ],
   alternates: {
     canonical: "/marketing-pentru-turism",
   },
@@ -112,6 +127,14 @@ const faqJsonLd = {
         text: "Raportul de audit ajunge pe email in 30-90 de minute. Daca decizi sa implementezi recomandarile (singur sau cu noi), primele imbunatatiri ale vizibilitatii online se vad de obicei in 4-8 saptamani.",
       },
     },
+    {
+      "@type": "Question",
+      name: "Ce tipuri de proprietati ati analizat pana acum?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Am lucrat cu pensiuni boutique, tiny houses, A-frames, glampinguri, hoteluri de 3-4 stele si case de vacanta din toata Romania. Auditul nostru se adapteaza la orice tip de unitate de cazare - de la o cabana in padure la un hotel de oras.",
+      },
+    },
   ],
 };
 
@@ -127,6 +150,7 @@ export default function MarketingPentruTurismPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <HeroSection />
+      <IntroSection />
       <SectionDivider />
       <AudienceSection />
       <SectionDivider />

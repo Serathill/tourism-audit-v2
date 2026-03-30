@@ -1,4 +1,4 @@
-import { TrendingUp, Zap, ShieldCheck, Users, ExternalLink } from "lucide-react";
+import { TrendingUp, Zap, ShieldCheck, Users, Layers, ExternalLink } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -11,27 +11,33 @@ import { BRAND } from "@/lib/constants";
 const BENEFITS = [
   {
     icon: TrendingUp,
-    title: "Nu mai pierzi rezervări directe",
+    title: "Crestere reala a rezervarilor directe",
     description:
-      "Reducem dependența de platformele care percep comisioane mari.",
+      "Proprietatile cu care lucram vad in medie +85% rezervari directe si +150% vizibilitate online in primele 6 luni.",
   },
   {
     icon: Zap,
-    title: "Marketing care funcționează",
+    title: "Reducerea dependentei de platforme",
     description:
-      "Implementăm o strategie personalizată care atrage clienții ideali pentru tine.",
+      "Strategii de marketing turistic care aduc trafic direct pe site-ul tau, nu prin Booking sau Airbnb cu comisioane de 15-25%.",
   },
   {
     icon: ShieldCheck,
-    title: "Timp și energie salvate",
+    title: "Timp si energie salvate",
     description:
-      "Ne ocupăm noi de complexitatea marketingului digital. Tu te concentrezi pe oaspeți.",
+      "Ne ocupam noi de complexitatea marketingului digital. Tu te concentrezi pe experienta oaspetilor - care e motivul pentru care te aleg.",
   },
   {
     icon: Users,
     title: "Un partener, nu un furnizor",
     description:
-      "Oferim transparență totală și suport constant pentru a-ți atinge obiectivele.",
+      "Oferim transparenta totala, raportare clara si suport constant. Intelegem sezonalitatea turismului si adaptam strategia in consecinta.",
+  },
+  {
+    icon: Layers,
+    title: "Servicii integrate de marketing turistic",
+    description:
+      "De la strategie digitala si SEO la campanii de promovare, content marketing, optimizare website si automatizari - totul intr-un singur loc.",
   },
 ] as const;
 
@@ -46,13 +52,13 @@ export function WhyUsSection() {
           id="whyus-heading"
           className="mb-4 text-center font-display text-[clamp(1.5rem,3vw,2rem)] font-bold tracking-tight text-foreground"
         >
-          Parteneriatul cu noi înseamnă rezultate
+          De ce sa alegi marketing digital pentru turism cu noi
         </h2>
 
         <p className="mx-auto mb-10 max-w-2xl text-center text-muted-foreground">
-          Totul începe cu auditul și o discuție de follow-up, ambele 100%
-          gratuite. Primești o analiză valoroasă și recomandări concrete,
-          fără niciun cost sau obligație.
+          Totul incepe cu auditul si o discutie de follow-up, ambele 100%
+          gratuite. Primesti o analiza valoroasa si recomandari concrete,
+          fara niciun cost sau obligatie.
         </p>
 
         <div className="grid gap-6 sm:grid-cols-2">

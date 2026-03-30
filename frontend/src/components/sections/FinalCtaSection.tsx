@@ -14,12 +14,13 @@ export function FinalCtaSection() {
             id="final-cta-heading"
             className="font-display text-[clamp(1.5rem,3vw,2.25rem)] font-bold tracking-tight text-white"
           >
-            Nu mai lăsa concurența să-ți ia clienții
+            Esti gata sa transformi prezenta digitala a afacerii tale de turism?
           </h2>
 
           <p className="text-lg leading-relaxed text-brand-teal-lighter">
-            Solicită auditul digital gratuit și află exact unde pierzi
-            vizibilitate și rezervări. Raport personalizat, fără obligații.
+            Solicita auditul digital gratuit si afla exact unde pierzi
+            vizibilitate si rezervari directe. Raport personalizat, fara
+            obligatii, in 30-90 de minute.
           </p>
 
           <Button

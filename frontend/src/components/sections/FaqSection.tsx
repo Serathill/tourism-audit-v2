@@ -30,9 +30,14 @@ const FAQS = [
       "Nu. Nu cerem parole, acces la conturi sau date financiare. Tot procesul de audit se bazează pe informații publice disponibile online. Este complet sigur și transparent.",
   },
   {
-    question: "În cât timp pot vedea rezultate?",
+    question: "In cat timp pot vedea rezultate?",
     answer:
-      "Raportul de audit ajunge pe email în 30-90 de minute. Dacă decizi să implementezi recomandările (singur sau cu noi), primele îmbunătățiri ale vizibilității online se văd de obicei în 4-8 săptămâni.",
+      "Raportul de audit ajunge pe email in 30-90 de minute. Daca decizi sa implementezi recomandarile (singur sau cu noi), primele imbunatatiri ale vizibilitatii online se vad de obicei in 4-8 saptamani.",
+  },
+  {
+    question: "Ce tipuri de proprietati ati analizat pana acum?",
+    answer:
+      "Am lucrat cu pensiuni boutique, tiny houses, A-frames, glampinguri, hoteluri de 3-4 stele si case de vacanta din toata Romania. Auditul nostru se adapteaza la orice tip de unitate de cazare - de la o cabana in padure la un hotel de oras.",
   },
 ] as const;
 

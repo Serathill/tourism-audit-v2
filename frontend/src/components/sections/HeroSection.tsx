@@ -21,25 +21,24 @@ export function HeroSection() {
               id="hero-heading"
               className="font-display text-[clamp(1.75rem,5vw,3rem)] font-extrabold leading-[1.1] tracking-tight text-foreground"
             >
-              Află câte rezervări pierzi fără o prezență online corectă
+              Marketing pentru turism &amp; audit digital gratuit pentru unitati de cazare
             </h1>
 
             <p className="text-lg font-medium leading-snug text-foreground/80 sm:text-xl">
-              Află unde pierzi vizibilitate online. Raport personalizat
-              în 30-90 de minute.
+              Descopera cum poti creste numarul de rezervari directe cu un audit gratuit
             </p>
 
             <p className="max-w-xl text-lg leading-relaxed text-muted-foreground">
-              Primești un plan de acțiune personalizat ca să nu mai pierzi
-              clienți în favoarea concurenței, fără efort și fără acces la
-              datele tale interne.
+              Primesti un plan de actiune personalizat pentru a atrage clientii
+              potriviti si a creste numarul de rezervari, fara efort si fara
+              acces la datele tale interne.
             </p>
 
             <TeamStrip />
 
             <p className="inline-flex items-center gap-1.5 text-sm text-muted-foreground">
               <CheckCircle className="size-4 text-primary" />
-              <span className="font-medium text-foreground">10+</span> proprietati analizate in Romania
+              <span className="font-medium text-foreground">15+</span> proprietati analizate in Romania
             </p>
 
             {/* Mobile CTA (visible only on mobile/tablet where form isn't side-by-side) */}
