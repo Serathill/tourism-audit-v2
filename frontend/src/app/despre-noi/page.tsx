@@ -71,7 +71,7 @@ export default function DespreNoiPage() {
                   alt={member.name}
                   fill
                   sizes="96px"
-                  className="object-cover object-center"
+                  className="object-cover object-top"
                 />
               </div>
               <CardTitle className="text-lg">{member.name}</CardTitle>
