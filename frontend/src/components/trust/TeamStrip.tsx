@@ -16,7 +16,7 @@ export function TeamStrip() {
               alt={member.name}
               fill
               sizes="40px"
-              className="object-cover object-top"
+              className="object-cover object-center"
             />
           </div>
         ))}
