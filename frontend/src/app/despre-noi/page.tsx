@@ -64,7 +64,7 @@ export default function DespreNoiPage() {
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {TEAM_MEMBERS.map((member) => (
           <Card key={member.name} className="overflow-hidden">
-            <CardHeader className="items-center text-center">
+            <CardHeader className="items-center justify-items-center text-center">
               <div className="relative mb-2 size-24 overflow-hidden rounded-full border-2 border-primary">
                 <Image
                   src={member.image}
