@@ -14,7 +14,7 @@ export function HeroSection() {
       className="bg-gradient-hero"
     >
       <div className="mx-auto max-w-[1200px] px-4 py-12 sm:px-6 md:py-16 lg:py-20">
-        <div className="grid items-start gap-10 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
+        <div className="grid items-center gap-10 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
           {/* Left column — text content */}
           <div className="flex flex-col gap-6">
             <h1

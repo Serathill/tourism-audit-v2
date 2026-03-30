@@ -96,7 +96,7 @@
 
   /* ── Extended brand tokens ── */
   --bg-warm: #FFFBF5;
-  --bg-secondary: #F8FAFC;
+  --bg-secondary: #F0FDFA;
   --text-primary: #0F172A;
   --text-secondary: #475569;
   --text-muted: #94A3B8;
@@ -114,7 +114,7 @@
   --audit-score-bad: #DC2626;
 
   /* Gradients */
-  --gradient-hero: linear-gradient(180deg, #FFFBF5 0%, #F0FDFA 100%);
+  --gradient-hero: linear-gradient(180deg, #F0FDFA 0%, #CCFBF1 50%, #F0FDFA 100%);
   --gradient-cta: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%);
   --gradient-section: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
 }
