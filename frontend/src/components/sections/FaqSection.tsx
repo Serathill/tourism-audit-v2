@@ -12,12 +12,12 @@ const FAQS = [
   {
     question: "Ce se întâmplă, concret, după ce solicit auditul?",
     answer:
-      "Completezi formularul (durează ~2 minute), iar noi analizăm automat prezența ta online folosind doar informații publice. În 30-90 de minute primești pe email un raport detaliat cu recomandări personalizate. După aceea, dacă dorești, programăm o discuție gratuită de follow-up.",
+      "Completezi formularul (durează ~2 minute), iar noi analizăm prezența ta online folosind doar informații publice. În 30-90 de minute primești pe email un raport detaliat cu recomandări personalizate. După aceea, dacă dorești, programăm o discuție gratuită de follow-up.",
   },
   {
     question: "Sunt obligat(ă) să cumpăr ceva după audit?",
     answer:
-      "Nu. Auditul și discuția de follow-up sunt 100% gratuite, fără nicio obligație. Dacă rezonezi cu recomandările noastre și vrei să mergem mai departe, discutăm opțiunile. Dacă nu, păstrezi raportul și îl folosești cum dorești.",
+      "Nu. Auditul și discuția de follow-up sunt 100% gratuite, fără nicio obligație. Dacă îți plac recomandările noastre și vrei să mergem mai departe, discutăm opțiunile. Dacă nu, păstrezi raportul și îl folosești cum dorești.",
   },
   {
     question: "Acest serviciu este pentru mine dacă nu am o echipă de marketing?",
@@ -30,14 +30,14 @@ const FAQS = [
       "Nu. Nu cerem parole, acces la conturi sau date financiare. Tot procesul de audit se bazează pe informații publice disponibile online. Este complet sigur și transparent.",
   },
   {
-    question: "In cat timp pot vedea rezultate?",
+    question: "În cât timp pot vedea rezultate?",
     answer:
-      "Raportul de audit ajunge pe email in 30-90 de minute. Daca decizi sa implementezi recomandarile (singur sau cu noi), primele imbunatatiri ale vizibilitatii online se vad de obicei in 4-8 saptamani.",
+      "Raportul de audit ajunge pe email în 30-90 de minute. Dacă decizi să implementezi recomandările (singur sau cu noi), primele îmbunătățiri ale vizibilității online se văd de obicei în 4-8 săptămâni.",
   },
   {
-    question: "Ce tipuri de proprietati ati analizat pana acum?",
+    question: "Ce tipuri de proprietăți ați analizat până acum?",
     answer:
-      "Am lucrat cu pensiuni boutique, tiny houses, A-frames, glampinguri, hoteluri de 3-4 stele si case de vacanta din toata Romania. Auditul nostru se adapteaza la orice tip de unitate de cazare - de la o cabana in padure la un hotel de oras.",
+      "Am lucrat cu pensiuni boutique, tiny houses, A-frames, glampinguri, hoteluri de 3-4 stele și case de vacanță din toată România. Auditul nostru se adaptează la orice tip de unitate de cazare, de la o cabană în pădure la un hotel de oraș.",
   },
 ] as const;
 

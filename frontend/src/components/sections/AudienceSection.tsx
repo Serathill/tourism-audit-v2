@@ -1,11 +1,11 @@
 import { CheckCircle } from "lucide-react";
 
 const PAIN_POINTS = [
-  "Proprietari de pensiuni boutique, tiny houses, A-frames, glampinguri si case de vacanta cu potential de crestere",
-  "Hoteluri mici si medii care vor mai multe rezervari directe, nu doar prin Booking sau Airbnb",
-  "Proprietari de cazari inedite (cabane, container homes, treehouses) care vor sa iasa din dependenta de platforme",
-  "Agentii de turism locale si proiecte de destinatii turistice care vor sa-si optimizeze prezenta digitala",
-  "Proprietari care nu au echipa interna de marketing si vor un partener care preia totul",
+  "Ai investit in renovari si amenajari, dar camerele stau goale in extrasezon",
+  "Rezervarile vin aproape doar prin Booking, iar comisioanele cresc de la an la an",
+  "Ai o pagina de Facebook, poate si un site, dar nu stii daca te gaseste cineva pe Google",
+  "Concurenta din zona pare ca are mereu plin, desi tu oferi conditii la fel de bune",
+  "Ai incercat sa faci 'ceva marketing', dar nu ai vazut rezultate concrete",
 ] as const;
 
 export function AudienceSection() {
@@ -19,11 +19,11 @@ export function AudienceSection() {
           id="audience-heading"
           className="mb-6 text-center font-display text-[clamp(1.5rem,3vw,2rem)] font-bold tracking-tight text-foreground"
         >
-          Pentru cine este aceasta solutie de marketing in turism?
+          Daca iti recunosti situatia aici, auditul e facut pentru tine
         </h2>
 
         <p className="mx-auto mb-10 max-w-2xl text-center text-lg leading-relaxed text-muted-foreground">
-          Serviciul nostru de audit si marketing turistic este destinat:
+          Pensiuni, tiny houses, A-frames, glampinguri, case de vacanta, hoteluri mici:
         </p>
 
         <div className="mx-auto max-w-2xl">

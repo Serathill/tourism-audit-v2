@@ -25,13 +25,13 @@ export function HeroSection() {
             </h1>
 
             <p className="text-lg font-medium leading-snug text-foreground/80 sm:text-xl">
-              Descopera cum poti creste numarul de rezervari directe cu un audit gratuit
+              Vecinii tai au plin in weekend. Tu de ce nu?
             </p>
 
             <p className="max-w-xl text-lg leading-relaxed text-muted-foreground">
-              Primesti un plan de actiune personalizat pentru a atrage clientii
-              potriviti si a creste numarul de rezervari, fara efort si fara
-              acces la datele tale interne.
+              In 30 de minute afli exact ce te costa vizibilitatea slaba online
+              si ce poti face concret, incepand de azi. Nu cerem acces la
+              datele tale.
             </p>
 
             <TeamStrip />

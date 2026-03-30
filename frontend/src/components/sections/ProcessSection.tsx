@@ -14,7 +14,7 @@ const STEPS = [
     badge: "Pasul 1",
     title: "Audit gratuit",
     description:
-      "In aproximativ 5 minute completezi formularul. Primesti un raport personalizat fara acces la datele tale interne. Analizam date publice si folosim AI pentru a identifica rapid ce pierzi si ce poti imbunatati. Acest prim pas te introduce in solutia noastra de marketing pentru turism.",
+      "Completezi formularul in 2 minute. In maximum 90 de minute primesti pe email un raport detaliat cu ce te costa si ce poti imbunatati. Analizam doar informatii publice.",
     highlighted: true,
   },
   {
@@ -22,7 +22,7 @@ const STEPS = [
     badge: "Pasul 2",
     title: "Consultanta strategica",
     description:
-      "Dupa audit, discutam strategia ta de marketing turistic: definim prioritati, obiective si canale - de la SEO pentru turism la campanii de promovare, social media si email marketing. Totul adaptat la tipul tau de proprietate si la sezonalitate.",
+      "Programam o discutie scurta, tot gratuita, in care iti explicam raportul si raspundem la intrebari. Fara presiune.",
     highlighted: false,
   },
   {
@@ -30,7 +30,7 @@ const STEPS = [
     badge: "Pasul 3",
     title: "Implementare & crestere",
     description:
-      "Daca decizi sa continuam impreuna, preluam implementarea: campanii de promovare turistica, optimizare continua, monitorizare si raportare transparenta. Tu te ocupi de oaspeti, noi de vizibilitate si rezervari directe.",
+      "Poti implementa singur recomandarile sau ne ocupam noi. Tu te concentrezi pe oaspeti, noi pe vizibilitate.",
     highlighted: false,
   },
 ] as const;
@@ -43,7 +43,7 @@ export function ProcessSection() {
           id="process-heading"
           className="mb-10 text-center font-display text-[clamp(1.5rem,3vw,2rem)] font-bold tracking-tight text-foreground"
         >
-          Ce face auditul nostru + ce urmeaza: pasi simpli pentru promovare turistica
+          Cum functioneaza
         </h2>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

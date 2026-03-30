@@ -14,13 +14,12 @@ export function FinalCtaSection() {
             id="final-cta-heading"
             className="font-display text-[clamp(1.5rem,3vw,2.25rem)] font-bold tracking-tight text-white"
           >
-            Esti gata sa transformi prezenta digitala a afacerii tale de turism?
+            Fiecare zi fara vizibilitate online e o zi in care pierzi rezervari
           </h2>
 
           <p className="text-lg leading-relaxed text-brand-teal-lighter">
-            Solicita auditul digital gratuit si afla exact unde pierzi
-            vizibilitate si rezervari directe. Raport personalizat, fara
-            obligatii, in 30-90 de minute.
+            Afla in 30 de minute ce te costa si ce poti face.
+            Gratuit, fara obligatii, fara acces la datele tale.
           </p>
 
           <Button

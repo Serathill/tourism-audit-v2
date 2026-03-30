@@ -92,7 +92,7 @@ const faqJsonLd = {
       name: "Ce se intampla, concret, dupa ce solicit auditul?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Completezi formularul (dureaza ~2 minute), iar noi analizam automat prezenta ta online folosind doar informatii publice. In 30-90 de minute primesti pe email un raport detaliat cu recomandari personalizate. Dupa aceea, daca doresti, programam o discutie gratuita de follow-up.",
+        text: "Completezi formularul (dureaza ~2 minute), iar noi analizam prezenta ta online folosind doar informatii publice. In 30-90 de minute primesti pe email un raport detaliat cu recomandari personalizate. Dupa aceea, daca doresti, programam o discutie gratuita de follow-up.",
       },
     },
     {
@@ -100,7 +100,7 @@ const faqJsonLd = {
       name: "Sunt obligat(a) sa cumpar ceva dupa audit?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Nu. Auditul si discutia de follow-up sunt 100% gratuite, fara nicio obligatie. Daca rezonezi cu recomandarile noastre si vrei sa mergem mai departe, discutam optiunile. Daca nu, pastrezi raportul si il folosesti cum doresti.",
+        text: "Nu. Auditul si discutia de follow-up sunt 100% gratuite, fara nicio obligatie. Daca iti plac recomandarile noastre si vrei sa mergem mai departe, discutam optiunile. Daca nu, pastrezi raportul si il folosesti cum doresti.",
       },
     },
     {

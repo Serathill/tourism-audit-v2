@@ -1,4 +1,4 @@
-import { TrendingUp, Zap, ShieldCheck, Users, Layers, ExternalLink } from "lucide-react";
+import { TrendingUp, Zap, ShieldCheck, Users, ExternalLink } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -11,33 +11,27 @@ import { BRAND } from "@/lib/constants";
 const BENEFITS = [
   {
     icon: TrendingUp,
-    title: "Crestere reala a rezervarilor directe",
+    title: "Afli concret ce te costa",
     description:
-      "Proprietatile cu care lucram vad in medie +85% rezervari directe si +150% vizibilitate online in primele 6 luni.",
+      "Nu primesti sfaturi vagi. Raportul iti arata exact unde pierzi vizibilitate si ce poti face, cu impact estimat in rezervari.",
   },
   {
     icon: Zap,
-    title: "Reducerea dependentei de platforme",
+    title: "Gata in 90 de minute",
     description:
-      "Strategii de marketing turistic care aduc trafic direct pe site-ul tau, nu prin Booking sau Airbnb cu comisioane de 15-25%.",
+      "Completezi formularul in 2 minute. Raportul ajunge pe email in maximum 90 de minute. Fara apeluri, fara asteptare.",
   },
   {
     icon: ShieldCheck,
-    title: "Timp si energie salvate",
+    title: "Bazat pe date reale",
     description:
-      "Ne ocupam noi de complexitatea marketingului digital. Tu te concentrezi pe experienta oaspetilor - care e motivul pentru care te aleg.",
+      "Analizam peste 60 de surse publice: Google, Booking, TripAdvisor, social media, site-ul tau. Nu ghicim, verificam.",
   },
   {
     icon: Users,
-    title: "Un partener, nu un furnizor",
+    title: "Facut de o echipa care intelege turismul",
     description:
-      "Oferim transparenta totala, raportare clara si suport constant. Intelegem sezonalitatea turismului si adaptam strategia in consecinta.",
-  },
-  {
-    icon: Layers,
-    title: "Servicii integrate de marketing turistic",
-    description:
-      "De la strategie digitala si SEO la campanii de promovare, content marketing, optimizare website si automatizari - totul intr-un singur loc.",
+      "Stim ce inseamna sezonalitate, extrasezon si dependenta de platforme. Nu suntem o agentie generica.",
   },
 ] as const;
 
@@ -52,13 +46,12 @@ export function WhyUsSection() {
           id="whyus-heading"
           className="mb-4 text-center font-display text-[clamp(1.5rem,3vw,2rem)] font-bold tracking-tight text-foreground"
         >
-          De ce sa alegi marketing digital pentru turism cu noi
+          De ce functioneaza acest audit
         </h2>
 
         <p className="mx-auto mb-10 max-w-2xl text-center text-muted-foreground">
-          Totul incepe cu auditul si o discutie de follow-up, ambele 100%
-          gratuite. Primesti o analiza valoroasa si recomandari concrete,
-          fara niciun cost sau obligatie.
+          Auditul si discutia de follow-up sunt 100% gratuite.
+          Primesti recomandari concrete, fara obligatii.
         </p>
 
         <div className="grid gap-6 sm:grid-cols-2">
