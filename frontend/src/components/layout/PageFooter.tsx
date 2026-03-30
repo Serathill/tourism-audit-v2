@@ -9,7 +9,7 @@ export function PageFooter() {
   return (
     <footer role="contentinfo" className="bg-[#0F172A] text-slate-300">
       <div className="mx-auto max-w-[1200px] px-4 py-12 sm:px-6">
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {/* Brand column */}
           <div className="flex flex-col gap-3 lg:col-span-1">
             <span className="font-display text-lg font-bold text-white">
